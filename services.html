@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Terra & Ochre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#D9A025' },
+    fontFamily: { display: ['"Bodoni Moda"', 'serif'], body: ['Outfit', 'sans-serif'] },
+  } } }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background:#E9E9E1; }
+  .font-display { font-family: 'Bodoni Moda', serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+  .reveal-scale.in { opacity: 1; transform: scale(1); }
+  .reveal-left { opacity:0; transform: translateX(-32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-left.in { opacity:1; transform: translateX(0); }
+  .reveal-right { opacity:0; transform: translateX(32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-right.in { opacity:1; transform: translateX(0); }
+  .stagger > * { transition-delay: calc(var(--i, 0) * 120ms); }
+  .nav-link { position:relative; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
+  .nav-link:hover::after { width:100%; }
+  .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
+  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
+  .bg-noise { background-image: radial-gradient(rgba(233,233,225,.06) 1px, transparent 1px); background-size: 22px 22px; }
+  .page-hero-img { transform: scale(1.1); transition: transform 1.6s cubic-bezier(.16,.86,.3,1); }
+  .page-hero.in .page-hero-img { transform: scale(1); }
+
+  /* accordion */
+  .acc-panel { max-height: 0; overflow: hidden; transition: max-height .6s cubic-bezier(.22,1,.36,1), padding .6s ease; }
+  .acc-item.open .acc-panel { max-height: 300px; }
+  .acc-icon { transition: transform .4s cubic-bezier(.22,1,.36,1); }
+  .acc-item.open .acc-icon { transform: rotate(45deg); }
+</style>
+</head>
+<body class="bg-cream text-espresso antialiased">
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-cream/95 backdrop-blur shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
+    <a href="index.html" class="font-display text-2xl tracking-wide text-espresso flex items-center gap-2">
+      <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+      Terra <span class="text-gold">&</span> Ochre
+    </a>
+    <nav class="hidden lg:flex items-center gap-9 text-espresso/80 text-sm tracking-wide">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link text-gold">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-gold text-espresso text-sm font-medium px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition-colors duration-300">Get In Touch</a>
+  </div>
+</header>
+
+<section class="page-hero relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso">
+  <div class="absolute inset-0 overflow-hidden">
+    <img class="page-hero-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1800&auto=format&fit=crop" alt="Interior services">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/50 to-espresso/60"></div>
+  <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-end pb-16">
+    <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4 reveal in">What We Offer</p>
+    <h1 class="font-display text-cream text-5xl md:text-6xl reveal in">Services Built Around Every Stage of a Room</h1>
+  </div>
+</section>
+
+<!-- SERVICE LIST -->
+<section class="relative py-28 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-10 items-start mb-16">
+      <span class="reveal-left inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber h-fit">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Our Services
+      </span>
+      <h2 class="reveal-right font-display text-4xl md:text-5xl leading-tight">Five Ways We Can Work <span class="text-umber">Together</span></h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div class="reveal-scale relative">
+        <div class="rounded-3xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1400&auto=format&fit=crop" class="w-full h-[520px] object-cover" alt="Interior detail">
+        </div>
+        <div class="absolute bottom-6 left-6 right-6 bg-espresso/85 backdrop-blur-sm text-cream rounded-xl p-5 text-sm">
+          Every service starts the same way — a walk-through, a conversation, and honest scoping of what your space actually needs.
+        </div>
+      </div>
+
+      <div class="divide-y divide-umber/15 stagger">
+        <div class="reveal group flex items-center justify-between py-6" style="--i:0">
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">01</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Residential Interior Design</h3></div>
+          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+        <div class="reveal group flex items-center justify-between py-6" style="--i:1">
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">02</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Commercial Interior Design</h3></div>
+          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+        <div class="reveal group flex items-center justify-between py-6" style="--i:2">
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">03</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Interior Design Consultation</h3></div>
+          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+        <div class="reveal group flex items-center justify-between py-6" style="--i:3">
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">04</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Outdoor & Landscape Design</h3></div>
+          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+        <div class="reveal group flex items-center justify-between py-6" style="--i:4">
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">05</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Renovation & Remodeling</h3></div>
+          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS (same section pattern as home, reused) -->
+<section class="relative py-28 px-6 md:px-10 bg-espresso/[.03]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-10 items-end mb-16">
+      <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">How Each Engagement <span class="text-umber">Runs</span></h2>
+      <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end">The same four-step process underlies every service, scaled to the size of the job.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
+      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:0">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Consultation">
+        <div class="p-6 relative"><span class="absolute right-5 top-5 font-display text-4xl text-umber/10">01</span><h3 class="font-display text-lg mb-2">Initial Consultation</h3><p class="text-sm text-espresso/60">Understanding your vision, goals and budget.</p></div>
+      </div>
+      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:1">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Design and planning">
+        <div class="p-6 relative"><span class="absolute right-5 top-5 font-display text-4xl text-umber/10">02</span><h3 class="font-display text-lg mb-2">Design & Planning</h3><p class="text-sm text-espresso/60">Layouts, mood boards and material palettes.</p></div>
+      </div>
+      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:2">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Implementation">
+        <div class="p-6 relative"><span class="absolute right-5 top-5 font-display text-4xl text-umber/10">03</span><h3 class="font-display text-lg mb-2">Implementation</h3><p class="text-sm text-espresso/60">On-site coordination across every trade.</p></div>
+      </div>
+      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:3">
+        <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Handover">
+        <div class="p-6 relative"><span class="absolute right-5 top-5 font-display text-4xl text-umber/10">04</span><h3 class="font-display text-lg mb-2">Project Handover</h3><p class="text-sm text-espresso/60">A final walkthrough and styling pass.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ACCORDION -->
+<section class="relative py-28 px-6 md:px-10">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="reveal-scale in inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Common Questions
+      </span>
+      <h2 class="reveal in font-display text-4xl md:text-5xl leading-tight">Before You Reach Out</h2>
+    </div>
+    <div class="space-y-4 stagger">
+      <div class="acc-item reveal open bg-white/50 border border-umber/10 rounded-2xl px-7 py-6 cursor-pointer" style="--i:0">
+        <div class="flex items-center justify-between" onclick="this.parentElement.classList.toggle('open')">
+          <h3 class="font-display text-lg pr-6">How long does a full residential project take?</h3>
+          <span class="acc-icon text-gold text-2xl leading-none">+</span>
+        </div>
+        <div class="acc-panel text-sm text-espresso/70 pt-4">Most single-home projects run 12–20 weeks from signed brief to handover, depending on scope and how much structural work is involved.</div>
+      </div>
+      <div class="acc-item reveal bg-white/50 border border-umber/10 rounded-2xl px-7 py-6 cursor-pointer" style="--i:1">
+        <div class="flex items-center justify-between" onclick="this.parentElement.classList.toggle('open')">
+          <h3 class="font-display text-lg pr-6">Do you work outside Berlin?</h3>
+          <span class="acc-icon text-gold text-2xl leading-none">+</span>
+        </div>
+        <div class="acc-panel text-sm text-espresso/70 pt-4">Yes — we regularly take on projects across Germany and occasionally further afield, with site visits scheduled around key milestones.</div>
+      </div>
+      <div class="acc-item reveal bg-white/50 border border-umber/10 rounded-2xl px-7 py-6 cursor-pointer" style="--i:2">
+        <div class="flex items-center justify-between" onclick="this.parentElement.classList.toggle('open')">
+          <h3 class="font-display text-lg pr-6">Can you work with an existing architect or contractor?</h3>
+          <span class="acc-icon text-gold text-2xl leading-none">+</span>
+        </div>
+        <div class="acc-panel text-sm text-espresso/70 pt-4">Absolutely. We regularly collaborate alongside existing project teams, joining at whichever stage makes sense.</div>
+      </div>
+      <div class="acc-item reveal bg-white/50 border border-umber/10 rounded-2xl px-7 py-6 cursor-pointer" style="--i:3">
+        <div class="flex items-center justify-between" onclick="this.parentElement.classList.toggle('open')">
+          <h3 class="font-display text-lg pr-6">What does a consultation cost?</h3>
+          <span class="acc-icon text-gold text-2xl leading-none">+</span>
+        </div>
+        <div class="acc-panel text-sm text-espresso/70 pt-4">Initial consultations are complimentary. A detailed scoping session is quoted once we understand the size of the project.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-24 px-6 md:px-10">
+  <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-[2rem] px-10 py-16 md:py-20 text-center relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gold/10"></div>
+    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-umber/20"></div>
+    <span class="relative inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-gold mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project</span>
+    <h2 class="relative font-display text-4xl md:text-5xl leading-tight max-w-2xl mx-auto">Tell Us Which Service Fits Your Space</h2>
+    <a href="contact.html" class="relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
+  </div>
+</section>
+
+<footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+    <div>
+      <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+        <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+        Terra <span class="text-gold">&</span> Ochre
+      </a>
+      <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.html" class="hover:text-gold transition-colors">Home</a></li>
+        <li><a href="about.html" class="hover:text-gold transition-colors">About</a></li>
+        <li><a href="services.html" class="hover:text-gold transition-colors">Services</a></li>
+        <li><a href="projects.html" class="hover:text-gold transition-colors">Projects</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
+      <ul class="space-y-3 text-sm">
+        <li>Motzstraße 12, Berlin</li>
+        <li>hello@terraochre.studio</li>
+        <li>+49 30 1234 5678</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
+      <p class="text-sm mb-4">Considered interiors, once a month.</p>
+      <form class="flex" onsubmit="return false;">
+        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
+        <button class="bg-gold text-espresso px-5 rounded-r-full text-sm font-medium hover:bg-cream transition-colors">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+    <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
+    <p>Crafted with care in Berlin.</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .page-hero').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

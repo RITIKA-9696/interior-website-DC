@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Terra & Ochre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#D9A025' },
+    fontFamily: { display: ['"Bodoni Moda"', 'serif'], body: ['Outfit', 'sans-serif'] },
+  } } }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background:#E9E9E1; }
+  .font-display { font-family: 'Bodoni Moda', serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+  .reveal-scale.in { opacity: 1; transform: scale(1); }
+  .reveal-left { opacity:0; transform: translateX(-32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-left.in { opacity:1; transform: translateX(0); }
+  .reveal-right { opacity:0; transform: translateX(32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-right.in { opacity:1; transform: translateX(0); }
+  .stagger > * { transition-delay: calc(var(--i, 0) * 90ms); }
+  .nav-link { position:relative; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
+  .nav-link:hover::after { width:100%; }
+  .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
+  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
+  .lift img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .lift:hover img { transform: scale(1.06); }
+  .page-hero-img { transform: scale(1.1); transition: transform 1.6s cubic-bezier(.16,.86,.3,1); }
+  .page-hero.in .page-hero-img { transform: scale(1); }
+
+  /* filter fade */
+  .proj-card { transition: opacity .5s ease, transform .5s ease; }
+  .proj-card.hide { opacity: 0; transform: scale(.9); pointer-events:none; position:absolute; }
+  .filter-btn.active { background:#2E2717; color:#E9E9E1; }
+</style>
+</head>
+<body class="bg-cream text-espresso antialiased">
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-cream/95 backdrop-blur shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
+    <a href="index.html" class="font-display text-2xl tracking-wide text-espresso flex items-center gap-2">
+      <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+      Terra <span class="text-gold">&</span> Ochre
+    </a>
+    <nav class="hidden lg:flex items-center gap-9 text-espresso/80 text-sm tracking-wide">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link text-gold">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-gold text-espresso text-sm font-medium px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition-colors duration-300">Get In Touch</a>
+  </div>
+</header>
+
+<section class="page-hero relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso">
+  <div class="absolute inset-0 overflow-hidden">
+    <img class="page-hero-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1800&auto=format&fit=crop" alt="Portfolio hero">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/50 to-espresso/60"></div>
+  <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-end pb-16">
+    <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4 reveal in">Our Portfolio</p>
+    <h1 class="font-display text-cream text-5xl md:text-6xl reveal in">Projects That Define Our Style</h1>
+  </div>
+</section>
+
+<!-- FILTERABLE GRID -->
+<section class="relative py-28 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-10 items-end mb-10">
+      <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">A Diverse Range of <span class="text-umber">Spaces</span></h2>
+      <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end">From full residences to focused commercial fit-outs — filter to see what fits your project.</p>
+    </div>
+
+    <div class="reveal in flex flex-wrap gap-3 mb-14" id="filters">
+      <button data-filter="all" class="filter-btn active border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">All Projects</button>
+      <button data-filter="Residential" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Residential</button>
+      <button data-filter="Commercial" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Commercial</button>
+      <button data-filter="Renovation" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Renovation</button>
+    </div>
+
+    <div class="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger" id="grid">
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:0">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Luxury Skyline"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Luxury Skyline</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:1">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Bohemian Rhapsody</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Renovation" style="--i:2">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Vintage Glamour"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Renovation</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Vintage Glamour</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:3">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Titan Office Interior"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Titan Office Interior</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:4">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Living Quarter"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Living Quarter</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:5">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Studio Atelier"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Studio Atelier</h3><p class="text-xs text-espresso/50 mt-1">Munich, Germany · 2024</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Renovation" style="--i:6">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Attic Rework"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Renovation</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Attic Rework</h3><p class="text-xs text-espresso/50 mt-1">Hamburg, Germany · 2024</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:7">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Garden House"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Garden House</h3><p class="text-xs text-espresso/50 mt-1">Potsdam, Germany · 2024</p></div>
+      </a>
+      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:8">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Corner Café"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
+        <div class="p-6"><h3 class="font-display text-xl">Corner Café</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2024</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-24 px-6 md:px-10">
+  <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-[2rem] px-10 py-16 md:py-20 text-center relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gold/10"></div>
+    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-umber/20"></div>
+    <span class="relative inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-gold mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project</span>
+    <h2 class="relative font-display text-4xl md:text-5xl leading-tight max-w-2xl mx-auto">See Your Space on This Wall Next</h2>
+    <a href="contact.html" class="relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
+  </div>
+</section>
+
+<footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+    <div>
+      <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+        <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+        Terra <span class="text-gold">&</span> Ochre
+      </a>
+      <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.html" class="hover:text-gold transition-colors">Home</a></li>
+        <li><a href="about.html" class="hover:text-gold transition-colors">About</a></li>
+        <li><a href="services.html" class="hover:text-gold transition-colors">Services</a></li>
+        <li><a href="projects.html" class="hover:text-gold transition-colors">Projects</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
+      <ul class="space-y-3 text-sm">
+        <li>Motzstraße 12, Berlin</li>
+        <li>hello@terraochre.studio</li>
+        <li>+49 30 1234 5678</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
+      <p class="text-sm mb-4">Considered interiors, once a month.</p>
+      <form class="flex" onsubmit="return false;">
+        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
+        <button class="bg-gold text-espresso px-5 rounded-r-full text-sm font-medium hover:bg-cream transition-colors">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+    <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
+    <p>Crafted with care in Berlin.</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .page-hero').forEach(el => io.observe(el));
+
+  // Filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.proj-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        const match = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('hide', !match);
+      });
+    });
+  });
+</script>
+</body>
+</html>

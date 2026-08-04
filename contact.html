@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Terra & Ochre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#D9A025' },
+    fontFamily: { display: ['"Bodoni Moda"', 'serif'], body: ['Outfit', 'sans-serif'] },
+  } } }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background:#E9E9E1; }
+  .font-display { font-family: 'Bodoni Moda', serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+  .reveal-scale.in { opacity: 1; transform: scale(1); }
+  .reveal-left { opacity:0; transform: translateX(-32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-left.in { opacity:1; transform: translateX(0); }
+  .reveal-right { opacity:0; transform: translateX(32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal-right.in { opacity:1; transform: translateX(0); }
+  .stagger > * { transition-delay: calc(var(--i, 0) * 120ms); }
+  .nav-link { position:relative; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
+  .nav-link:hover::after { width:100%; }
+  .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
+  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
+  .page-hero-img { transform: scale(1.1); transition: transform 1.6s cubic-bezier(.16,.86,.3,1); }
+  .page-hero.in .page-hero-img { transform: scale(1); }
+
+  .field { position:relative; }
+  .field input, .field textarea, .field select {
+    background: transparent; border: none; border-bottom: 1px solid rgba(46,39,23,.25);
+    padding: 14px 2px; width: 100%; outline: none; transition: border-color .35s ease;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: #D9A025; }
+  .field label { position:absolute; left:2px; top:14px; color: rgba(46,39,23,.5); transition: all .3s ease; pointer-events:none; font-size:.95rem; }
+  .field input:focus + label, .field input:not(:placeholder-shown) + label,
+  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label,
+  .field.filled label { top:-14px; font-size:.72rem; color:#D9A025; letter-spacing:.05em; }
+
+  .success-toast { transform: translateY(140%); transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .success-toast.show { transform: translateY(0); }
+</style>
+</head>
+<body class="bg-cream text-espresso antialiased">
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-cream/95 backdrop-blur shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
+    <a href="index.html" class="font-display text-2xl tracking-wide text-espresso flex items-center gap-2">
+      <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+      Terra <span class="text-gold">&</span> Ochre
+    </a>
+    <nav class="hidden lg:flex items-center gap-9 text-espresso/80 text-sm tracking-wide">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link text-gold">Contact</a>
+    </nav>
+    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-gold text-espresso text-sm font-medium px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition-colors duration-300">Get In Touch</a>
+  </div>
+</header>
+
+<section class="page-hero relative h-[50vh] min-h-[360px] w-full overflow-hidden bg-espresso">
+  <div class="absolute inset-0 overflow-hidden">
+    <img class="page-hero-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=1800&auto=format&fit=crop" alt="Contact hero">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/50 to-espresso/60"></div>
+  <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-end pb-16">
+    <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4 reveal in">Get In Touch</p>
+    <h1 class="font-display text-cream text-5xl md:text-6xl reveal in">Let's Start Designing</h1>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="relative py-24 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-5 gap-14">
+
+    <!-- info -->
+    <div class="lg:col-span-2 reveal-left">
+      <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Contact Us
+      </span>
+      <h2 class="font-display text-4xl leading-tight mb-6">Tell Us About the Space You Have in Mind</h2>
+      <p class="text-espresso/70 mb-10 max-w-sm">Share a few details and a member of the studio will get back to you within two working days to arrange a consultation.</p>
+
+      <div class="space-y-6 stagger">
+        <div class="reveal flex items-start gap-4" style="--i:0">
+          <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">✆</span>
+          <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Phone</p><p class="font-medium">+49 30 1234 5678</p></div>
+        </div>
+        <div class="reveal flex items-start gap-4" style="--i:1">
+          <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">✉</span>
+          <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Email</p><p class="font-medium">hello@terraochre.studio</p></div>
+        </div>
+        <div class="reveal flex items-start gap-4" style="--i:2">
+          <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">⚑</span>
+          <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Studio</p><p class="font-medium">Motzstraße 12, 10777 Berlin</p></div>
+        </div>
+        <div class="reveal flex items-start gap-4" style="--i:3">
+          <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">◷</span>
+          <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Studio Hours</p><p class="font-medium">Mon – Fri, 9:00 – 18:00</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="lg:col-span-3 reveal-right">
+      <form id="contact-form" class="bg-white/50 border border-umber/10 rounded-3xl p-8 md:p-10 grid sm:grid-cols-2 gap-8" onsubmit="return false;">
+        <div class="field"><input type="text" placeholder=" " required><label>Full Name</label></div>
+        <div class="field"><input type="email" placeholder=" " required><label>Email Address</label></div>
+        <div class="field"><input type="tel" placeholder=" "><label>Phone Number</label></div>
+        <div class="field">
+          <select required>
+            <option value="" disabled selected></option>
+            <option>Residential Interior Design</option>
+            <option>Commercial Interior Design</option>
+            <option>Consultation</option>
+            <option>Renovation</option>
+          </select>
+          <label>Service Interested In</label>
+        </div>
+        <div class="field sm:col-span-2"><textarea rows="4" placeholder=" " required></textarea><label>Tell Us About Your Project</label></div>
+        <button type="submit" class="sm:col-span-2 bg-gold text-espresso px-8 py-4 rounded-full font-medium hover:bg-espresso hover:text-cream transition-colors duration-300 w-fit">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="relative py-4 px-6 md:px-10 pb-24">
+  <div class="reveal-scale max-w-7xl mx-auto rounded-3xl overflow-hidden h-[360px] border border-umber/10">
+    <iframe class="w-full h-full grayscale contrast-125" style="filter: sepia(.15);" loading="lazy" src="https://www.google.com/maps?q=Berlin,Germany&output=embed"></iframe>
+  </div>
+</section>
+
+<footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+    <div>
+      <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+        <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+        Terra <span class="text-gold">&</span> Ochre
+      </a>
+      <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.html" class="hover:text-gold transition-colors">Home</a></li>
+        <li><a href="about.html" class="hover:text-gold transition-colors">About</a></li>
+        <li><a href="services.html" class="hover:text-gold transition-colors">Services</a></li>
+        <li><a href="projects.html" class="hover:text-gold transition-colors">Projects</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
+      <ul class="space-y-3 text-sm">
+        <li>Motzstraße 12, Berlin</li>
+        <li>hello@terraochre.studio</li>
+        <li>+49 30 1234 5678</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
+      <p class="text-sm mb-4">Considered interiors, once a month.</p>
+      <form class="flex" onsubmit="return false;">
+        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
+        <button class="bg-gold text-espresso px-5 rounded-r-full text-sm font-medium hover:bg-cream transition-colors">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+    <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
+    <p>Crafted with care in Berlin.</p>
+  </div>
+</footer>
+
+<!-- toast -->
+<div id="toast" class="success-toast fixed bottom-8 left-1/2 -translate-x-1/2 bg-espresso text-cream px-7 py-4 rounded-full shadow-2xl z-50 text-sm flex items-center gap-3">
+  <span class="text-gold">✓</span> Thanks — we'll be in touch within two working days.
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .page-hero').forEach(el => io.observe(el));
+
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(() => toast.classList.remove('show'), 3800);
+  });
+</script>
+</body>
+</html>
