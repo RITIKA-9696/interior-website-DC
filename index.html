@@ -1,775 +1,1377 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terra & Ochre — Interior Design Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          espresso: '#2E2717',
-          cream: '#E9E9E1',
-          umber: '#895725',
-          gold: '#895725',
-        },
-        fontFamily: {
-          display: ['Space Grotesk', 'sans-serif'],
-          body: ['Space Grotesk', 'sans-serif'],
-        },
-      }
-    }
-  }
-</script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Space Grotesk', sans-serif; background:#E9E9E1; }
-  .font-display { font-family: 'Space Grotesk', serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home — Interior Design Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#2E2717',
+                        cream: '#E9E9E1',
+                        umber: '#895725',
+                        gold: '#895725',
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['Space Grotesk', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-  /* ---------- Reveal-on-scroll ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
-  .reveal-scale.in { opacity: 1; transform: scale(1); }
-  .reveal-left { opacity:0; transform: translateX(-32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
-  .reveal-left.in { opacity:1; transform: translateX(0); }
-  .reveal-right { opacity:0; transform: translateX(32px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
-  .reveal-right.in { opacity:1; transform: translateX(0); }
-  .stagger > * { transition-delay: calc(var(--i, 0) * 120ms); }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #E9E9E1;
+        }
 
-  /* ---------- Hero carousel ---------- */
-  .hero-slide { opacity: 0; visibility: hidden; transition: opacity 1.4s ease, visibility 1.4s ease; }
-  .hero-slide.active { opacity: 1; visibility: visible; z-index: 10; }
-  .hero-slide img { transform: scale(1.12); transition: transform 7s cubic-bezier(.16,.86,.3,1); }
-  .hero-slide.active img { transform: scale(1); }
-  .hero-copy span { display:inline-block; overflow:hidden; }
-  .hero-copy span em { display:inline-block; font-style:normal; transform: translateY(115%); transition: transform .9s cubic-bezier(.22,1,.36,1); }
-  .hero-slide.active .hero-copy span em { transform: translateY(0); }
-  .hero-slide:nth-child(1).active .hero-copy span:nth-child(1) em { transition-delay: .35s; }
-  .hero-slide:nth-child(1).active .hero-copy span:nth-child(2) em { transition-delay: .48s; }
-  .hero-eyebrow, .hero-sub, .hero-cta { opacity:0; transform: translateY(16px); transition: opacity .8s ease .55s, transform .8s ease .55s; }
-  .hero-slide.active .hero-eyebrow { opacity:1; transform: translateY(0); transition-delay: .2s; }
-  .hero-slide.active .hero-sub { opacity:1; transform: translateY(0); transition-delay: .65s; }
-  .hero-slide.active .hero-cta { opacity:1; transform: translateY(0); transition-delay: .8s; }
+        .font-display {
+            font-family: 'Space Grotesk', serif;
+        }
 
-  .hero-dot { width: 34px; height: 3px; background: rgba(233,233,225,.4); transition: background .4s ease; position:relative; overflow:hidden; }
-  .hero-dot.active { background: rgba(233,233,225,.4); }
-  .hero-dot .fill { position:absolute; inset:0; background:#D9A025; width:0%; }
-  .hero-dot.active .fill { animation: dotfill 6s linear forwards; }
-  @keyframes dotfill { from { width:0% } to { width:100% } }
+        /* ---------- Reveal-on-scroll ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
 
-  /* nav underline */
-  .nav-link { position:relative; }
-  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
-  .nav-link:hover::after { width:100%; }
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-  /* project marquee */
-  .proj-track { animation: marquee 38s linear infinite; }
-  .proj-track:hover { animation-play-state: paused; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(.94);
+            transition: opacity 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1);
+        }
 
-  /* card hover */
-  .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
-  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
+        .reveal-scale.in {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-  .bg-noise { background-image: radial-gradient(rgba(233,233,225,.06) 1px, transparent 1px); background-size: 22px 22px; }
-</style>
-<style>
-  /* Nav link base style – underline effect with #E1DCC9 */
-  .nav-link {
-    position: relative;
-    transition: color 0.3s ease;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background: #E1DCC9;
-    transition: width 0.35s ease;
-  }
-  .nav-link:hover::after {
-    width: 100%;
-  }
-  /* Active state: full underline and brighter color */
-  .nav-link.active {
-    color: #E1DCC9 !important;
-  }
-  .nav-link.active::after {
-    width: 100%;
-    background: #E1DCC9;
-  }
-  /* On scroll, header becomes solid – we keep the dark palette */
-  #site-header.scrolled {
-    background: white !important;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  #site-header.scrolled .nav-link {
-    color: rgba(44, 44, 41, 0.8) !important;
-  }
-  #site-header.scrolled .nav-link.active {
-    color: #2f2e2b !important;
-  }
-  #site-header.scrolled #logo {
-    color: #1a1a19 !important;
-  }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-32px);
+            transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
 
-   #service-image,
-  #service-detail-image {
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  #service-label {
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .service-trigger {
-    transition: color 0.3s ease, transform 0.2s ease;
-  }
-  .service-trigger:hover {
-    transform: translateY(-1px);
-  }
-  .service-hover-trigger {
-    transition: background 0.2s ease;
-    border-radius: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .service-hover-trigger:hover {
-    background: rgba(137, 87, 37, 0.06);
-  }
-</style>
+        .reveal-left.in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(32px);
+            transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .reveal-right.in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stagger>* {
+            transition-delay: calc(var(--i, 0) * 120ms);
+        }
+
+        /* ---------- Hero carousel ---------- */
+        .hero-slide {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.4s ease, visibility 1.4s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+        }
+
+        .hero-slide img {
+            transform: scale(1.12);
+            transition: transform 7s cubic-bezier(.16, .86, .3, 1);
+        }
+
+        .hero-slide.active img {
+            transform: scale(1);
+        }
+
+        .hero-copy span {
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .hero-copy span em {
+            display: inline-block;
+            font-style: normal;
+            transform: translateY(115%);
+            opacity: 0;
+            transition: transform .9s cubic-bezier(.22, 1, .36, 1), opacity .9s ease;
+        }
+
+        .hero-slide.active .hero-copy span em {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .hero-slide.active .hero-copy span:nth-child(1) em {
+            transition-delay: .35s;
+        }
+
+        .hero-slide.active .hero-copy span:nth-child(2) em {
+            transition-delay: .5s;
+        }
+
+        .hero-eyebrow,
+        .hero-sub,
+        .hero-cta {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .8s ease .55s, transform .8s ease .55s;
+        }
+
+        .hero-slide.active .hero-eyebrow {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        .hero-slide.active .hero-sub {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .65s;
+        }
+
+        .hero-slide.active .hero-cta {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .8s;
+        }
+
+        .hero-dot {
+            width: 34px;
+            height: 3px;
+            background: rgba(233, 233, 225, .4);
+            transition: background .4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-dot.active {
+            background: rgba(233, 233, 225, .4);
+        }
+
+        .hero-dot .fill {
+            position: absolute;
+            inset: 0;
+            background: #895725;
+            width: 0%;
+        }
+
+        .hero-dot.active .fill {
+            animation: dotfill 6s linear forwards;
+        }
+
+        @keyframes dotfill {
+            from {
+                width: 0%
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        /* nav underline */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 1px;
+            background: #895725;
+            transition: width .35s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* project marquee */
+        .proj-track {
+            animation: marquee 38s linear infinite;
+        }
+
+        .proj-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* card hover */
+        .lift {
+            transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease;
+        }
+
+        .lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px -20px rgba(46, 39, 23, .35);
+        }
+
+        .bg-noise {
+            background-image: radial-gradient(rgba(233, 233, 225, .06) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+
+        /* Nav link base style – underline effect */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: #E9E9E1;
+            transition: width 0.35s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #E9E9E1 !important;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+            background: #E9E9E1;
+        }
+
+        #site-header.scrolled {
+            background: #E9E9E1 !important;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(46, 39, 23, 0.15);
+        }
+
+        #site-header.scrolled .nav-link {
+            color: rgba(46, 39, 23, 0.8) !important;
+        }
+
+        #site-header.scrolled .nav-link.active {
+            color: #2E2717 !important;
+        }
+
+        #site-header.scrolled #logo {
+            color: #2E2717 !important;
+        }
+
+        #service-image,
+        #service-detail-image {
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #service-label {
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-trigger {
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .service-trigger:hover {
+            transform: translateY(-1px);
+        }
+
+        .service-hover-trigger {
+            transition: background 0.2s ease;
+            border-radius: 8px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .service-hover-trigger:hover {
+            background: rgba(137, 87, 37, 0.06);
+        }
+
+        .service-hover-trigger:hover .service-bar {
+            height: 60%;
+        }
+
+        /* ---------- Mobile menu ---------- */
+        #menu-btn { z-index: 60; }
+        .menu-bar { transform-origin: center; }
+        #mobile-menu-overlay { opacity: 0; transition: opacity .4s ease; }
+        #mobile-menu-panel { transform: translateX(100%); transition: transform .5s cubic-bezier(.22,1,.36,1); }
+        .mobile-nav-link { transition: color .3s ease, padding-left .3s ease; }
+        .mobile-nav-link:hover { color: #895725; padding-left: 6px; }
+
+        #scroll-image-container {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #scroll-image-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-section .bg-shape {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            max-width: 1232px;
+            width: 100%;
+            max-height: 690px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+        }
+
+        .project-section .project-text {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        .project-text span {
+            font-family: var(--tl-ff-heading);
+            font-size: 320px;
+            color: #2E2717;
+            opacity: .13;
+            line-height: 1;
+            margin-bottom: 0;
+        }
+
+        .project-section .project-text span::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: #895725;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        .project-section .project-text span:hover::after {
+            width: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .project-section .project-text span {
+                font-size: 32px;
+                letter-spacing: 4px;
+                padding: 6px 20px;
+            }
+
+            .project-section .project-text {
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-section .project-text span {
+                font-size: 24px;
+                letter-spacing: 3px;
+                padding: 4px 16px;
+            }
+        }
+    </style>
 </head>
+
 <body class="bg-cream text-espresso antialiased">
 
-<!-- ============ HEADER (updated: dark palette, active nav) ============ -->
+    <!-- ============ HEADER (FIXED - with working hamburger menu) ============ -->
+<!-- ============ HEADER (FIXED - with working hamburger menu) ============ -->
 <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
-    <!-- Logo: using #E1DCC9 for text, keep the image as is -->
-    <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color: #E1DCC9;">
-      <img src="./assets/interior_logo.jpeg" alt="Interior Logo" class="h-16 w-auto object-contain">
-    </a>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
+        <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color: #E9E9E1;">
+            <img src="./assets/interior_logo.jpeg" alt="Interior Logo" class="h-12 md:h-16 w-auto object-contain">
+        </a>
+        <nav class="hidden lg:flex items-center gap-6 xl:gap-9 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
+            <a href="index.html" class="nav-link active" style="color: #E9E9E1; font-weight: 500;">Home</a>
+            <a href="about.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">About</a>
+            <a href="services.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Services</a>
+            <a href="projects.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Projects</a>
+            <a href="contact.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3 md:gap-4">
+            <a href="contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background: #E9E9E1; color: #2E2717;">Get In Touch</a>
+            <button id="menu-btn" class="lg:hidden w-9 h-9 md:w-10 md:h-10 flex flex-col items-center justify-center gap-1.5 relative z-[100]" aria-label="Toggle menu">
+                <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+                <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+                <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+            </button>
+        </div>
+    </div>
 
-    <!-- Navigation: dark theme, active link highlighted -->
-    <nav class="hidden lg:flex items-center gap-9 text-sm tracking-wide" style="color: rgba(225, 220, 201, 0.85);">
-      <a href="index.html" class="nav-link active" style="color: #E1DCC9; font-weight: 500;">Home</a>
-      <a href="about.html" class="nav-link" style="color: rgba(225, 220, 201, 0.7);">About</a>
-      <a href="services.html" class="nav-link" style="color: rgba(225, 220, 201, 0.7);">Services</a>
-      <a href="projects.html" class="nav-link" style="color: rgba(225, 220, 201, 0.7);">Projects</a>
-      <a href="contact.html" class="nav-link" style="color: rgba(225, 220, 201, 0.7);">Contact</a>
-    </nav>
-
-    <!-- CTA button: using #E1DCC9 as bg, #1F150C as text -->
-    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full transition-colors duration-300" style="background: #E1DCC9; color: #1F150C; hover:bg-cream;">
-      Get In Touch
-    </a>
-  </div>
+    <!-- MOBILE MENU - FIXED with fixed positioning -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[100] pointer-events-none" style="visibility:hidden; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+        <div id="mobile-menu-overlay" class="absolute inset-0 pointer-events-auto" style="background: rgba(46,39,23,0.7); opacity:0; transition: opacity 0.4s ease; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); width: 100%; height: 100%;"></div>
+        <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-[80%] max-w-sm bg-cream shadow-2xl flex flex-col px-6 sm:px-8 pt-24 pb-8 gap-0 overflow-y-auto pointer-events-auto" style="transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); height: 100%;">
+            <button id="mobile-close-btn" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-2xl text-espresso hover:bg-umber/10 transition-colors z-10">✕</button>
+            <a href="index.html" class="mobile-nav-link font-display text-2xl py-3.5 border-b border-umber/10 text-espresso" style="color:#895725;">Home</a>
+            <a href="about.html" class="mobile-nav-link font-display text-2xl py-3.5 border-b border-umber/10 text-espresso">About</a>
+            <a href="services.html" class="mobile-nav-link font-display text-2xl py-3.5 border-b border-umber/10 text-espresso">Services</a>
+            <a href="projects.html" class="mobile-nav-link font-display text-2xl py-3.5 border-b border-umber/10 text-espresso">Projects</a>
+            <a href="contact.html" class="mobile-nav-link font-display text-2xl py-3.5 border-b border-umber/10 text-espresso">Contact</a>
+            <a href="contact.html" class="mt-6 inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-6 py-3.5 rounded-full w-full transition-colors hover:bg-opacity-80">Get In Touch</a>
+        </div>
+    </div>
 </header>
 
-<!-- ============ HERO CAROUSEL — new palette: #000000, #1F150C, #412D15, #E1DCC9 ============ -->
-<section class="relative h-screen min-h-[700px] w-full overflow-hidden" id="hero" style="background:#000000;">
-
-  <!-- Slide 1 -->
-  <div class="hero-slide active absolute inset-0">
-    <div class="absolute inset-0 overflow-hidden">
-      <img src="/assets/slider-img-1.png" class="w-full h-full object-cover" alt="Minimal living room">
-    </div>
-    <!-- overlay: deep brown -->
-    <div class="absolute inset-0" style="background: rgba(31,21,12,0.75);"></div>
-    <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
-      <p class="hero-eyebrow text-[#E1DCC9] uppercase tracking-[0.3em] text-xs mb-5 ">Est. Studio · Since 1998</p>
-      <h1 class="hero-copy font-display text-cream text-5xl md:text-7xl leading-[1.05] max-w-3xl" style="color:#E1DCC9;">
-        <span><em>The Quiet Art</em></span><br>
-        <span><em>of <span style="color:#E1DCC9;">Interior</span> Design</em></span>
-      </h1>
-      <p class="hero-sub text-cream/70 max-w-md mt-6 text-base md:text-lg" style="color:rgba(225,220,201,0.75);">Every room begins with restraint — texture, light and proportion, composed until the space speaks for itself.</p>
-      <div class="hero-cta mt-9 flex items-center gap-5">
-        <a href="projects.html" class="bg-[#E1DCC9] text-[#1F150C] px-8 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">View Our Work</a>
-        <a href="contact.html" class="text-[#E1DCC9] border border-[#E1DCC9]/30 px-8 py-4 rounded-full hover:border-[#E1DCC9] hover:text-[#E1DCC9] transition-colors duration-300">Book Consultation</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 2 -->
-  <div class="hero-slide absolute inset-0">
-    <div class="absolute inset-0 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Warm dining room">
-    </div>
-    <div class="absolute inset-0" style="background: rgba(31,21,12,0.75);"></div>
-    <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
-      <p class="hero-eyebrow text-[#E1DCC9] uppercase tracking-[0.3em] text-xs mb-5">260+ Projects Delivered</p>
-      <h1 class="hero-copy font-display text-cream text-5xl md:text-7xl leading-[1.05] max-w-3xl" style="color:#E1DCC9;">
-        <span><em>Spaces Built</em></span><br>
-        <span><em>Around <span style="color:#E1DCC9;">You</span></em></span>
-      </h1>
-      <p class="hero-sub text-cream/70 max-w-md mt-6 text-base md:text-lg" style="color:rgba(225,220,201,0.75);">From single rooms to full residences — we design around how you actually live, not how a catalogue says you should.</p>
-      <div class="hero-cta mt-9 flex items-center gap-5">
-        <a href="projects.html" class="bg-[#E1DCC9] text-[#1F150C] px-8 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">View Our Work</a>
-        <a href="contact.html" class="text-[#E1DCC9] border border-[#E1DCC9]/30 px-8 py-4 rounded-full hover:border-[#E1DCC9] hover:text-[#E1DCC9] transition-colors duration-300">Book Consultation</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 3 -->
-  <div class="hero-slide absolute inset-0">
-    <div class="absolute inset-0 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Modern bedroom">
-    </div>
-    <div class="absolute inset-0" style="background: rgba(31,21,12,0.75);"></div>
-    <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
-      <p class="hero-eyebrow text-[#E1DCC9] uppercase tracking-[0.3em] text-xs mb-5">Material-First Design</p>
-      <h1 class="hero-copy font-display text-cream text-5xl md:text-7xl leading-[1.05] max-w-3xl" style="color:#E1DCC9;">
-        <span><em>Where Light</em></span><br>
-        <span><em>Meets <span style="color:#E1DCC9;">Material</span></em></span>
-      </h1>
-      <p class="hero-sub text-cream/70 max-w-md mt-6 text-base md:text-lg" style="color:rgba(225,220,201,0.75);">Timber, stone, plaster and brass — chosen for how they age, not just how they photograph on day one.</p>
-      <div class="hero-cta mt-9 flex items-center gap-5">
-        <a href="projects.html" class="bg-[#E1DCC9] text-[#1F150C] px-8 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">View Our Work</a>
-        <a href="contact.html" class="text-[#E1DCC9] border border-[#E1DCC9]/30 px-8 py-4 rounded-full hover:border-[#E1DCC9] hover:text-[#E1DCC9] transition-colors duration-300">Book Consultation</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <div class="absolute bottom-9 left-0 w-full z-20">
-    <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
-      <div class="flex gap-3" id="hero-dots">
-        <button class="hero-dot active" data-i="0"><span class="fill"></span></button>
-        <button class="hero-dot" data-i="1"><span class="fill"></span></button>
-        <button class="hero-dot" data-i="2"><span class="fill"></span></button>
-      </div>
-      <div class="hidden md:flex items-center gap-3 text-cream/50 text-xs tracking-widest">
-        <button id="hero-prev" class="w-10 h-10 rounded-full border border-[#E1DCC9]/25 flex items-center justify-center hover:border-[#E1DCC9] hover:text-[#E1DCC9] transition-colors text-[#E1DCC9]">←</button>
-        <button id="hero-next" class="w-10 h-10 rounded-full border border-[#E1DCC9]/25 flex items-center justify-center hover:border-[#E1DCC9] hover:text-[#E1DCC9] transition-colors text-[#E1DCC9]">→</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHO WE ARE — SECTION A (cards) ============ -->
-<section class="relative py-28 px-6 md:px-10 overflow-hidden">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-start mb-16">
-      <div class="reveal-left">
-        <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber">
-          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Who We Are
-        </span>
-      </div>
-      <div class="reveal-right">
-        <h2 class="font-display text-4xl md:text-5xl leading-tight">
-          Experience the <span class="text-umber">Craft</span> of<br> Considered <span class="text-umber">Interiors</span>
-        </h2>
-        <p class="mt-5 text-espresso/70 max-w-xl">We specialise in translating how you want a room to feel into layouts, materials and light — a portfolio built on precision rather than trend.</p>
-      </div>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
-      <div class="reveal lift bg-cream border border-umber/15 rounded-2xl p-8" style="--i:0">
-        <div class="w-12 h-12 rounded-full border border-gold/50 flex items-center justify-center text-gold mb-8">01</div>
-        <h3 class="font-display text-xl mb-3">Architectural Design</h3>
-        <div class="w-8 h-px bg-gold/40 mb-4"></div>
-        <p class="text-espresso/70 text-sm leading-relaxed">Spatial planning that resolves flow and light before a single finish is chosen.</p>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/15 rounded-2xl p-8" style="--i:1">
-        <div class="w-12 h-12 rounded-full border border-espresso/30 flex items-center justify-center text-espresso mb-8">02</div>
-        <h3 class="font-display text-xl mb-3">Interior Design & Planning</h3>
-        <div class="w-8 h-px bg-espresso/40 mb-4"></div>
-        <p class="text-espresso/70 text-sm leading-relaxed">From concept boards to furniture schedules, tailored to how each room is used.</p>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/15 rounded-2xl p-8" style="--i:2">
-        <div class="w-12 h-12 rounded-full border border-umber/40 flex items-center justify-center text-umber mb-8">03</div>
-        <h3 class="font-display text-xl mb-3">Consulting Services</h3>
-        <div class="w-8 h-px bg-umber/40 mb-4"></div>
-        <p class="text-espresso/70 text-sm leading-relaxed">A single session or ongoing advisory — direction when you need a second eye.</p>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/15 rounded-2xl p-8" style="--i:3">
-        <div class="w-12 h-12 rounded-full border border-umber/40 flex items-center justify-center text-umber mb-8">04</div>
-        <h3 class="font-display text-xl mb-3">Project Management</h3>
-        <div class="w-8 h-px bg-umber/40 mb-4"></div>
-        <p class="text-espresso/70 text-sm leading-relaxed">One point of contact from tender to snag list, coordinating every trade.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURE BAND (with hover-triggered image reveal) ============ -->
-<section class="relative py-28 px-6 md:px-10 bg-espresso text-cream overflow-hidden">
-  <!-- Background image (static) -->
-  <img src="/assets/about-bg.png" class="absolute inset-0 w-full h-full object-cover opacity-70" alt="Living room detail">
-  
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
-    <div class="reveal-left">
-      <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-[#D9A025] mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Started in 1998
-      </span>
-      <h2 class="font-display text-4xl md:text-5xl leading-tight">
-        Where Spaces Inspire,<br> and <span class="text-[#D9A025]">Design</span> Comes Alive
-      </h2>
-      <div class="grid grid-cols-2 gap-4 mt-8 text-sm">
-        <p class="flex items-center gap-2"><span class="text-[#D9A025]">✓</span> Latest technologies</p>
-        <p class="flex items-center gap-2"><span class="text-[#D9A025]">✓</span> High-quality finishes</p>
-        <p class="flex items-center gap-2"><span class="text-[#D9A025]">✓</span> 5-year warranty</p>
-        <p class="flex items-center gap-2"><span class="text-[#D9A025]">✓</span> Residential & commercial</p>
-      </div>
-      <p class="text-cream/60 mt-8 max-w-md">Whether it's a single room, a full home or a commercial fit-out, we stay involved from first sketch to final styling.</p>
-      <a href="about.html" class="inline-flex items-center gap-3 mt-10 border border-cream/30 rounded-full px-7 py-3.5 hover:border-gold hover:text-gold transition-colors duration-300">More About Us →</a>
-    </div>
-    
-    <!-- Image container with hover reveal -->
-    <div class="reveal-scale relative">
-      <div class="rounded-3xl overflow-hidden shadow-2xl relative" id="service-image-container">
-        <!-- Default image (residential) -->
-        <img src="/assets/about-img-1.png" class="w-full h-[460px] object-cover transition-all duration-700 ease-in-out" id="service-image" alt="Living room detail">
-        <!-- Overlay gradient for smooth transition -->
-        <div class="absolute inset-0 bg-gradient-to-t from-espresso/20 to-transparent pointer-events-none"></div>
-      </div>
-      <!-- Service selector (hidden, used as hover triggers) -->
-      <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-espresso/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-xl flex gap-6 border border-gold/20" id="service-selector">
-        <span class="service-trigger text-sm font-medium cursor-pointer hover:text-[#D9A025] transition-colors duration-300" data-image="/assets/about-img-1.png" style="color: #D9A025;">Residential</span>
-        <span class="service-trigger text-sm font-medium cursor-pointer hover:text-[#D9A025] transition-colors duration-300" data-image="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" style="color: rgba(225,220,201,0.7);">Commercial</span>
-        <span class="service-trigger text-sm font-medium cursor-pointer hover:text-[#D9A025] transition-colors duration-300" data-image="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop" style="color: rgba(225,220,201,0.7);">Outdoor</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHO WE ARE — SECTION B (list layout with hover image reveal) ============ -->
-<section class="relative py-28 px-6 md:px-10 overflow-hidden">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-start mb-16">
-      <div class="reveal-left">
-        <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber">
-          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Who We Are
-        </span>
-      </div>
-      <div class="reveal-right">
-        <h2 class="font-display text-4xl md:text-5xl leading-tight">
-          Explore Our <span class="text-umber">Comprehensive</span><br> Interior Services
-        </h2>
-        <p class="mt-5 text-espresso/70 max-w-xl">The same craft, applied differently depending on the room, the client and the brief in front of us.</p>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-      <!-- Image container (reveal target) -->
-      <div class="reveal-scale relative" id="service-image-panel">
-        <div class="rounded-3xl overflow-hidden shadow-xl transition-all duration-700 ease-in-out">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop" class="w-full h-[420px] object-cover transition-transform duration-700 ease-in-out" id="service-detail-image" alt="Interior design service">
+     <!-- ============ HERO CAROUSEL ============ -->
+    <section class="relative h-[100vh] min-h-[660px] w-full overflow-hidden" id="hero" style="background:#2E2717;">
+        <!-- Slide 1 -->
+        <div class="hero-slide active absolute inset-0">
+            <div class="absolute inset-0 overflow-hidden">
+                <img src="/assets/slider-img-1.png" class="w-full h-full object-cover" alt="Minimal living room">
+            </div>
+            <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(46,39,23,.8) 0%, rgba(46,39,23,.55) 45%, rgba(46,39,23,.25) 75%, rgba(46,39,23,.15) 100%), linear-gradient(180deg, rgba(46,39,23,.25) 0%, rgba(46,39,23,.1) 35%, rgba(46,39,23,.65) 100%);"></div>
+            <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
+                <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5" style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">Est. Studio · Since 1998
+                </p>
+                <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
+                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
+                    <span><em>9 Sens Interior Design</em></span><br>
+                    <!-- <span><em>Design <span style="color:#895725;">Studio</span></em></span> -->
+                </h1>
+                <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
+                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">Every room begins with restraint — texture, light and
+                    proportion, composed until the space speaks for itself.</p>
+                <div class="hero-cta mt-9 flex items-center gap-5">
+                    <a href="projects.html"
+                        class="px-8 py-4 rounded-full font-medium transition-colors duration-300"
+                        style="background:#E9E9E1; color:#2E2717;">View
+                        Our Work</a>
+                    <a href="contact.html"
+                        class="px-8 py-4 rounded-full transition-colors duration-300 border"
+                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book
+                        Consultation</a>
+                </div>
+            </div>
         </div>
-        <div class="absolute bottom-6 left-6 right-6 bg-espresso/85 backdrop-blur-sm text-cream rounded-xl p-5 text-sm transition-all duration-500" id="service-label">
-          Tailored design for private homes — from single-room refreshes to full transformations.
+        <!-- Slide 2 -->
+        <div class="hero-slide absolute inset-0">
+            <div class="absolute inset-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1800&auto=format&fit=crop"
+                    class="w-full h-full object-cover" alt="Warm dining room">
+            </div>
+            <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(46,39,23,.8) 0%, rgba(46,39,23,.55) 45%, rgba(46,39,23,.25) 75%, rgba(46,39,23,.15) 100%), linear-gradient(180deg, rgba(46,39,23,.25) 0%, rgba(46,39,23,.1) 35%, rgba(46,39,23,.65) 100%);"></div>
+            <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
+                <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5" style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">260+ Projects Delivered
+                </p>
+                <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
+                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
+                    <span><em>Dev Construction</em></span><br>
+                    <!-- <span><em>Around <span style="color:#895725;">You</span></em></span> -->
+                </h1>
+                <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
+                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">From single rooms to full residences — we design around how
+                    you actually live, not how a catalogue says you should.</p>
+                <div class="hero-cta mt-9 flex items-center gap-5">
+                    <a href="projects.html"
+                        class="px-8 py-4 rounded-full font-medium transition-colors duration-300"
+                        style="background:#E9E9E1; color:#2E2717;">View
+                        Our Work</a>
+                    <a href="contact.html"
+                        class="px-8 py-4 rounded-full transition-colors duration-300 border"
+                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book
+                        Consultation</a>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <!-- Service list with hover triggers -->
-      <div class="divide-y divide-umber/15 stagger">
-        <div class="reveal group flex items-center justify-between py-6 cursor-pointer service-hover-trigger" style="--i:0" data-image="/assets/service1.png" data-label="Residential design — warm, livable spaces tailored to your rhythm.">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">01</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Residential Interior Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        <!-- Slide 3 -->
+        <div class="hero-slide absolute inset-0">
+            <div class="absolute inset-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1800&auto=format&fit=crop"
+                    class="w-full h-full object-cover" alt="Modern bedroom">
+            </div>
+            <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(46,39,23,.82) 0%, rgba(46,39,23,.58) 45%, rgba(46,39,23,.28) 75%, rgba(46,39,23,.18) 100%), linear-gradient(180deg, rgba(46,39,23,.3) 0%, rgba(46,39,23,.12) 35%, rgba(46,39,23,.7) 100%);"></div>
+            <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
+                <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5" style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">Material-First Design</p>
+                <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
+                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
+                    <span><em>Rudra Engineers</em></span><br>
+                    <!-- <span><em>Meets <span style="color:#895725;">Material</span></em></span> -->
+                </h1>
+                <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
+                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">Timber, stone, plaster and brass — chosen for how they age,
+                    not just how they photograph on day one.</p>
+                <div class="hero-cta mt-9 flex items-center gap-5">
+                    <a href="projects.html"
+                        class="px-8 py-4 rounded-full font-medium transition-colors duration-300"
+                        style="background:#E9E9E1; color:#2E2717;">View
+                        Our Work</a>
+                    <a href="contact.html"
+                        class="px-8 py-4 rounded-full transition-colors duration-300 border"
+                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book
+                        Consultation</a>
+                </div>
+            </div>
         </div>
-        <div class="reveal group flex items-center justify-between py-6 cursor-pointer service-hover-trigger" style="--i:1" data-image="/assets/feature-img-2.png" data-label="Commercial interiors — brand-driven, functional, and inspiring for teams and clients.">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">02</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Commercial Interior Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+        <!-- Controls -->
+        <div class="absolute bottom-9 left-0 w-full z-20">
+            <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
+                <div class="flex gap-3" id="hero-dots">
+                    <button class="hero-dot active" data-i="0"><span class="fill"></span></button>
+                    <button class="hero-dot" data-i="1"><span class="fill"></span></button>
+                    <button class="hero-dot" data-i="2"><span class="fill"></span></button>
+                </div>
+                <div class="hidden md:flex items-center gap-3 text-xs tracking-widest">
+                    <button id="hero-prev"
+                        class="w-10 h-10 rounded-full border flex items-center justify-center transition-colors"
+                        style="border-color:rgba(233,233,225,.3); color:#E9E9E1;">←</button>
+                    <button id="hero-next"
+                        class="w-10 h-10 rounded-full border flex items-center justify-center transition-colors"
+                        style="border-color:rgba(233,233,225,.3); color:#E9E9E1;">→</button>
+                </div>
+            </div>
         </div>
-        <div class="reveal group flex items-center justify-between py-6 cursor-pointer service-hover-trigger" style="--i:2" data-image="/assets/services3.png" data-label="Design consultation — expert guidance to sharpen your vision and elevate your space.">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">03</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Interior Design Consultation</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6 cursor-pointer service-hover-trigger" style="--i:3" data-image="/assets/service4.png" data-label="Outdoor & landscape — extending your interior language into the garden and terrace.">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">04</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Outdoor & Landscape Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6 cursor-pointer service-hover-trigger" style="--i:4" data-image="/assets/services5.png" data-label="Renovation & remodeling — reimagining existing spaces with sensitivity and precision.">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">05</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Renovation & Remodeling</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============ WHO WE ARE — SECTION B (list layout, mirrors section A content, different composition) ============ -->
-<section class="relative py-28 px-6 md:px-10 overflow-hidden">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-start mb-16">
-      <div class="reveal-left">
-        <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber">
-          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Who We Are
-        </span>
-      </div>
-      <div class="reveal-right">
-        <h2 class="font-display text-4xl md:text-5xl leading-tight">
-          Explore Our <span class="text-umber">Comprehensive</span><br> Interior Services
-        </h2>
-        <p class="mt-5 text-espresso/70 max-w-xl">The same craft, applied differently depending on the room, the client and the brief in front of us.</p>
-      </div>
-    </div>
+    <!-- ============ WHO WE ARE — SECTION A (cards) ============ -->
+    <section class="relative py-16 px-6 md:px-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-10 items-start mb-10">
+                <div class="reveal-left">
+                    <span
+                        class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber">
+                        <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Who We Are
+                    </span>
+                </div>
+                <div class="reveal-right">
+                    <h2 class="font-display text-4xl md:text-5xl leading-tight">
+                        Experience the <span class="text-umber">Craft</span> of<br> Considered <span
+                            class="text-umber">Interiors</span>
+                    </h2>
+                    <p class="mt-5 text-espresso/70 max-w-xl">We specialise in translating how you want a room to feel
+                        into layouts, materials and light — a portfolio built on precision rather than trend.</p>
+                </div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
+                <div class="reveal lift bg-cream border border-umber/30 rounded-2xl p-8" style="--i:0">
+                    <div
+                        class="w-12 h-12 rounded-full border border-umber/50 flex items-center justify-center text-umber mb-8">
+                        01</div>
+                    <h3 class="font-display text-xl mb-3">Architectural Design</h3>
+                    <div class="w-8 h-px bg-umber/40 mb-4"></div>
+                    <p class="text-espresso/70 text-sm leading-relaxed">Spatial planning that resolves flow and light
+                        before a single finish is chosen.</p>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/30 rounded-2xl p-8" style="--i:1">
+                    <div
+                        class="w-12 h-12 rounded-full border border-espresso/30 flex items-center justify-center text-espresso mb-8">
+                        02</div>
+                    <h3 class="font-display text-xl mb-3">Interior Design & Planning</h3>
+                    <div class="w-8 h-px bg-espresso/40 mb-4"></div>
+                    <p class="text-espresso/70 text-sm leading-relaxed">From concept boards to furniture schedules,
+                        tailored to how each room is used.</p>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/30 rounded-2xl p-8" style="--i:2">
+                    <div
+                        class="w-12 h-12 rounded-full border border-umber/40 flex items-center justify-center text-umber mb-8">
+                        03</div>
+                    <h3 class="font-display text-xl mb-3">Consulting Services</h3>
+                    <div class="w-8 h-px bg-umber/40 mb-4"></div>
+                    <p class="text-espresso/70 text-sm leading-relaxed">A single session or ongoing advisory — direction
+                        when you need a second eye.</p>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/30 rounded-2xl p-8" style="--i:3">
+                    <div
+                        class="w-12 h-12 rounded-full border border-umber/40 flex items-center justify-center text-umber mb-8">
+                        04</div>
+                    <h3 class="font-display text-xl mb-3">Project Management</h3>
+                    <div class="w-8 h-px bg-umber/40 mb-4"></div>
+                    <p class="text-espresso/70 text-sm leading-relaxed">One point of contact from tender to snag list,
+                        coordinating every trade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-      <div class="reveal-scale relative">
-        <div class="rounded-3xl overflow-hidden">
-          <img src="/assets/feature-img-1.png" class="w-full h-[420px] object-cover" alt="Open plan kitchen living">
+    <!-- ============ FEATURE BAND (with hover-triggered image reveal) ============ -->
+    <section class="relative py-16 px-6 md:px-10 bg-espresso text-cream overflow-hidden">
+        <img src="/assets/about-bg.png" class="absolute inset-0 w-full h-full object-cover opacity-70"
+            alt="Living room detail">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="reveal-left">
+                <span
+                    class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 mb-6" style="color:#895725;">
+                    <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Started in 1998
+                </span>
+                <h2 class="font-display text-4xl md:text-5xl leading-tight">
+                    Where Spaces Inspire,<br> and <span style="color:#895725;">Design</span> Comes Alive
+                </h2>
+                <div class="grid grid-cols-2 gap-4 mt-8 text-sm">
+                    <p class="flex items-center gap-2"><span style="color:#895725;">✓</span> Latest technologies</p>
+                    <p class="flex items-center gap-2"><span style="color:#895725;">✓</span> High-quality finishes</p>
+                    <p class="flex items-center gap-2"><span style="color:#895725;">✓</span> 5-year warranty</p>
+                    <p class="flex items-center gap-2"><span style="color:#895725;">✓</span> Residential & commercial
+                    </p>
+                </div>
+                <p class="text-cream/60 mt-8 max-w-md">Whether it's a single room, a full home or a commercial fit-out,
+                    we stay involved from first sketch to final styling.</p>
+                <a href="about.html"
+                    class="inline-flex items-center gap-3 mt-10 border border-cream/30 rounded-full px-7 py-3.5 hover:border-umber hover:text-umber transition-colors duration-300">More
+                    About Us →</a>
+            </div>
+            <div class="reveal-scale relative">
+                <div class="rounded-3xl overflow-hidden shadow-2xl relative" id="service-image-container">
+                    <img src="/assets/about-img-1.png"
+                        class="w-full h-[460px] object-cover transition-all duration-700 ease-in-out" id="service-image"
+                        alt="Living room detail">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espresso/20 to-transparent pointer-events-none">
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-espresso/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-xl flex gap-6 border border-umber/20"
+                    id="service-selector">
+                    <span
+                        class="service-trigger text-sm font-medium cursor-pointer transition-colors duration-300"
+                        data-image="/assets/about-img-1.png" style="color: #895725;">Residential</span>
+                    <span
+                        class="service-trigger text-sm font-medium cursor-pointer transition-colors duration-300"
+                        data-image="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
+                        style="color: rgba(233,233,225,0.7);">Commercial</span>
+                    <span
+                        class="service-trigger text-sm font-medium cursor-pointer transition-colors duration-300"
+                        data-image="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop"
+                        style="color: rgba(233,233,225,0.7);">Outdoor</span>
+                </div>
+            </div>
         </div>
-        <div class="absolute bottom-6 left-6 right-6 bg-espresso/85 backdrop-blur-sm text-cream rounded-xl p-5 text-sm">
-          Tailored design for private homes — from single-room refreshes to full transformations.
-        </div>
-      </div>
-      <div class="divide-y divide-umber/15 stagger">
-        <div class="reveal group flex items-center justify-between py-6" style="--i:0">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">01</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Residential Interior Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6" style="--i:1">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">02</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Commercial Interior Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6" style="--i:2">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">03</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Interior Design Consultation</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6" style="--i:3">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">04</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Outdoor & Landscape Design</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-        <div class="reveal group flex items-center justify-between py-6" style="--i:4">
-          <div class="flex items-center gap-5">
-            <span class="text-umber/50 text-sm">05</span>
-            <h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Renovation & Remodeling</h3>
-          </div>
-          <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="relative py-28 px-6 md:px-10 bg-espresso/[.03]">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-end mb-16">
-      <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">
-        A Process Built for <span class="text-umber">Exceptional</span> Results
-      </h2>
-      <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end">Our process adapts to your vision — from the first conversation to the day you get the keys back.</p>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
-      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:0">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Consultation">
-        <div class="p-6 relative">
-          <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">01</span>
-          <h3 class="font-display text-lg mb-2">Initial Consultation</h3>
-          <p class="text-sm text-espresso/60">Understanding your vision, goals and how you'll live in the space.</p>
+    <!-- ============ EXPLORE OUR COMPREHENSIVE INTERIOR SERVICES (with hover image reveal) ============ -->
+    <section class="relative py-16 px-6 md:px-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-10 items-start mb-10">
+                <div class="reveal-left">
+                    <span
+                        class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber">
+                        <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Who We Are
+                    </span>
+                </div>
+                <div class="reveal-right">
+                    <h2 class="font-display text-4xl md:text-5xl leading-tight">
+                        Explore Our <span class="text-umber">Comprehensive</span><br> Interior Services
+                    </h2>
+                    <p class="mt-5 text-espresso/70 max-w-xl">The same craft, applied differently depending on the room,
+                        the client and the brief in front of us.</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+                <!-- Image container (reveal target) -->
+                <div class="reveal-scale relative" id="service-image-panel">
+                    <div class="rounded-3xl overflow-hidden shadow-xl transition-all duration-700 ease-in-out">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop"
+                            class="w-full h-[420px] object-cover transition-transform duration-700 ease-in-out"
+                            id="service-detail-image" alt="Interior design service">
+                    </div>
+                    <div class="absolute bottom-6 left-6 right-6 bg-espresso/85 backdrop-blur-sm text-cream rounded-xl p-5 text-sm transition-all duration-500"
+                        id="service-label">
+                        Tailored design for private homes — from single-room refreshes to full transformations.
+                    </div>
+                </div>
+
+                <!-- Service list with hover triggers -->
+                <div class="divide-y divide-umber/15 stagger">
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:0" data-image="/assets/service1.png"
+                        data-label="Residential design — warm, livable spaces tailored to your rhythm.">
+                        <span class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">01</span>
+                            <h3 class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Residential Interior Design</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:1" data-image="/assets/feature-img-2.png"
+                        data-label="Commercial interiors — brand-driven, functional, and inspiring for teams and clients.">
+                        <span class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">02</span>
+                            <h3 class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Commercial Interior Design</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:2" data-image="/assets/services3.png"
+                        data-label="Design consultation — expert guidance to sharpen your vision and elevate your space.">
+                        <span class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">03</span>
+                            <h3 class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Interior Design Consultation</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:3" data-image="/assets/service4.png"
+                        data-label="Outdoor & landscape — extending your interior language into the garden and terrace.">
+                        <span class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">04</span>
+                            <h3 class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Outdoor & Landscape Design</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:4" data-image="/assets/services5.png"
+                        data-label="Renovation & remodeling — reimagining existing spaces with sensitivity and precision.">
+                        <span class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">05</span>
+                            <h3 class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Renovation & Remodeling</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ COUNTERS ============ -->
+            <div class="mt-10 pt-10 border-t border-umber/15">
+                <div class="grid grid-cols-2 md:grid-cols-4 divide-y divide-umber/10 md:divide-y-0 md:divide-x stagger">
+                    <div class="reveal text-center md:px-6 py-6 md:py-0" style="--i:0">
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <span class="font-display text-4xl md:text-5xl text-espresso counter" data-target="26" data-suffix="">0</span>
+                            <span class="font-display text-2xl text-umber">+</span>
+                        </div>
+                        <div class="w-8 h-px bg-umber/40 mx-auto mb-3"></div>
+                        <h3 class="text-sm tracking-wide text-espresso/70">Years of Experience</h3>
+                    </div>
+                    <div class="reveal text-center md:px-6 py-6 md:py-0" style="--i:1">
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <span class="font-display text-4xl md:text-5xl text-espresso counter" data-target="580" data-suffix="">0</span>
+                            <span class="font-display text-2xl text-umber">+</span>
+                        </div>
+                        <div class="w-8 h-px bg-umber/40 mx-auto mb-3"></div>
+                        <h3 class="text-sm tracking-wide text-espresso/70">Completed Projects</h3>
+                    </div>
+                    <div class="reveal text-center md:px-6 py-6 md:py-0" style="--i:2">
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <span class="font-display text-4xl md:text-5xl text-espresso counter" data-target="18" data-suffix="">0</span>
+                        </div>
+                        <div class="w-8 h-px bg-umber/40 mx-auto mb-3"></div>
+                        <h3 class="text-sm tracking-wide text-espresso/70">Ongoing Projects</h3>
+                    </div>
+                    <div class="reveal text-center md:px-6 py-6 md:py-0" style="--i:3">
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <span class="font-display text-4xl md:text-5xl text-espresso counter" data-target="420" data-suffix="">0</span>
+                            <span class="font-display text-2xl text-umber">+</span>
+                        </div>
+                        <div class="w-8 h-px bg-umber/40 mx-auto mb-3"></div>
+                        <h3 class="text-sm tracking-wide text-espresso/70">Happy Clients</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:1">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Design and planning">
-        <div class="p-6 relative">
-          <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">02</span>
-          <h3 class="font-display text-lg mb-2">Design & Planning</h3>
-          <p class="text-sm text-espresso/60">Layouts, mood boards and material palettes refined with you.</p>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="relative py-16 px-6 md:px-10 bg-espresso/[.03]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-10 items-end mb-10">
+                <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">
+                    A Process Built for <span class="text-umber">Exceptional</span> Results
+                </h2>
+                <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end">Our process adapts to your vision
+                    — from the first conversation to the day you get the keys back.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
+                <div class="reveal lift bg-cream border border-umber/50 rounded-2xl overflow-hidden" style="--i:0">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-40 object-cover" alt="Consultation">
+                    <div class="p-6 relative">
+                        <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">01</span>
+                        <h3 class="font-display text-lg mb-2">Initial Consultation</h3>
+                        <p class="text-sm text-espresso/60">Understanding your vision, goals and how you'll live in the
+                            space.</p>
+                    </div>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/50 rounded-2xl overflow-hidden" style="--i:1">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-40 object-cover" alt="Design and planning">
+                    <div class="p-6 relative">
+                        <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">02</span>
+                        <h3 class="font-display text-lg mb-2">Design & Planning</h3>
+                        <p class="text-sm text-espresso/60">Layouts, mood boards and material palettes refined with you.
+                        </p>
+                    </div>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/50 rounded-2xl overflow-hidden" style="--i:2">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-40 object-cover" alt="Implementation">
+                    <div class="p-6 relative">
+                        <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">03</span>
+                        <h3 class="font-display text-lg mb-2">Implementation</h3>
+                        <p class="text-sm text-espresso/60">On-site coordination across every trade, tracked against
+                            plan.</p>
+                    </div>
+                </div>
+                <div class="reveal lift bg-cream border border-umber/50 rounded-2xl overflow-hidden" style="--i:3">
+                    <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-40 object-cover" alt="Handover">
+                    <div class="p-6 relative">
+                        <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">04</span>
+                        <h3 class="font-display text-lg mb-2">Project Handover</h3>
+                        <p class="text-sm text-espresso/60">A final walkthrough and styling pass before you move back
+                            in.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:2">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Implementation">
-        <div class="p-6 relative">
-          <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">03</span>
-          <h3 class="font-display text-lg mb-2">Implementation</h3>
-          <p class="text-sm text-espresso/60">On-site coordination across every trade, tracked against plan.</p>
+
+        <!-- image section -->
+        <section class="project-section fade-wrapper">
+            <div class="relative w-full h-[100px] md:h-[300px] overflow-hidden">
+                <div class="project-text">
+                    <span>Interior</span>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 via-espresso/20 to-transparent"></div>
+                <img src="/assets/project-house.png"
+                    class="absolute top-0 left-0 w-full h-full object-contain opacity-90"
+                    alt="Interior design showcase overlay">
+            </div>
+        </section>
+    </section>
+
+    <!-- ============ PROJECTS MARQUEE ============ -->
+    <section class="relative py-12 overflow-hidden">
+        <div
+            class="max-w-7xl mx-auto px-6 md:px-10 mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+                <span
+                    class="reveal-left inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Our Projects
+                </span>
+                <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">Projects That <span
+                        class="text-umber">Define</span> Our Style</h2>
+            </div>
+            <p class="reveal-right text-espresso/70 max-w-sm">A selection of residential interiors, from full
+                renovations to considered single-room updates.</p>
         </div>
-      </div>
-      <div class="reveal lift bg-cream border border-umber/10 rounded-2xl overflow-hidden" style="--i:3">
-        <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=800&auto=format&fit=crop" class="w-full h-40 object-cover" alt="Handover">
-        <div class="p-6 relative">
-          <span class="absolute right-5 top-5 font-display text-4xl text-umber/10">04</span>
-          <h3 class="font-display text-lg mb-2">Project Handover</h3>
-          <p class="text-sm text-espresso/60">A final walkthrough and styling pass before you move back in.</p>
+        <div class="overflow-hidden">
+            <div class="proj-track flex gap-6 w-max px-6 md:px-10">
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Luxury Skyline"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Luxury Skyline</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Bohemian Rhapsody</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Vintage Glamour"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Vintage Glamour</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Titan Office Interior"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Titan Office Interior</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Living Quarter"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Living Quarter</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Luxury Skyline"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Luxury Skyline</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Bohemian Rhapsody</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Vintage Glamour"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Vintage Glamour</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Titan Office Interior"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Titan Office Interior</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+                <a href="projects.html"
+                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
+                    <div class="relative"><img
+                            src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=800&auto=format&fit=crop"
+                            class="w-full h-72 object-cover" alt="Living Quarter"><span
+                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display text-lg">Living Quarter</h3>
+                        <p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p>
+                    </div>
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============ PROJECTS MARQUEE ============ -->
-<section class="relative py-28 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-    <div>
-      <span class="reveal-left inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Our Projects
-      </span>
-      <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">Projects That <span class="text-umber">Define</span> Our Style</h2>
-    </div>
-    <p class="reveal-right text-espresso/70 max-w-sm">A selection of residential interiors, from full renovations to considered single-room updates.</p>
-  </div>
+    <!-- ============ CTA ============ -->
+    <section class="relative py-14 px-6 md:px-10">
+        <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-3xl border border-cream/10 px-10 py-14 md:py-16 relative">
+            <div class="grid md:grid-cols-[1fr_auto] gap-10 items-center">
+                <div>
+                    <span class="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-cream/50 mb-4">
+                        <span class="w-6 h-px bg-umber"></span> Start Your Project
+                    </span>
+                    <h2 class="font-display text-3xl md:text-4xl leading-tight max-w-xl">Let's Design a Space You'll Never Want to Leave</h2>
+                </div>
+                <a href="contact.html"
+                    class="inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-medium whitespace-nowrap transition-all duration-300 hover:gap-4"
+                    style="background:#E9E9E1; color:#2E2717;">Book a Consultation
+                    <span class="transition-transform duration-300">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <div class="overflow-hidden">
-    <div class="proj-track flex gap-6 w-max px-6 md:px-10">
-      <!-- set 1 -->
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Luxury Skyline"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Luxury Skyline</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Bohemian Rhapsody</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Vintage Glamour"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Vintage Glamour</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Titan Office Interior"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Titan Office Interior</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Living Quarter"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Living Quarter</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <!-- set 2 (duplicate for seamless loop) -->
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Luxury Skyline"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Luxury Skyline</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Bohemian Rhapsody</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Vintage Glamour"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Vintage Glamour</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Titan Office Interior"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Titan Office Interior</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="projects.html" class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/10">
-        <div class="relative"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Living Quarter"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-5"><h3 class="font-display text-lg">Living Quarter</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- ============ FOOTER ============ -->
+    <footer class="bg-espresso text-cream/70 pt-14 pb-6 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-10">
+            <div>
+                <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+                   <img src="/assets/interior_logo.jpeg" alt="logo" class="w-20 h-16">
+                </a>
+                <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and
+                    how people actually live.</p>
+            </div>
+            <div>
+                <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="index.html" class="hover:text-umber transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-umber transition-colors">About</a></li>
+                    <li><a href="services.html" class="hover:text-umber transition-colors">Services</a></li>
+                    <li><a href="projects.html" class="hover:text-umber transition-colors">Projects</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
+                <ul class="space-y-3 text-sm">
+                    <li>Motzstraße 12, Berlin</li>
+                    <li>hello@terraochre.studio</li>
+                    <li>+49 30 1234 5678</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
+                <p class="text-sm mb-4">Considered interiors, once a month.</p>
+                <form class="flex" onsubmit="return false;">
+                    <input type="email" placeholder="Your email"
+                        class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-umber w-full">
+                    <button
+                        class="bg-umber text-cream px-5 rounded-r-full text-sm font-medium hover:bg-cream hover:text-espresso transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+            <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
+            <p>Crafted with care in Berlin.</p>
+        </div>
+    </footer>
 
-<!-- ============ CTA ============ -->
-<section class="relative py-24 px-6 md:px-10">
-  <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-[2rem] px-10 py-16 md:py-20 text-center relative overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gold/10"></div>
-    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-umber/20"></div>
-    <span class="relative inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-gold mb-6">
-      <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project
-    </span>
-    <h2 class="relative font-display text-4xl md:text-5xl leading-tight max-w-2xl mx-auto">Let's Design a Space You'll Never Want to Leave</h2>
-    <a href="contact.html" class="relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
-  </div>
-</section>
+    <script>
+            // Header solid on scroll
+            (function() {
+        const header = document.getElementById('site-header');
+        const logo = document.getElementById('logo');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuBtn = document.getElementById('menu-btn');
+        const bars = menuBtn.querySelectorAll('.menu-bar');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const panel = document.getElementById('mobile-menu-panel');
+        const closeBtn = document.getElementById('mobile-close-btn');
+        let menuOpen = false;
 
-<!-- ============ FOOTER ============ -->
-<footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
-    <div>
-      <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
-        <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
-        Terra <span class="text-gold">&</span> Ochre
-      </a>
-      <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
-    </div>
-    <div>
-      <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
-      <ul class="space-y-3 text-sm">
-        <li><a href="index.html" class="hover:text-gold transition-colors">Home</a></li>
-        <li><a href="about.html" class="hover:text-gold transition-colors">About</a></li>
-        <li><a href="services.html" class="hover:text-gold transition-colors">Services</a></li>
-        <li><a href="projects.html" class="hover:text-gold transition-colors">Projects</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
-      <ul class="space-y-3 text-sm">
-        <li>Motzstraße 12, Berlin</li>
-        <li>hello@terraochre.studio</li>
-        <li>+49 30 1234 5678</li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
-      <p class="text-sm mb-4">Considered interiors, once a month.</p>
-      <form class="flex" onsubmit="return false;">
-        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
-        <button class="bg-gold text-espresso px-5 rounded-r-full text-sm font-medium hover:bg-cream transition-colors">Join</button>
-      </form>
-    </div>
-  </div>
-  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-    <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
-    <p>Crafted with care in Berlin.</p>
-  </div>
-</footer>
+        // Header scroll effect
+        function onScroll() {
+            if (window.scrollY > 60) {
+                header.classList.add('scrolled');
+                logo.style.color = '#2E2717';
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('active')) {
+                        link.style.color = 'rgba(46, 39, 23, 0.7)';
+                    } else {
+                        link.style.color = '#2E2717';
+                    }
+                });
+                if (!menuOpen) bars.forEach(b => b.style.background = '#2E2717');
+            } else {
+                header.classList.remove('scrolled');
+                logo.style.color = '#E9E9E1';
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('active')) {
+                        link.style.color = 'rgba(233, 233, 225, 0.7)';
+                    } else {
+                        link.style.color = '#E9E9E1';
+                    }
+                });
+                if (!menuOpen) bars.forEach(b => b.style.background = '#E9E9E1');
+            }
+        }
 
-<script>
-  // ---------- Header solid on scroll ----------
-    (function() {
-    const header = document.getElementById('site-header');
-    const logo = document.getElementById('logo');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    function onScroll() {
-      if (window.scrollY > 60) {
-        header.classList.add('scrolled');
-        // ensure logo and nav stay light
-        logo.style.color = '#E1DCC9';
-        navLinks.forEach(link => {
-          if (!link.classList.contains('active')) {
-            link.style.color = 'rgba(225, 220, 201, 0.7)';
-          } else {
-            link.style.color = '#E1DCC9';
-          }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') === 'index.html') {
+                link.classList.add('active');
+            }
         });
-      } else {
-        header.classList.remove('scrolled');
-        logo.style.color = '#E1DCC9';
-        navLinks.forEach(link => {
-          if (!link.classList.contains('active')) {
-            link.style.color = 'rgba(225, 220, 201, 0.7)';
-          } else {
-            link.style.color = '#E1DCC9';
-          }
+
+        document.addEventListener('scroll', onScroll);
+        onScroll();
+
+        // Open menu
+        function openMenu() {
+            menuOpen = true;
+            mobileMenu.style.visibility = 'visible';
+            mobileMenu.style.pointerEvents = 'auto';
+            
+            // Animate in
+            requestAnimationFrame(() => {
+                overlay.style.opacity = '1';
+                panel.style.transform = 'translateX(0)';
+            });
+            
+            // Animate hamburger to X
+            bars[0].style.transform = 'translateY(7px) rotate(45deg)';
+            bars[0].style.background = '#2E2717';
+            bars[1].style.opacity = '0';
+            bars[1].style.transform = 'scale(0)';
+            bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+            bars[2].style.background = '#2E2717';
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close menu
+        function closeMenu() {
+            menuOpen = false;
+            
+            // Animate out
+            overlay.style.opacity = '0';
+            panel.style.transform = 'translateX(100%)';
+            
+            // Reset hamburger
+            bars.forEach(b => { 
+                b.style.transform = ''; 
+                b.style.opacity = '1';
+                b.style.transform = '';
+            });
+            
+            document.body.style.overflow = '';
+            
+            setTimeout(() => { 
+                if (!menuOpen) {
+                    mobileMenu.style.visibility = 'hidden';
+                    mobileMenu.style.pointerEvents = 'none';
+                }
+            }, 500);
+        }
+
+        // Event listeners
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuOpen ? closeMenu() : openMenu();
         });
-      }
-    }
-
-    // set initial active state (Home is active)
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === 'index.html') {
-        link.classList.add('active');
-      }
-    });
-
-    document.addEventListener('scroll', onScroll);
-    onScroll(); 
-  })();
-
-    (function() {
-    // --- Service selector in FEATURE BAND ---
-    const triggers = document.querySelectorAll('.service-trigger');
-    const serviceImage = document.getElementById('service-image');
-    
-    triggers.forEach(trigger => {
-      trigger.addEventListener('mouseenter', function() {
-        const imgSrc = this.dataset.image;
-        // Smooth image transition
-        serviceImage.style.opacity = '0.5';
-        serviceImage.style.transform = 'scale(0.98)';
         
-        setTimeout(() => {
-          serviceImage.src = imgSrc;
-          serviceImage.style.opacity = '1';
-          serviceImage.style.transform = 'scale(1)';
-        }, 300);
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeMenu);
+        }
         
-        // Update active style
-        triggers.forEach(t => t.style.color = 'rgba(225,220,201,0.7)');
-        this.style.color = '#D9A025';
-      });
-    });
-
-    // --- Service list in SECTION B ---
-    const serviceItems = document.querySelectorAll('.service-hover-trigger');
-    const detailImage = document.getElementById('service-detail-image');
-    const labelElement = document.getElementById('service-label');
-    
-    // Store default
-    const defaultImage = detailImage.src;
-    const defaultLabel = labelElement.textContent;
-    
-    serviceItems.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        const imgSrc = this.dataset.image;
-        const label = this.dataset.label || 'Explore our full range of interior services.';
+        overlay.addEventListener('click', closeMenu);
         
-        // Smooth reveal animation
-        detailImage.style.opacity = '0.4';
-        detailImage.style.transform = 'scale(0.96)';
-        labelElement.style.opacity = '0';
-        labelElement.style.transform = 'translateY(8px)';
+        document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenu));
         
-        setTimeout(() => {
-          detailImage.src = imgSrc;
-          detailImage.style.opacity = '1';
-          detailImage.style.transform = 'scale(1)';
-          labelElement.textContent = label;
-          labelElement.style.opacity = '1';
-          labelElement.style.transform = 'translateY(0)';
-        }, 350);
-      });
-    });
-    
-    // Optional: reset to default on mouseleave (uncomment if needed)
-    // document.querySelector('.divide-y').addEventListener('mouseleave', function() {
-    //   detailImage.src = defaultImage;
-    //   labelElement.textContent = defaultLabel;
-    // });
-  })();
+        window.addEventListener('resize', () => { 
+            if (window.innerWidth >= 1024 && menuOpen) closeMenu(); 
+        });
 
-  // ---------- Hero carousel ----------
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.hero-dot');
-  let current = 0, timer;
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menuOpen) closeMenu();
+        });
+    })();
 
-  function goTo(i) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    resetTimer();
-  }
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 6000);
-  }
-  document.getElementById('hero-next').addEventListener('click', () => goTo(current + 1));
-  document.getElementById('hero-prev').addEventListener('click', () => goTo(current - 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.i))));
-  resetTimer();
+        // Service hover image reveal
+        (function () {
+            const triggers = document.querySelectorAll('.service-trigger');
+            const serviceImage = document.getElementById('service-image');
 
-  // ---------- Scroll reveal ----------
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(el => io.observe(el));
-</script>
+            triggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', function () {
+                    const imgSrc = this.dataset.image;
+                    serviceImage.style.opacity = '0.5';
+                    serviceImage.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        serviceImage.src = imgSrc;
+                        serviceImage.style.opacity = '1';
+                        serviceImage.style.transform = 'scale(1)';
+                    }, 300);
+                    triggers.forEach(t => t.style.color = 'rgba(233,233,225,0.7)');
+                    this.style.color = '#895725';
+                });
+            });
+
+            const serviceItems = document.querySelectorAll('.service-hover-trigger');
+            const detailImage = document.getElementById('service-detail-image');
+            const labelElement = document.getElementById('service-label');
+
+            serviceItems.forEach(item => {
+                item.addEventListener('mouseenter', function () {
+                    const imgSrc = this.dataset.image;
+                    const label = this.dataset.label || 'Explore our full range of interior services.';
+                    detailImage.style.opacity = '0.35';
+                    detailImage.style.transform = 'scale(1.04)';
+                    labelElement.style.opacity = '0';
+                    labelElement.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        detailImage.src = imgSrc;
+                        detailImage.style.opacity = '1';
+                        detailImage.style.transform = 'scale(1)';
+                        labelElement.textContent = label;
+                        labelElement.style.opacity = '1';
+                        labelElement.style.transform = 'translateY(0)';
+                    }, 400);
+                });
+            });
+        })();
+
+        // Hero carousel
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        let current = 0, timer;
+
+        function goTo(i) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (i + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+            resetTimer();
+        }
+        function resetTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => goTo(current + 1), 6000);
+        }
+        document.getElementById('hero-next').addEventListener('click', () => goTo(current + 1));
+        document.getElementById('hero-prev').addEventListener('click', () => goTo(current - 1));
+        dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.i))));
+
+        // Re-trigger the entrance animation for the first slide on initial load,
+        // since it starts with .active already applied (no class change to animate from).
+        window.addEventListener('DOMContentLoaded', () => {
+            const first = slides[0];
+            first.classList.remove('active');
+            // force reflow so the browser registers the "off" state before re-adding "active"
+            void first.offsetWidth;
+            requestAnimationFrame(() => {
+                first.classList.add('active');
+                dots[0].classList.add('active');
+                resetTimer();
+            });
+        });
+
+        // Scroll reveal
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+    </script>
+
+    <script>
+        (function () {
+            // Counter animation on scroll
+            const counters = document.querySelectorAll('.counter');
+            let animated = false;
+
+            function animateCounters() {
+                counters.forEach(counter => {
+                    const target = parseInt(counter.dataset.target);
+                    const suffix = counter.dataset.suffix || '';
+                    let current = 0;
+                    const increment = Math.ceil(target / 60);
+                    const stepTime = 20;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = current + suffix;
+                    }, stepTime);
+                });
+            }
+
+            const counterSection = document.querySelector('.counter')?.closest('section');
+            if (counterSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !animated) {
+                            animated = true;
+                            animateCounters();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(counterSection);
+            }
+
+            if (counterSection && counterSection.getBoundingClientRect().top < window.innerHeight) {
+                animated = true;
+                animateCounters();
+            }
+        })();
+    </script>
+
+    <script>
+        (function () {
+            const fadeElements = document.querySelectorAll('.fade-wrapper');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            fadeElements.forEach(el => observer.observe(el));
+        })();
+    </script>
 </body>
+
 </html>

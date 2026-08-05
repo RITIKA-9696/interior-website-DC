@@ -6,18 +6,18 @@
 <title>Projects — Terra & Ochre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = { theme: { extend: {
-    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#D9A025' },
-    fontFamily: { display: ['"Bodoni Moda"', 'serif'], body: ['Outfit', 'sans-serif'] },
+    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#895725' },
+    fontFamily: { display: ['Space Grotesk', 'sans-serif'], body: ['Space Grotesk', 'sans-serif'] },
   } } }
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background:#E9E9E1; }
-  .font-display { font-family: 'Bodoni Moda', serif; }
+  body { font-family: 'Space Grotesk', sans-serif; background:#E9E9E1; overflow-x: hidden; }
+  .font-display { font-family: 'Space Grotesk', serif; }
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
@@ -28,7 +28,7 @@
   .reveal-right.in { opacity:1; transform: translateX(0); }
   .stagger > * { transition-delay: calc(var(--i, 0) * 90ms); }
   .nav-link { position:relative; }
-  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#895725; transition: width .35s ease; }
   .nav-link:hover::after { width:100%; }
   .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
   .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
@@ -37,120 +37,221 @@
   .page-hero-img { transform: scale(1.1); transition: transform 1.6s cubic-bezier(.16,.86,.3,1); }
   .page-hero.in .page-hero-img { transform: scale(1); }
 
-  /* filter fade */
   .proj-card { transition: opacity .5s ease, transform .5s ease; }
   .proj-card.hide { opacity: 0; transform: scale(.9); pointer-events:none; position:absolute; }
   .filter-btn.active { background:#2E2717; color:#E9E9E1; }
+
+  #site-header.scrolled { background: #E9E9E1 !important; backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(46,39,23,.12); }
+  #site-header.scrolled .nav-link { color: rgba(46,39,23,.75) !important; }
+  #site-header.scrolled .nav-link.active { color: #2E2717 !important; }
+  #site-header.scrolled #logo { color: #2E2717 !important; }
+  #site-header.scrolled .menu-bar { background: #2E2717 !important; }
+
+  #menu-btn { z-index: 60; }
+  .menu-bar { transform-origin: center; transition: all 0.3s ease; }
+  #mobile-menu { z-index: 50; }
+  #mobile-menu-overlay { 
+    opacity: 0; 
+    transition: opacity 0.4s ease;
+    background: rgba(46, 39, 23, 0.7);
+    backdrop-filter: blur(4px);
+  }
+  #mobile-menu-panel { 
+    transform: translateX(100%); 
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: -20px 0 60px rgba(0,0,0,0.3);
+  }
+  #mobile-menu.visible #mobile-menu-overlay { opacity: 1; }
+  #mobile-menu.visible #mobile-menu-panel { transform: translateX(0); }
+  #mobile-menu.visible { visibility: visible !important; }
+
+  .mobile-nav-link { 
+    transition: color 0.3s ease, padding-left 0.3s ease; 
+    font-size: 1.5rem;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(137, 87, 37, 0.1);
+  }
+  .mobile-nav-link:hover { color: #895725; padding-left: 6px; }
+
+  /* Lightbox fixes */
+  #lightbox { z-index: 100; }
+  #lightbox-overlay { 
+    background: rgba(3, 3, 2, 0.92);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  #lightbox.visible #lightbox-overlay { opacity: 1; }
+  #lightbox.visible { visibility: visible !important; }
+  #lightbox.visible #lightbox-close { opacity: 1; transform: scale(1); }
+  #lightbox.visible #lightbox-content { opacity: 1; transform: scale(1); }
+  #lightbox-close { 
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0.8);
+    z-index: 10;
+  }
+  #lightbox-close:hover { 
+    background: rgba(233,233,225,0.2);
+    transform: rotate(90deg) scale(1.1);
+  }
+  #lightbox-content { 
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Responsive fixes */
+  @media (max-width: 1024px) {
+    .page-hero h1 { font-size: 2.5rem; }
+  }
+  @media (max-width: 768px) {
+    .page-hero h1 { font-size: 2rem; }
+    .page-hero { min-height: 300px; height: 40vh; }
+    .proj-card .h-72 { height: 200px; }
+    .filter-btn { font-size: 0.75rem; padding: 0.4rem 1rem; }
+  }
+  @media (max-width: 480px) {
+    .page-hero h1 { font-size: 1.6rem; }
+    .page-hero { min-height: 250px; height: 35vh; }
+    #site-header .py-5 { padding-top: 12px; padding-bottom: 12px; }
+    #logo span:last-child { font-size: 1rem; }
+    #logo .w-8 { width: 28px; height: 28px; font-size: 10px; }
+    .proj-card .h-72 { height: 180px; }
+    .mobile-nav-link { font-size: 1.2rem; padding: 12px 0; }
+    #mobile-menu-panel { padding: 80px 24px 20px; width: 85%; }
+  }
 </style>
 </head>
 <body class="bg-cream text-espresso antialiased">
 
-<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-cream/95 backdrop-blur shadow-sm">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
-    <a href="index.html" class="font-display text-2xl tracking-wide text-espresso flex items-center gap-2">
-      <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
-      Terra <span class="text-gold">&</span> Ochre
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
+    <a href="index.html" class="font-display text-xl md:text-2xl tracking-wide flex items-center gap-2" id="logo" style="color:#E9E9E1;">
+      <span class="w-7 h-7 md:w-8 md:h-8 rounded-full border flex items-center justify-center text-xs md:text-sm shrink-0" style="border-color:#895725; color:#895725;">T&O</span>
+      <span class="hidden xs:inline">Terra <span style="color:#895725;">&</span> Ochre</span>
+      <span class="xs:hidden">T&O</span>
     </a>
-    <nav class="hidden lg:flex items-center gap-9 text-espresso/80 text-sm tracking-wide">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="services.html" class="nav-link">Services</a>
-      <a href="projects.html" class="nav-link text-gold">Projects</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+    <nav class="hidden lg:flex items-center gap-6 xl:gap-9 text-sm tracking-wide">
+        <a href="index.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Home</a>
+        <a href="about.html" class="nav-link" style="color:rgba(233,233,225,0.7);">About</a>
+        <a href="services.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Services</a>
+        <a href="projects.html" class="nav-link active" style="color:#E9E9E1; font-weight:500;">Projects</a>
+        <a href="contact.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Contact</a>
     </nav>
-    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-gold text-espresso text-sm font-medium px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition-colors duration-300">Get In Touch</a>
+    <div class="flex items-center gap-3 md:gap-4">
+      <a href="contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background:#E9E9E1; color:#2E2717;">Get In Touch</a>
+      <button id="menu-btn" class="lg:hidden w-9 h-9 md:w-10 md:h-10 flex flex-col items-center justify-center gap-1.5 relative" aria-label="Toggle menu">
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40" style="visibility:hidden;">
+    <div id="mobile-menu-overlay" class="absolute inset-0"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-[80%] max-w-sm bg-cream shadow-2xl flex flex-col px-6 sm:px-8 pt-24 pb-8 gap-0 overflow-y-auto">
+      <button id="mobile-close-btn" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-2xl text-espresso hover:bg-umber/10 transition-colors">✕</button>
+      <a href="index.html" class="mobile-nav-link font-display text-espresso">Home</a>
+      <a href="about.html" class="mobile-nav-link font-display text-espresso">About</a>
+      <a href="services.html" class="mobile-nav-link font-display text-espresso">Services</a>
+      <a href="projects.html" class="mobile-nav-link font-display text-espresso" style="color:#895725;">Projects</a>
+      <a href="contact.html" class="mobile-nav-link font-display text-espresso">Contact</a>
+      <a href="contact.html" class="mt-6 inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-6 py-3.5 rounded-full w-full transition-colors hover:bg-opacity-80">Get In Touch</a>
+    </div>
   </div>
 </header>
 
-<section class="page-hero relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso">
+<section class="page-hero relative h-[50vh] min-h-[350px] md:min-h-[420px] w-full overflow-hidden bg-espresso">
   <div class="absolute inset-0 overflow-hidden">
     <img class="page-hero-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1800&auto=format&fit=crop" alt="Portfolio hero">
   </div>
-  <div class="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/50 to-espresso/60"></div>
-  <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-end pb-16">
-    <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4 reveal in">Our Portfolio</p>
-    <h1 class="font-display text-cream text-5xl md:text-6xl reveal in">Projects That Define Our Style</h1>
+  <div class="absolute inset-0 bg-espresso/70"></div>
+  <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex flex-col justify-end pb-10 md:pb-16">
+    <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3 md:mb-4 reveal in">Our Portfolio</p>
+    <h1 class="font-display text-cream text-3xl sm:text-4xl md:text-5xl lg:text-6xl reveal in">Projects That Define Our Style</h1>
   </div>
 </section>
 
 <!-- FILTERABLE GRID -->
-<section class="relative py-28 px-6 md:px-10">
+<section class="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-end mb-10">
-      <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">A Diverse Range of <span class="text-umber">Spaces</span></h2>
-      <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end">From full residences to focused commercial fit-outs — filter to see what fits your project.</p>
+    <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-end mb-8 md:mb-10">
+      <h2 class="reveal-left font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">A Diverse Range of <span class="text-umber">Spaces</span></h2>
+      <p class="reveal-right text-espresso/70 max-w-md md:justify-self-end text-sm md:text-base">From full residences to focused commercial fit-outs — filter to see what fits your project.</p>
     </div>
 
-    <div class="reveal in flex flex-wrap gap-3 mb-14" id="filters">
-      <button data-filter="all" class="filter-btn active border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">All Projects</button>
-      <button data-filter="Residential" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Residential</button>
-      <button data-filter="Commercial" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Commercial</button>
-      <button data-filter="Renovation" class="filter-btn border border-umber/20 rounded-full px-6 py-2.5 text-sm transition-colors duration-300">Renovation</button>
+    <div class="reveal in flex flex-wrap gap-2 sm:gap-3 mb-10 md:mb-14" id="filters">
+      <button data-filter="all" class="filter-btn active border border-umber/20 rounded-full px-4 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm transition-colors duration-300">All Projects</button>
+      <button data-filter="Residential" class="filter-btn border border-umber/20 rounded-full px-4 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm transition-colors duration-300">Residential</button>
+      <button data-filter="Commercial" class="filter-btn border border-umber/20 rounded-full px-4 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm transition-colors duration-300">Commercial</button>
+      <button data-filter="Renovation" class="filter-btn border border-umber/20 rounded-full px-4 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm transition-colors duration-300">Renovation</button>
     </div>
 
-    <div class="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger" id="grid">
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:0">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Luxury Skyline"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Luxury Skyline</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:1">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Bohemian Rhapsody"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Bohemian Rhapsody</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Renovation" style="--i:2">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Vintage Glamour"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Renovation</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Vintage Glamour</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:3">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Titan Office Interior"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Titan Office Interior</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:4">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Living Quarter"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Living Quarter</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:5">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Studio Atelier"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Studio Atelier</h3><p class="text-xs text-espresso/50 mt-1">Munich, Germany · 2024</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Renovation" style="--i:6">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Attic Rework"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Renovation</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Attic Rework</h3><p class="text-xs text-espresso/50 mt-1">Hamburg, Germany · 2024</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Residential" style="--i:7">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Garden House"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Garden House</h3><p class="text-xs text-espresso/50 mt-1">Potsdam, Germany · 2024</p></div>
-      </a>
-      <a href="#" class="proj-card reveal lift rounded-2xl overflow-hidden bg-white/40 border border-umber/10 block" data-cat="Commercial" style="--i:8">
-        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=900&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Corner Café"><span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span></div>
-        <div class="p-6"><h3 class="font-display text-xl">Corner Café</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2024</p></div>
-      </a>
+    <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger" id="grid">
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Residential" data-img="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900&auto=format&fit=crop" data-title="Luxury Skyline" data-meta="Berlin, Germany · 2025" data-tag="Residential" style="--i:0">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Luxury Skyline"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Luxury Skyline</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Residential" data-img="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=900&auto=format&fit=crop" data-title="Bohemian Rhapsody" data-meta="Berlin, Germany · 2025" data-tag="Residential" style="--i:1">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Bohemian Rhapsody"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Bohemian Rhapsody</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Renovation" data-img="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=900&auto=format&fit=crop" data-title="Vintage Glamour" data-meta="Berlin, Germany · 2025" data-tag="Renovation" style="--i:2">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Vintage Glamour"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Vintage Glamour</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Commercial" data-img="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=900&auto=format&fit=crop" data-title="Titan Office Interior" data-meta="Berlin, Germany · 2025" data-tag="Commercial" style="--i:3">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Titan Office Interior"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Titan Office Interior</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Residential" data-img="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=900&auto=format&fit=crop" data-title="Living Quarter" data-meta="Berlin, Germany · 2025" data-tag="Residential" style="--i:4">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Living Quarter"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Living Quarter</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2025</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Commercial" data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" data-title="Studio Atelier" data-meta="Munich, Germany · 2024" data-tag="Commercial" style="--i:5">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Studio Atelier"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Studio Atelier</h3><p class="text-xs text-espresso/50 mt-1">Munich, Germany · 2024</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Renovation" data-img="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop" data-title="Attic Rework" data-meta="Hamburg, Germany · 2024" data-tag="Renovation" style="--i:6">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Attic Rework"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Attic Rework</h3><p class="text-xs text-espresso/50 mt-1">Hamburg, Germany · 2024</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Residential" data-img="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?q=80&w=900&auto=format&fit=crop" data-title="Garden House" data-meta="Potsdam, Germany · 2024" data-tag="Residential" style="--i:7">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Garden House"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Garden House</h3><p class="text-xs text-espresso/50 mt-1">Potsdam, Germany · 2024</p></div>
+      </div>
+      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" data-cat="Commercial" data-img="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=900&auto=format&fit=crop" data-title="Corner Café" data-meta="Berlin, Germany · 2024" data-tag="Commercial" style="--i:8">
+        <div class="relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=900&auto=format&fit=crop" class="w-full h-56 sm:h-64 md:h-72 object-cover" alt="Corner Café"><span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span><div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center"><span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span></div></div>
+        <div class="p-4 sm:p-5 md:p-6"><h3 class="font-display text-lg sm:text-xl">Corner Café</h3><p class="text-xs text-espresso/50 mt-1">Berlin, Germany · 2024</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="relative py-24 px-6 md:px-10">
-  <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-[2rem] px-10 py-16 md:py-20 text-center relative overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gold/10"></div>
-    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-umber/20"></div>
-    <span class="relative inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-gold mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project</span>
-    <h2 class="relative font-display text-4xl md:text-5xl leading-tight max-w-2xl mx-auto">See Your Space on This Wall Next</h2>
-    <a href="contact.html" class="relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
+<section class="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-10">
+  <div class="reveal-scale max-w-6xl mx-auto bg-espresso text-cream rounded-2xl sm:rounded-[2rem] px-6 sm:px-10 py-12 sm:py-16 md:py-20 text-center relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-48 sm:w-64 md:w-72 h-48 sm:h-64 md:h-72 rounded-full bg-gold/10"></div>
+    <div class="absolute -bottom-24 -left-24 w-48 sm:w-64 md:w-72 h-48 sm:h-64 md:h-72 rounded-full bg-umber/20"></div>
+    <span class="relative inline-flex items-center gap-2 text-[10px] sm:text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-gold mb-4 sm:mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project</span>
+    <h2 class="relative font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight max-w-2xl mx-auto">See Your Space on This Wall Next</h2>
+    <a href="contact.html" class="relative inline-flex items-center gap-2 sm:gap-3 mt-6 sm:mt-9 bg-gold text-espresso px-6 sm:px-8 md:px-9 py-3 sm:py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300 text-sm sm:text-base">Book a Consultation →</a>
   </div>
 </section>
 
-<footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+<footer class="bg-espresso text-cream/70 pt-16 sm:pt-20 pb-6 sm:pb-8 px-4 sm:px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
     <div>
-      <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
-        <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
+      <a href="index.html" class="font-display text-xl sm:text-2xl text-cream flex items-center gap-2 mb-4">
+        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gold flex items-center justify-center text-gold text-xs sm:text-sm">T&O</span>
         Terra <span class="text-gold">&</span> Ochre
       </a>
       <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
     </div>
     <div>
-      <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
-      <ul class="space-y-3 text-sm">
+      <h4 class="text-cream font-display text-base sm:text-lg mb-3 sm:mb-4">Navigate</h4>
+      <ul class="space-y-2 sm:space-y-3 text-sm">
         <li><a href="index.html" class="hover:text-gold transition-colors">Home</a></li>
         <li><a href="about.html" class="hover:text-gold transition-colors">About</a></li>
         <li><a href="services.html" class="hover:text-gold transition-colors">Services</a></li>
@@ -158,27 +259,108 @@
       </ul>
     </div>
     <div>
-      <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
-      <ul class="space-y-3 text-sm">
+      <h4 class="text-cream font-display text-base sm:text-lg mb-3 sm:mb-4">Studio</h4>
+      <ul class="space-y-2 sm:space-y-3 text-sm">
         <li>Motzstraße 12, Berlin</li>
         <li>hello@terraochre.studio</li>
         <li>+49 30 1234 5678</li>
       </ul>
     </div>
     <div>
-      <h4 class="text-cream font-display text-lg mb-4">Newsletter</h4>
-      <p class="text-sm mb-4">Considered interiors, once a month.</p>
+      <h4 class="text-cream font-display text-base sm:text-lg mb-3 sm:mb-4">Newsletter</h4>
+      <p class="text-sm mb-3 sm:mb-4">Considered interiors, once a month.</p>
       <form class="flex" onsubmit="return false;">
-        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-4 py-2.5 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
-        <button class="bg-gold text-espresso px-5 rounded-r-full text-sm font-medium hover:bg-cream transition-colors">Join</button>
+        <input type="email" placeholder="Your email" class="bg-cream/10 border border-cream/20 rounded-l-full px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold w-full">
+        <button class="bg-gold text-espresso px-3 sm:px-5 rounded-r-full text-xs sm:text-sm font-medium hover:bg-cream transition-colors">Join</button>
       </form>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+  <div class="max-w-7xl mx-auto border-t border-cream/10 pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 text-[10px] sm:text-xs text-cream/40">
     <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
     <p>Crafted with care in Berlin.</p>
   </div>
 </footer>
+
+<!-- ============ LIGHTBOX (FIXED - with visible close icon) ============ -->
+<div id="lightbox" class="fixed inset-0 z-[100]" style="visibility:hidden;">
+  <div id="lightbox-overlay" class="absolute inset-0" style="background: rgba(3, 3, 2, 0.92); opacity:0; transition: opacity 0.5s ease;"></div>
+  
+  <!-- CLOSE ICON - Now properly visible -->
+  <button id="lightbox-close" class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20 w-12 h-12 rounded-full flex items-center justify-center text-2xl sm:text-3xl transition-all duration-300 hover:rotate-90 hover:scale-110" style="background: rgba(255,255,255,0.15); color: #ffffff; border: 2px solid rgba(255,255,255,0.3); opacity:0; transform: scale(0.8); backdrop-filter: blur(8px);">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  
+  <div class="relative h-full w-full flex items-center justify-center px-4 sm:px-6 md:px-16">
+    <div id="lightbox-content" class="max-w-4xl sm:max-w-5xl w-full opacity-0 scale-95 transition-all duration-500 ease-out">
+      <div class="rounded-xl sm:rounded-2xl overflow-hidden bg-espresso/20">
+        <img id="lightbox-img" src="" alt="" class="w-full max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh] object-contain">
+      </div>
+      <div class="text-center mt-4 sm:mt-6">
+        <span id="lightbox-tag" class="inline-block text-[10px] sm:text-xs tracking-[0.25em] uppercase mb-1 sm:mb-2" style="color:#D9A025;"></span>
+        <h3 id="lightbox-title" class="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl" style="color:#E9E9E1;"></h3>
+        <p id="lightbox-meta" class="text-xs sm:text-sm mt-1 sm:mt-2" style="color: rgba(233,233,225,.6);"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const triggers = document.querySelectorAll('.lightbox-trigger');
+    const lightbox = document.getElementById('lightbox');
+    const overlay = document.getElementById('lightbox-overlay');
+    const closeBtn = document.getElementById('lightbox-close');
+    const content = document.getElementById('lightbox-content');
+    const img = document.getElementById('lightbox-img');
+    const titleEl = document.getElementById('lightbox-title');
+    const metaEl = document.getElementById('lightbox-meta');
+    const tagEl = document.getElementById('lightbox-tag');
+    let open = false;
+
+    function openLightbox(card) {
+      img.src = card.dataset.img;
+      img.alt = card.dataset.title;
+      titleEl.textContent = card.dataset.title;
+      metaEl.textContent = card.dataset.meta;
+      tagEl.textContent = card.dataset.tag;
+      open = true;
+      lightbox.style.visibility = 'visible';
+      document.body.style.overflow = 'hidden';
+      
+      // Animate in
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+        closeBtn.style.opacity = '1';
+        closeBtn.style.transform = 'scale(1)';
+        content.style.opacity = '1';
+        content.style.transform = 'scale(1)';
+      });
+    }
+    
+    function closeLightbox() {
+      open = false;
+      overlay.style.opacity = '0';
+      closeBtn.style.opacity = '0';
+      closeBtn.style.transform = 'scale(0.8)';
+      content.style.opacity = '0';
+      content.style.transform = 'scale(0.95)';
+      document.body.style.overflow = '';
+      setTimeout(() => { 
+        if (!open) lightbox.style.visibility = 'hidden'; 
+      }, 500);
+    }
+    
+    triggers.forEach(card => card.addEventListener('click', () => openLightbox(card)));
+    overlay.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => { 
+      if (e.key === 'Escape' && open) closeLightbox(); 
+    });
+  })();
+</script>
 
 <script>
   const io = new IntersectionObserver((entries) => {
@@ -200,6 +382,72 @@
       });
     });
   });
+</script>
+
+<script>
+  // Header scroll + mobile menu - FIXED
+  (function () {
+    const header = document.getElementById('site-header');
+    const logo = document.getElementById('logo');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuBtn = document.getElementById('menu-btn');
+    const bars = menuBtn.querySelectorAll('.menu-bar');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const panel = document.getElementById('mobile-menu-panel');
+    const mobileCloseBtn = document.getElementById('mobile-close-btn');
+    let menuOpen = false;
+
+    function onScroll() {
+      if (window.scrollY > 60) {
+        header.classList.add('scrolled');
+        logo.style.color = '#2E2717';
+        navLinks.forEach(link => { link.style.color = link.classList.contains('active') ? '#2E2717' : 'rgba(46,39,23,0.7)'; });
+        if (!menuOpen) bars.forEach(b => b.style.background = '#2E2717');
+      } else {
+        header.classList.remove('scrolled');
+        logo.style.color = '#E9E9E1';
+        navLinks.forEach(link => { link.style.color = link.classList.contains('active') ? '#E9E9E1' : 'rgba(233,233,225,0.7)'; });
+        if (!menuOpen) bars.forEach(b => b.style.background = '#E9E9E1');
+      }
+    }
+    document.addEventListener('scroll', onScroll);
+    onScroll();
+
+    function openMenu() {
+      menuOpen = true;
+      mobileMenu.style.visibility = 'visible';
+      // Use class-based approach for cleaner transitions
+      requestAnimationFrame(() => {
+        mobileMenu.classList.add('visible');
+      });
+      bars[0].style.transform = 'translateY(7px) rotate(45deg)';
+      bars[0].style.background = '#2E2717';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+      bars[2].style.background = '#2E2717';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('visible');
+      bars.forEach(b => { b.style.transform = ''; b.style.opacity = '1'; });
+      onScroll();
+      document.body.style.overflow = '';
+      setTimeout(() => { 
+        if (!menuOpen) mobileMenu.style.visibility = 'hidden'; 
+      }, 500);
+    }
+    
+    menuBtn.addEventListener('click', () => (menuOpen ? closeMenu() : openMenu()));
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { 
+      if (window.innerWidth >= 1024 && menuOpen) closeMenu(); 
+    });
+  })();
 </script>
 </body>
 </html>

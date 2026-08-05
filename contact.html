@@ -6,18 +6,18 @@
 <title>Contact — Terra & Ochre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = { theme: { extend: {
-    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#D9A025' },
-    fontFamily: { display: ['"Bodoni Moda"', 'serif'], body: ['Outfit', 'sans-serif'] },
+    colors: { espresso: '#2E2717', cream: '#E9E9E1', umber: '#895725', gold: '#895725' },
+    fontFamily: { display: ['Space Grotesk', 'sans-serif'], body: ['Space Grotesk', 'sans-serif'] },
   } } }
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background:#E9E9E1; }
-  .font-display { font-family: 'Bodoni Moda', serif; }
+  body { font-family: 'Space Grotesk', sans-serif; background:#E9E9E1; }
+  .font-display { font-family: 'Space Grotesk', serif; }
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
@@ -28,7 +28,7 @@
   .reveal-right.in { opacity:1; transform: translateX(0); }
   .stagger > * { transition-delay: calc(var(--i, 0) * 120ms); }
   .nav-link { position:relative; }
-  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#D9A025; transition: width .35s ease; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:#895725; transition: width .35s ease; }
   .nav-link:hover::after { width:100%; }
   .lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
   .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -20px rgba(46,39,23,.35); }
@@ -37,43 +37,119 @@
 
   .field { position:relative; }
   .field input, .field textarea, .field select {
-    background: transparent; border: none; border-bottom: 1px solid rgba(46,39,23,.25);
+    background: transparent; border-bottom: 1px solid rgba(46,39,23,.25);
     padding: 14px 2px; width: 100%; outline: none; transition: border-color .35s ease;
   }
-  .field input:focus, .field textarea:focus, .field select:focus { border-color: #D9A025; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: #895725; }
   .field label { position:absolute; left:2px; top:14px; color: rgba(46,39,23,.5); transition: all .3s ease; pointer-events:none; font-size:.95rem; }
   .field input:focus + label, .field input:not(:placeholder-shown) + label,
   .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label,
-  .field.filled label { top:-14px; font-size:.72rem; color:#D9A025; letter-spacing:.05em; }
+  .field.filled label { top:-14px; font-size:.72rem; color:#895725; letter-spacing:.05em; }
 
   .success-toast { transform: translateY(140%); transition: transform .6s cubic-bezier(.22,1,.36,1); }
   .success-toast.show { transform: translateY(0); }
+
+  /* Header scrolled state */
+  #site-header.scrolled { background: #E9E9E1 !important; backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(46,39,23,.12); }
+  #site-header.scrolled .nav-link { color: rgba(46,39,23,.75) !important; }
+  #site-header.scrolled .nav-link.active { color: #2E2717 !important; }
+  #site-header.scrolled #logo { color: #2E2717 !important; }
+  #site-header.scrolled .menu-bar { background: #2E2717 !important; }
+
+  /* Mobile menu - FIXED */
+  #menu-btn { z-index: 60; }
+  .menu-bar { transform-origin: center; transition: all 0.3s ease; }
+  
+  #mobile-menu {
+    z-index: 40;
+    pointer-events: none;
+  }
+  #mobile-menu.active {
+    pointer-events: auto;
+  }
+  #mobile-menu-overlay { 
+    opacity: 0; 
+    transition: opacity 0.4s ease;
+    background: rgba(46,39,23,0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  #mobile-menu.active #mobile-menu-overlay {
+    opacity: 1;
+  }
+  #mobile-menu-panel { 
+    transform: translateX(100%); 
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #mobile-menu.active #mobile-menu-panel {
+    transform: translateX(0);
+  }
+  
+  .mobile-nav-link { 
+    transition: color .3s ease, padding-left .3s ease; 
+    font-size: 1.5rem;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(137, 87, 37, 0.1);
+  }
+  .mobile-nav-link:hover { color: #895725; padding-left: 6px; }
+  
+  #mobile-close-btn {
+    z-index: 10;
+    transition: all 0.3s ease;
+  }
+  #mobile-close-btn:hover {
+    transform: rotate(90deg);
+    background: rgba(137, 87, 37, 0.1);
+  }
 </style>
 </head>
 <body class="bg-cream text-espresso antialiased">
 
-<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-cream/95 backdrop-blur shadow-sm">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
-    <a href="index.html" class="font-display text-2xl tracking-wide text-espresso flex items-center gap-2">
-      <span class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold text-sm">T&O</span>
-      Terra <span class="text-gold">&</span> Ochre
+<!-- ============ HEADER (FIXED) ============ -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
+    <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color:#E9E9E1;">
+      <span class="w-8 h-8 rounded-full border flex items-center justify-center text-sm shrink-0" style="border-color:#895725; color:#895725;">T&O</span>
+      <span>Terra <span style="color:#895725;">&</span> Ochre</span>
     </a>
-    <nav class="hidden lg:flex items-center gap-9 text-espresso/80 text-sm tracking-wide">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="services.html" class="nav-link">Services</a>
-      <a href="projects.html" class="nav-link">Projects</a>
-      <a href="contact.html" class="nav-link text-gold">Contact</a>
+    <nav class="hidden lg:flex items-center gap-6 xl:gap-9 text-sm tracking-wide">
+        <a href="index.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Home</a>
+        <a href="about.html" class="nav-link" style="color:rgba(233,233,225,0.7);">About</a>
+        <a href="services.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Services</a>
+        <a href="projects.html" class="nav-link" style="color:rgba(233,233,225,0.7);">Projects</a>
+        <a href="contact.html" class="nav-link active" style="color:#E9E9E1; font-weight:500;">Contact</a>
     </nav>
-    <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-gold text-espresso text-sm font-medium px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition-colors duration-300">Get In Touch</a>
+    <div class="flex items-center gap-3 md:gap-4">
+      <a href="contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background:#E9E9E1; color:#2E2717;">Get In Touch</a>
+      <button id="menu-btn" class="lg:hidden w-9 h-9 md:w-10 md:h-10 flex flex-col items-center justify-center gap-1.5 relative" aria-label="Toggle menu">
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+        <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU - FIXED -->
+  <div id="mobile-menu" class="lg:hidden fixed inset-0">
+    <div id="mobile-menu-overlay" class="absolute inset-0"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-[80%] max-w-sm bg-cream shadow-2xl flex flex-col px-6 sm:px-8 pt-24 pb-8 gap-0 overflow-y-auto">
+      <button id="mobile-close-btn" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-2xl text-espresso transition-all duration-300">✕</button>
+      <a href="index.html" class="mobile-nav-link font-display text-espresso">Home</a>
+      <a href="about.html" class="mobile-nav-link font-display text-espresso">About</a>
+      <a href="services.html" class="mobile-nav-link font-display text-espresso">Services</a>
+      <a href="projects.html" class="mobile-nav-link font-display text-espresso">Projects</a>
+      <a href="contact.html" class="mobile-nav-link font-display text-espresso" style="color:#895725;">Contact</a>
+      <a href="contact.html" class="mt-6 inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-6 py-3.5 rounded-full w-full transition-colors hover:bg-opacity-80">Get In Touch</a>
+    </div>
   </div>
 </header>
 
+<!-- PAGE HERO -->
 <section class="page-hero relative h-[50vh] min-h-[360px] w-full overflow-hidden bg-espresso">
   <div class="absolute inset-0 overflow-hidden">
     <img class="page-hero-img w-full h-full object-cover" src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=1800&auto=format&fit=crop" alt="Contact hero">
   </div>
-  <div class="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/50 to-espresso/60"></div>
+  <div class="absolute inset-0 bg-espresso/70"></div>
   <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-end pb-16">
     <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4 reveal in">Get In Touch</p>
     <h1 class="font-display text-cream text-5xl md:text-6xl reveal in">Let's Start Designing</h1>
@@ -105,16 +181,12 @@
           <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">⚑</span>
           <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Studio</p><p class="font-medium">Motzstraße 12, 10777 Berlin</p></div>
         </div>
-        <div class="reveal flex items-start gap-4" style="--i:3">
-          <span class="w-11 h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0">◷</span>
-          <div><p class="text-xs text-espresso/50 uppercase tracking-wide mb-1">Studio Hours</p><p class="font-medium">Mon – Fri, 9:00 – 18:00</p></div>
-        </div>
       </div>
     </div>
 
     <!-- form -->
     <div class="lg:col-span-3 reveal-right">
-      <form id="contact-form" class="bg-white/50 border border-umber/10 rounded-3xl p-8 md:p-10 grid sm:grid-cols-2 gap-8" onsubmit="return false;">
+      <form id="contact-form" class="bg-cream border border-umber/45 rounded-3xl p-8 md:p-10 grid sm:grid-cols-2 gap-8" onsubmit="return false;">
         <div class="field"><input type="text" placeholder=" " required><label>Full Name</label></div>
         <div class="field"><input type="email" placeholder=" " required><label>Email Address</label></div>
         <div class="field"><input type="tel" placeholder=" "><label>Phone Number</label></div>
@@ -129,19 +201,13 @@
           <label>Service Interested In</label>
         </div>
         <div class="field sm:col-span-2"><textarea rows="4" placeholder=" " required></textarea><label>Tell Us About Your Project</label></div>
-        <button type="submit" class="sm:col-span-2 bg-gold text-espresso px-8 py-4 rounded-full font-medium hover:bg-espresso hover:text-cream transition-colors duration-300 w-fit">Send Message →</button>
+        <button type="submit" class="sm:col-span-2 bg-[#895725] text-cream px-8 py-2 rounded-full font-medium hover:bg-[#6b441c] hover:text-cream transition-colors duration-300 w-fit">Send Message →</button>
       </form>
     </div>
   </div>
 </section>
 
-<!-- MAP -->
-<section class="relative py-4 px-6 md:px-10 pb-24">
-  <div class="reveal-scale max-w-7xl mx-auto rounded-3xl overflow-hidden h-[360px] border border-umber/10">
-    <iframe class="w-full h-full grayscale contrast-125" style="filter: sepia(.15);" loading="lazy" src="https://www.google.com/maps?q=Berlin,Germany&output=embed"></iframe>
-  </div>
-</section>
-
+<!-- FOOTER -->
 <footer class="bg-espresso text-cream/70 pt-20 pb-8 px-6 md:px-10">
   <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
     <div>
@@ -183,23 +249,96 @@
   </div>
 </footer>
 
-<!-- toast -->
-<div id="toast" class="success-toast fixed bottom-8 left-1/2 -translate-x-1/2 bg-espresso text-cream px-7 py-4 rounded-full shadow-2xl z-50 text-sm flex items-center gap-3">
-  <span class="text-gold">✓</span> Thanks — we'll be in touch within two working days.
-</div>
-
 <script>
+  // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .page-hero').forEach(el => io.observe(el));
 
+  // Contact form submission
   document.getElementById('contact-form').addEventListener('submit', (e) => {
     const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    e.target.reset();
-    setTimeout(() => toast.classList.remove('show'), 3800);
+    if (toast) {
+      toast.classList.add('show');
+      e.target.reset();
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    }
   });
+</script>
+
+<script>
+  // Header scroll + mobile menu - FIXED
+  (function () {
+    const header = document.getElementById('site-header');
+    const logo = document.getElementById('logo');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuBtn = document.getElementById('menu-btn');
+    const bars = menuBtn.querySelectorAll('.menu-bar');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const panel = document.getElementById('mobile-menu-panel');
+    const closeBtn = document.getElementById('mobile-close-btn');
+    let menuOpen = false;
+
+    function onScroll() {
+      if (window.scrollY > 60) {
+        header.classList.add('scrolled');
+        logo.style.color = '#2E2717';
+        navLinks.forEach(link => { link.style.color = link.classList.contains('active') ? '#2E2717' : 'rgba(46,39,23,0.7)'; });
+        if (!menuOpen) bars.forEach(b => b.style.background = '#2E2717');
+      } else {
+        header.classList.remove('scrolled');
+        logo.style.color = '#E9E9E1';
+        navLinks.forEach(link => { link.style.color = link.classList.contains('active') ? '#E9E9E1' : 'rgba(233,233,225,0.7)'; });
+        if (!menuOpen) bars.forEach(b => b.style.background = '#E9E9E1');
+      }
+    }
+    document.addEventListener('scroll', onScroll);
+    onScroll();
+
+    function openMenu() {
+      menuOpen = true;
+      mobileMenu.classList.add('active');
+      
+      // Animate hamburger to X
+      bars[0].style.transform = 'translateY(7px) rotate(45deg)';
+      bars[0].style.background = '#2E2717';
+      bars[1].style.opacity = '0';
+      bars[1].style.transform = 'scale(0)';
+      bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+      bars[2].style.background = '#2E2717';
+      
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('active');
+      
+      // Reset hamburger
+      bars.forEach(b => { 
+        b.style.transform = ''; 
+        b.style.opacity = '1';
+        b.style.transform = '';
+      });
+      
+      document.body.style.overflow = '';
+    }
+    
+    menuBtn.addEventListener('click', () => (menuOpen ? closeMenu() : openMenu()));
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenu));
+    
+    window.addEventListener('resize', () => { 
+      if (window.innerWidth >= 1024 && menuOpen) closeMenu(); 
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOpen) closeMenu();
+    });
+  })();
 </script>
 </body>
 </html>
