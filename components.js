@@ -325,7 +325,7 @@
                     <a href="services.html" class="mobile-nav-link">Services</a>
                     <a href="projects.html" class="mobile-nav-link">Projects</a>
                     
-                    <a href="contact.html" class="mobile-cta-btn inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-8 py-3.5 rounded-full w-auto min-w-[180px] transition-colors hover:bg-opacity-80">Get In Touch</a>
+                    <a href="contact.html" class="mobile-cta-btn inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-8 py-3.5 rounded-full w-auto min-w-[180px] transition-colors hover:bg-opacity-80 mt-2">Get In Touch</a>
                 </div>
             </div>
         `;
