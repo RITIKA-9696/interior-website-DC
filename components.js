@@ -1,9 +1,9 @@
 // components.js - Self-contained header and footer components with styles
 
-(function() {
+(function () {
     'use strict';
 
-    // Inject styles for nav links and mobile menu
+    // Inject styles for nav links
     function injectNavStyles() {
         const styleId = 'nav-component-styles';
         if (document.getElementById(styleId)) return;
@@ -41,8 +41,8 @@
             }
 
             .nav-link.active {
-                color: #E9E9E1 !important;
-                background: rgba(233, 233, 225, 0.15);
+                color: #f8f8f5 !important;
+                background: rgba(233, 233, 225, 0.18);
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
@@ -53,7 +53,7 @@
 
             #site-header.scrolled .nav-link.active {
                 background: rgba(137, 87, 37, 0.12) !important;
-                color: #2E2717 !important;
+                color: #554520 !important;
                 box-shadow: 0 2px 12px rgba(137, 87, 37, 0.15);
             }
 
@@ -103,25 +103,22 @@
                 color: #2E2717 !important;
             }
 
-            /* ============ MOBILE MENU - SLIDE FROM RIGHT ============ */
+            /* Mobile menu styles */
             #menu-btn {
                 z-index: 60;
-                cursor: pointer;
             }
 
             .menu-bar {
                 transform-origin: center;
-                transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+                transition: all 0.3s ease;
             }
 
-            /* Mobile menu overlay */
             #mobile-menu {
                 position: fixed;
                 inset: 0;
                 z-index: 100;
                 visibility: hidden;
                 pointer-events: none;
-                transition: visibility 0.4s ease;
             }
 
             #mobile-menu.active {
@@ -129,46 +126,42 @@
                 pointer-events: auto;
             }
 
-            /* Overlay background */
             #mobile-menu-overlay {
                 position: absolute;
                 inset: 0;
                 opacity: 0;
-                background: rgba(46, 39, 23, 0.6);
-                backdrop-filter: blur(4px);
-                -webkit-backdrop-filter: blur(4px);
-                transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                transition: opacity 0.4s ease;
+                background: rgba(46, 39, 23, 0.7);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
             }
 
             #mobile-menu.active #mobile-menu-overlay {
                 opacity: 1;
             }
 
-            /* Panel sliding from right */
             #mobile-menu-panel {
                 position: absolute;
                 top: 0;
-                right: 0;
-                width: 85%;
-                max-width: 400px;
+                left: 0;
+                width: 100%;
                 height: 100%;
                 background: #E9E9E1;
-                transform: translateX(100%);
-                transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                transform: translateY(-100%);
+                transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 padding: 2rem 1.5rem;
                 overflow-y: auto;
-                box-shadow: -20px 0 60px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             }
 
             #mobile-menu.active #mobile-menu-panel {
-                transform: translateX(0);
+                transform: translateY(0);
             }
 
-            /* Mobile nav links */
             .mobile-nav-link {
                 font-family: 'Space Grotesk', sans-serif;
                 font-size: 1.75rem;
@@ -179,27 +172,11 @@
                 width: 100%;
                 text-align: center;
                 max-width: 300px;
-                opacity: 0;
-                transform: translateX(30px);
-                transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             }
-
-            #mobile-menu.active .mobile-nav-link {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            /* Stagger animation for mobile links */
-            #mobile-menu.active .mobile-nav-link:nth-child(1) { transition-delay: 0.05s; }
-            #mobile-menu.active .mobile-nav-link:nth-child(2) { transition-delay: 0.10s; }
-            #mobile-menu.active .mobile-nav-link:nth-child(3) { transition-delay: 0.15s; }
-            #mobile-menu.active .mobile-nav-link:nth-child(4) { transition-delay: 0.20s; }
-            #mobile-menu.active .mobile-nav-link:nth-child(5) { transition-delay: 0.25s; }
-            #mobile-menu.active .mobile-nav-link:nth-child(6) { transition-delay: 0.30s; }
 
             .mobile-nav-link:hover {
                 color: #895725;
-                padding-left: 12px;
+                padding-left: 6px;
                 background: rgba(137, 87, 37, 0.05);
                 border-radius: 8px;
             }
@@ -212,7 +189,6 @@
                 border-bottom: none;
             }
 
-            /* Close button */
             #mobile-close-btn {
                 position: absolute;
                 top: 1.5rem;
@@ -228,16 +204,8 @@
                 background: rgba(46, 39, 23, 0.06);
                 border: none;
                 cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+                transition: all 0.3s ease;
                 z-index: 10;
-                opacity: 0;
-                transform: rotate(-90deg) scale(0.8);
-            }
-
-            #mobile-menu.active #mobile-close-btn {
-                opacity: 1;
-                transform: rotate(0deg) scale(1);
-                transition-delay: 0.3s;
             }
 
             #mobile-close-btn:hover {
@@ -245,29 +213,14 @@
                 background: rgba(137, 87, 37, 0.12);
             }
 
-            /* Get in touch button in mobile menu */
-            .mobile-cta-btn {
-                opacity: 0;
-                transform: translateY(20px);
-                transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            }
-
-            #mobile-menu.active .mobile-cta-btn {
-                opacity: 1;
-                transform: translateY(0);
-                transition-delay: 0.35s;
-            }
-
             /* Responsive mobile menu */
             @media (max-width: 480px) {
-                #mobile-menu-panel {
-                    width: 100%;
-                    max-width: 100%;
-                    padding: 2rem 1rem;
-                }
                 .mobile-nav-link {
                     font-size: 1.25rem;
                     padding: 12px 0;
+                }
+                #mobile-menu-panel {
+                    padding: 2rem 1rem;
                 }
             }
 
@@ -295,17 +248,17 @@
             <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
                     <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color: #E9E9E1;">
-                        <img src="./assets/interior_logo.jpeg" alt="Interior Logo" class="h-12 md:h-16 w-auto object-contain" />
+                        <img src="./assets/logo-remove.png" alt="Interior Logo" class="h-12 md:h-16 w-auto object-contain" />
                     </a>
                     <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
-                        <a href="index.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7); font-weight: 500;">Home</a>
-                        <a href="about.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">About</a>
-                        <a href="services.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Services</a>
-                        <a href="projects.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Projects</a>
-                        <a href="contact.html" class="nav-link" style="color: rgba(233, 233, 225, 0.7);">Contact</a>
+                        <a href="index.html" class="nav-link" style="color: white; font-weight: 500;">Home</a>
+                        <a href="about.html" class="nav-link" style="color: white;">About</a>
+                        <a href="services.html" class="nav-link" style="color: white;">Services</a>
+                        <a href="projects.html" class="nav-link" style="color: white;">Projects</a>
+                       
                     </nav>
                     <div class="flex items-center gap-3 md:gap-4">
-                        <a href="contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background: #E9E9E1; color: #2E2717;">Get In Touch</a>
+                        <a href="/contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background: #8f7933; color: #f6f4ef;">Contact Us</a>
                         <button id="menu-btn" class="lg:hidden w-9 h-9 md:w-10 md:h-10 flex flex-col items-center justify-center gap-1.5 relative z-[60]" aria-label="Toggle menu">
                             <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
                             <span class="menu-bar block w-5 md:w-6 h-0.5 rounded-full transition-all duration-300" style="background:#E9E9E1;"></span>
@@ -315,7 +268,7 @@
                 </div>
             </header>
 
-            <!-- ============ MOBILE MENU - SLIDE FROM RIGHT ============ -->
+            <!-- ============ MOBILE MENU ============ -->
             <div id="mobile-menu">
                 <div id="mobile-menu-overlay"></div>
                 <div id="mobile-menu-panel">
@@ -324,8 +277,7 @@
                     <a href="about.html" class="mobile-nav-link">About</a>
                     <a href="services.html" class="mobile-nav-link">Services</a>
                     <a href="projects.html" class="mobile-nav-link">Projects</a>
-                    
-                    <a href="contact.html" class="mobile-cta-btn inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-8 py-3.5 rounded-full w-auto min-w-[180px] transition-colors hover:bg-opacity-80 mt-2">Get In Touch</a>
+                    <a href="contact.html" class="mt-8 inline-flex items-center justify-center gap-2 bg-umber text-cream text-sm font-medium px-8 py-3.5 rounded-full w-auto min-w-[180px] transition-colors hover:bg-opacity-80">Contact Us</a>
                 </div>
             </div>
         `;
@@ -353,11 +305,13 @@
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-cream font-display text-lg mb-4">Studio</h4>
+                        <h4 class="text-cream font-display text-lg mb-4">Address</h4>
                         <ul class="space-y-3 text-sm">
-                            <li>Motzstraße 12, Berlin</li>
-                            <li>hello@terraochre.studio</li>
-                            <li>+49 30 1234 5678</li>
+                            <li>Gate No.1491, Hanuman Hsg Soc No.1,
+                                Tamhanevasti, Chikhali, Haveli,
+                                Pune - 411062</li>
+                            <li>devcons333@gmail.com</li>
+                            <li>9922065069</li>
                         </ul>
                     </div>
                     <div>
@@ -370,8 +324,8 @@
                     </div>
                 </div>
                 <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-                    <p>© 2026 Terra & Ochre Interior Design Studio. All rights reserved.</p>
-                    <p>Crafted with care in Berlin.</p>
+                    <p>© 2026 Dev Construction Interior Design. All rights reserved.</p>
+                    <p>Crafted with care in India.</p>
                 </div>
             </footer>
         `;
@@ -394,11 +348,11 @@
 
         // Set active nav link based on current page
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        
+
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             link.classList.remove('active');
-            
+
             if (href === currentPage) {
                 link.classList.add('active');
                 link.style.color = '#E9E9E1';
@@ -411,13 +365,13 @@
         // Header scroll effect
         function onScroll() {
             if (!header) return;
-            
+
             const isScrolled = window.scrollY > 60;
-            
+
             if (isScrolled) {
                 header.classList.add('scrolled');
                 if (logo) logo.style.color = '#2E2717';
-                
+
                 navLinks.forEach(link => {
                     if (link.classList.contains('active')) {
                         link.style.color = '#2E2717';
@@ -425,14 +379,14 @@
                         link.style.color = 'rgba(46, 39, 23, 0.7)';
                     }
                 });
-                
+
                 if (!menuOpen && bars.length) {
                     bars.forEach(b => b.style.background = '#2E2717');
                 }
             } else {
                 header.classList.remove('scrolled');
                 if (logo) logo.style.color = '#E9E9E1';
-                
+
                 navLinks.forEach(link => {
                     if (link.classList.contains('active')) {
                         link.style.color = '#E9E9E1';
@@ -440,7 +394,7 @@
                         link.style.color = 'rgba(233, 233, 225, 0.7)';
                     }
                 });
-                
+
                 if (!menuOpen && bars.length) {
                     bars.forEach(b => b.style.background = '#E9E9E1');
                 }
@@ -450,13 +404,13 @@
         document.addEventListener('scroll', onScroll);
         onScroll();
 
-        // Mobile menu functions - Slide from right
+        // Mobile menu functions
         function openMenu() {
             if (!mobileMenu || !panel || !overlay) return;
             menuOpen = true;
             mobileMenu.classList.add('active');
-            
-            // Animate hamburger to X
+            overlay.style.opacity = '1';
+            panel.classList.add('open');
             if (bars.length) {
                 bars[0].style.transform = 'translateY(7px) rotate(45deg)';
                 bars[0].style.background = '#2E2717';
@@ -465,16 +419,14 @@
                 bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
                 bars[2].style.background = '#2E2717';
             }
-            
             document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
             if (!mobileMenu || !panel || !overlay) return;
             menuOpen = false;
-            mobileMenu.classList.remove('active');
-            
-            // Reset hamburger
+            overlay.style.opacity = '0';
+            panel.classList.remove('open');
             if (bars.length) {
                 bars.forEach(b => {
                     b.style.transform = '';
@@ -482,8 +434,12 @@
                     b.style.background = header && header.classList.contains('scrolled') ? '#2E2717' : '#E9E9E1';
                 });
             }
-            
             document.body.style.overflow = '';
+            setTimeout(() => {
+                if (!menuOpen) {
+                    mobileMenu.classList.remove('active');
+                }
+            }, 500);
         }
 
         if (menuBtn) {
