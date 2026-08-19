@@ -242,7 +242,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 20px 80px 20px;
+    padding: 70px 20px 20px 20px;
     gap: 12px;
     position: relative;
   }
@@ -250,8 +250,8 @@
   .carousel-main {
     width: 100%;
     flex: 1;
-    height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
+    height: calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -324,7 +324,7 @@
   .carousel-btn.prev { left: 16px; }
   .carousel-btn.next { right: 16px; }
   
-  /* Thumbnails - Horizontal on mobile, vertical on desktop */
+  /* Thumbnails - Horizontal on both desktop and mobile */
   .thumbnail-container {
     display: flex;
     gap: 8px;
@@ -334,6 +334,7 @@
     padding: 4px 0;
     justify-content: center;
     flex-shrink: 0;
+    max-width: 100%;
   }
   .thumbnail-container::-webkit-scrollbar {
     height: 3px;
@@ -368,9 +369,10 @@
     transform: scale(1.05);
   }
 
-  /* Project Info - Top on desktop, bottom on mobile */
-  .project-info {
+  /* Project Info - Top on both desktop and mobile */
+  .project-info-top {
     position: absolute;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -380,14 +382,7 @@
     width: 100%;
     max-width: 90%;
   }
-  .project-info-top {
-    top: 30px;
-  }
-  .project-info-bottom {
-    bottom: 30px;
-    display: none;
-  }
-  .project-info .tag {
+  .project-info-top .tag {
     display: inline-block;
     font-size: 10px;
     letter-spacing: 0.25em;
@@ -395,108 +390,72 @@
     color: #D9A025;
     margin-bottom: 4px;
   }
-  .project-info .title {
+  .project-info-top .title {
     font-family: 'Space Grotesk', serif;
     font-size: 1.5rem;
     color: #E9E9E1;
     line-height: 1.3;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
-  .project-info .meta {
+  .project-info-top .meta {
     font-size: 0.8rem;
     color: rgba(233, 233, 225, 0.6);
     margin-top: 2px;
   }
 
-  /* Desktop: thumbnails on right, info on top */
+  /* Desktop specific adjustments */
   @media (min-width: 769px) {
     #lightbox-content {
-      flex-direction: row;
-      padding: 60px 20px 20px 20px;
+      padding: 70px 20px 20px 20px;
       gap: 16px;
     }
     .carousel-main {
-      height: calc(100vh - 140px);
-      max-height: calc(100vh - 140px);
+      height: calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
     }
     .thumbnail-container {
-      flex-direction: column;
-      width: 80px;
-      height: calc(100vh - 200px);
-      max-height: calc(100vh - 200px);
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding-right: 4px;
-      justify-content: flex-start;
-      flex-shrink: 0;
-    }
-    .thumbnail-container::-webkit-scrollbar {
-      width: 3px;
-      height: auto;
+      gap: 10px;
+      padding: 8px 0;
     }
     .thumbnail-item {
       width: 70px;
       height: 70px;
     }
-    .project-info-top {
-      display: block;
-    }
-    .project-info-bottom {
-      display: none;
-    }
   }
 
-  /* Mobile: thumbnails at bottom, info on bottom */
+  /* Mobile specific adjustments */
   @media (max-width: 768px) {
     #lightbox-content {
-      flex-direction: column;
-      padding: 50px 12px 12px 12px;
+      padding: 60px 12px 12px 12px;
       gap: 10px;
     }
     .carousel-main {
-      height: calc(100vh - 180px);
-      max-height: calc(100vh - 180px);
-    }
-    .thumbnail-container {
-      flex-direction: row;
-      width: 100%;
-      height: auto;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 4px 0;
-      justify-content: center;
-      flex-shrink: 0;
+      height: calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
     }
     .thumbnail-item {
       width: 50px;
       height: 50px;
     }
-    .project-info-top {
-      display: none;
-    }
-    .project-info-bottom {
-      display: block;
-      bottom: 80px;
-    }
-    .project-info .title {
+    .project-info-top .title {
       font-size: 1.2rem;
     }
-    .project-info .meta {
+    .project-info-top .meta {
       font-size: 0.7rem;
     }
-    .project-info .tag {
+    .project-info-top .tag {
       font-size: 9px;
     }
   }
 
   @media (max-width: 480px) {
     #lightbox-content {
-      padding: 40px 6px 6px 6px;
+      padding: 50px 6px 6px 6px;
       gap: 6px;
     }
     .carousel-main {
-      height: calc(100vh - 160px);
-      max-height: calc(100vh - 160px);
+      height: calc(100vh - 140px);
+      max-height: calc(100vh - 140px);
     }
     .thumbnail-item {
       width: 38px;
@@ -512,17 +471,14 @@
     }
     .carousel-btn.prev { left: 6px; }
     .carousel-btn.next { right: 6px; }
-    .project-info .title {
+    .project-info-top .title {
       font-size: 1rem;
     }
-    .project-info .meta {
+    .project-info-top .meta {
       font-size: 0.6rem;
     }
-    .project-info .tag {
+    .project-info-top .tag {
       font-size: 8px;
-    }
-    .project-info-bottom {
-      bottom: 70px;
     }
     #lightbox-close {
       top: 10px;
@@ -1123,21 +1079,14 @@
       </button>
     </div>
 
-    <!-- Thumbnails Container - Horizontal on mobile, Vertical on desktop -->
+    <!-- Thumbnails - Horizontal on both desktop and mobile -->
     <div class="thumbnail-container" id="thumbnail-container"></div>
 
-    <!-- Project Info - Top on desktop -->
-    <div class="project-info project-info-top" id="project-info-top">
-      <div class="tag" id="lightbox-tag-top"></div>
-      <div class="title" id="lightbox-title-top"></div>
-      <div class="meta" id="lightbox-meta-top"></div>
-    </div>
-
-    <!-- Project Info - Bottom on mobile -->
-    <div class="project-info project-info-bottom" id="project-info-bottom">
-      <div class="tag" id="lightbox-tag-bottom"></div>
-      <div class="title" id="lightbox-title-bottom"></div>
-      <div class="meta" id="lightbox-meta-bottom"></div>
+    <!-- Project Info - Top on both desktop and mobile -->
+    <div class="project-info-top" id="project-info-top">
+      <div class="tag" id="lightbox-tag"></div>
+      <div class="title" id="lightbox-title"></div>
+      <div class="meta" id="lightbox-meta"></div>
     </div>
   </div>
 </div>
@@ -1169,7 +1118,7 @@
 </script>
 
 <script>
- // Lightbox with responsive thumbnails
+ // Lightbox with horizontal thumbnails and top info
 (function () {
   const triggers = document.querySelectorAll('.lightbox-trigger');
   const lightbox = document.getElementById('lightbox');
@@ -1179,15 +1128,10 @@
   const track = document.getElementById('carousel-track');
   const thumbnailsContainer = document.getElementById('thumbnail-container');
   
-  // Top info (desktop)
-  const titleTop = document.getElementById('lightbox-title-top');
-  const metaTop = document.getElementById('lightbox-meta-top');
-  const tagTop = document.getElementById('lightbox-tag-top');
-  
-  // Bottom info (mobile)
-  const titleBottom = document.getElementById('lightbox-title-bottom');
-  const metaBottom = document.getElementById('lightbox-meta-bottom');
-  const tagBottom = document.getElementById('lightbox-tag-bottom');
+  // Top info (both desktop and mobile)
+  const titleEl = document.getElementById('lightbox-title');
+  const metaEl = document.getElementById('lightbox-meta');
+  const tagEl = document.getElementById('lightbox-tag');
   
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
@@ -1290,14 +1234,10 @@
     const meta = card.dataset.meta || '';
     const tag = card.dataset.tag || '';
     
-    // Update both top and bottom info
-    titleTop.textContent = title;
-    metaTop.textContent = meta;
-    tagTop.textContent = tag;
-    
-    titleBottom.textContent = title;
-    metaBottom.textContent = meta;
-    tagBottom.textContent = tag;
+    // Update info
+    titleEl.textContent = title;
+    metaEl.textContent = meta;
+    tagEl.textContent = tag;
     
     buildCarousel(images);
     currentIndex = 0;
