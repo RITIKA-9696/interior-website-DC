@@ -78,39 +78,6 @@
     opacity: 1;
   }
   
-  /* Expand icon */
-  .proj-card .expand-icon {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4;
-    opacity: 0;
-    transform: scale(0.75);
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-  }
-  .proj-card:hover .expand-icon {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .proj-card .expand-icon span {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: rgba(233,233,225,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #2E2717;
-    font-size: 1.5rem;
-    transition: transform 0.4s ease;
-  }
-  .proj-card:hover .expand-icon span {
-    transform: rotate(45deg);
-  }
-  
   /* Tag badge */
   .proj-card .tag-badge {
     position: absolute;
@@ -272,18 +239,19 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 20px 20px 20px;
-    gap: 16px;
+    padding: 60px 20px 80px 20px;
+    gap: 12px;
     position: relative;
   }
 
   .carousel-main {
+    width: 100%;
     flex: 1;
-    height: calc(100vh - 140px);
-    max-height: calc(100vh - 140px);
+    height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -356,31 +324,32 @@
   .carousel-btn.prev { left: 16px; }
   .carousel-btn.next { right: 16px; }
   
-  .thumbnail-column {
+  /* Thumbnails - Horizontal on mobile, vertical on desktop */
+  .thumbnail-container {
     display: flex;
-    flex-direction: column;
     gap: 8px;
-    width: 80px;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    padding-right: 4px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+    justify-content: center;
     flex-shrink: 0;
   }
-  .thumbnail-column::-webkit-scrollbar {
-    width: 3px;
+  .thumbnail-container::-webkit-scrollbar {
+    height: 3px;
   }
-  .thumbnail-column::-webkit-scrollbar-track {
+  .thumbnail-container::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
   }
-  .thumbnail-column::-webkit-scrollbar-thumb {
+  .thumbnail-container::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
   }
   
   .thumbnail-item {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 6px;
@@ -399,17 +368,26 @@
     transform: scale(1.05);
   }
 
-  .project-info-bottom {
+  /* Project Info - Top on desktop, bottom on mobile */
+  .project-info {
     position: absolute;
-    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     z-index: 5;
     pointer-events: none;
     padding: 0 20px;
+    width: 100%;
+    max-width: 90%;
   }
-  .project-info-bottom .tag {
+  .project-info-top {
+    top: 30px;
+  }
+  .project-info-bottom {
+    bottom: 30px;
+    display: none;
+  }
+  .project-info .tag {
     display: inline-block;
     font-size: 10px;
     letter-spacing: 0.25em;
@@ -417,57 +395,112 @@
     color: #D9A025;
     margin-bottom: 4px;
   }
-  .project-info-bottom .title {
+  .project-info .title {
     font-family: 'Space Grotesk', serif;
     font-size: 1.5rem;
     color: #E9E9E1;
     line-height: 1.3;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
-  .project-info-bottom .meta {
+  .project-info .meta {
     font-size: 0.8rem;
     color: rgba(233, 233, 225, 0.6);
     margin-top: 2px;
   }
 
+  /* Desktop: thumbnails on right, info on top */
+  @media (min-width: 769px) {
+    #lightbox-content {
+      flex-direction: row;
+      padding: 60px 20px 20px 20px;
+      gap: 16px;
+    }
+    .carousel-main {
+      height: calc(100vh - 140px);
+      max-height: calc(100vh - 140px);
+    }
+    .thumbnail-container {
+      flex-direction: column;
+      width: 80px;
+      height: calc(100vh - 200px);
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 4px;
+      justify-content: flex-start;
+      flex-shrink: 0;
+    }
+    .thumbnail-container::-webkit-scrollbar {
+      width: 3px;
+      height: auto;
+    }
+    .thumbnail-item {
+      width: 70px;
+      height: 70px;
+    }
+    .project-info-top {
+      display: block;
+    }
+    .project-info-bottom {
+      display: none;
+    }
+  }
+
+  /* Mobile: thumbnails at bottom, info on bottom */
   @media (max-width: 768px) {
-    .thumbnail-column {
-      width: 60px;
-      gap: 6px;
+    #lightbox-content {
+      flex-direction: column;
+      padding: 50px 12px 12px 12px;
+      gap: 10px;
+    }
+    .carousel-main {
+      height: calc(100vh - 180px);
+      max-height: calc(100vh - 180px);
+    }
+    .thumbnail-container {
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+      justify-content: center;
+      flex-shrink: 0;
     }
     .thumbnail-item {
       width: 50px;
       height: 50px;
     }
-    #lightbox-content {
-      padding: 50px 12px 12px 12px;
-      gap: 10px;
+    .project-info-top {
+      display: none;
     }
-    .carousel-main {
-      height: calc(100vh - 130px);
-      max-height: calc(100vh - 130px);
+    .project-info-bottom {
+      display: block;
+      bottom: 80px;
     }
-    .project-info-bottom .title { font-size: 1.2rem; }
-    .project-info-bottom .meta { font-size: 0.7rem; }
-    .project-info-bottom { bottom: 20px; }
+    .project-info .title {
+      font-size: 1.2rem;
+    }
+    .project-info .meta {
+      font-size: 0.7rem;
+    }
+    .project-info .tag {
+      font-size: 9px;
+    }
   }
 
   @media (max-width: 480px) {
-    .thumbnail-column {
-      width: 45px;
-      gap: 4px;
-    }
-    .thumbnail-item {
-      width: 38px;
-      height: 38px;
-    }
     #lightbox-content {
       padding: 40px 6px 6px 6px;
       gap: 6px;
     }
     .carousel-main {
-      height: calc(100vh - 110px);
-      max-height: calc(100vh - 110px);
+      height: calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
+    }
+    .thumbnail-item {
+      width: 38px;
+      height: 38px;
     }
     .carousel-btn {
       width: 28px;
@@ -479,10 +512,18 @@
     }
     .carousel-btn.prev { left: 6px; }
     .carousel-btn.next { right: 6px; }
-    .project-info-bottom .title { font-size: 1rem; }
-    .project-info-bottom .meta { font-size: 0.6rem; }
-    .project-info-bottom .tag { font-size: 8px; }
-    .project-info-bottom { bottom: 12px; }
+    .project-info .title {
+      font-size: 1rem;
+    }
+    .project-info .meta {
+      font-size: 0.6rem;
+    }
+    .project-info .tag {
+      font-size: 8px;
+    }
+    .project-info-bottom {
+      bottom: 70px;
+    }
     #lightbox-close {
       top: 10px;
       right: 10px;
@@ -610,25 +651,12 @@
            style="--i:0">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/residential/p1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Altura baner 2 bhk">
-          
-          <!-- Overlay gradient from bottom to top -->
           <div class="overlay-gradient"></div>
-          
-          <!-- Tag badge -->
           <span class="tag-badge">Residential</span>
-          
-          <!-- Project name overlay - desktop only -->
           <div class="project-name-overlay hidden md:block">
-            <h3 class="font-display text-lg text-espresso">Baner · 2023</h3>
-            <!-- <p class="text-xs text-cream/70 mt-0.5">Interior Design · 2023</p> -->
-          </div>
-          
-          <!-- Expand icon -->
-          <div class="expand-icon">
-            <span>⤢</span>
+            <h3 class="font-display text-lg text-cream">Baner · 2023</h3>
           </div>
         </div>
-        <!-- Project Name - Mobile only -->
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Baner · 2023</h3>
           <p class="text-xs text-espresso/50 mt-0.5">Interior Design · 2023</p>
@@ -650,9 +678,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Pashan · 2024</h3>
             <p class="text-xs text-cream/70 mt-0.5">Pashan Interior Design · 2024</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -677,9 +702,6 @@
             <h3 class="font-display text-lg text-cream">Baner · 2020</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Baner · 2020</h3>
@@ -702,9 +724,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Wakad · 2022</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -729,9 +748,6 @@
             <h3 class="font-display text-lg text-cream">Wakad · 2024</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Wakad · 2024</h3>
@@ -754,9 +770,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">DP ROAD PUNE HOTEL · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -781,9 +794,6 @@
             <h3 class="font-display text-lg text-cream">Bhosri · 2021</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Bhosri · 2021</h3>
@@ -806,9 +816,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Vimannagar Pune · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -833,9 +840,6 @@
             <h3 class="font-display text-lg text-cream">Dapodi · 2020</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Dapodi · 2020</h3>
@@ -858,9 +862,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Sales Office · 2022</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -885,9 +886,6 @@
             <h3 class="font-display text-lg text-cream">Aundh · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Residential</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Aundh · 2023</h3>
@@ -910,9 +908,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Wakad Pune · 2022</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -937,9 +932,6 @@
             <h3 class="font-display text-lg text-cream">Katraj Pune · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Residential</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Katraj Pune · 2023</h3>
@@ -962,9 +954,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Pune · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -989,9 +978,6 @@
             <h3 class="font-display text-lg text-cream">Moshi · 2024</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Moshi · 2024</h3>
@@ -1014,9 +1000,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Viman Nagar, Pune · 2021</h3>
             <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -1041,9 +1024,6 @@
             <h3 class="font-display text-lg text-cream">Pune · 2021</h3>
             <p class="text-xs text-cream/70 mt-0.5">Residential</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Pune · 2021</h3>
@@ -1067,9 +1047,6 @@
             <h3 class="font-display text-lg text-cream">Pashan · 2023</h3>
             <p class="text-xs text-cream/70 mt-0.5">Residential</p>
           </div>
-          <div class="expand-icon">
-            <span>⤢</span>
-          </div>
         </div>
         <div class="p-4 md:hidden">
           <h3 class="font-display text-base text-espresso">Pashan · 2023</h3>
@@ -1092,9 +1069,6 @@
           <div class="project-name-overlay hidden md:block">
             <h3 class="font-display text-lg text-cream">Pune · 2018</h3>
             <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
-          </div>
-          <div class="expand-icon">
-            <span>⤢</span>
           </div>
         </div>
         <div class="p-4 md:hidden">
@@ -1149,14 +1123,21 @@
       </button>
     </div>
 
-    <!-- Thumbnails Column -->
-    <div class="thumbnail-column" id="thumbnail-column"></div>
+    <!-- Thumbnails Container - Horizontal on mobile, Vertical on desktop -->
+    <div class="thumbnail-container" id="thumbnail-container"></div>
 
-    <!-- Project Info - Bottom Center -->
-    <div class="project-info-bottom">
-      <div class="tag" id="lightbox-tag"></div>
-      <div class="title" id="lightbox-title"></div>
-      <div class="meta" id="lightbox-meta"></div>
+    <!-- Project Info - Top on desktop -->
+    <div class="project-info project-info-top" id="project-info-top">
+      <div class="tag" id="lightbox-tag-top"></div>
+      <div class="title" id="lightbox-title-top"></div>
+      <div class="meta" id="lightbox-meta-top"></div>
+    </div>
+
+    <!-- Project Info - Bottom on mobile -->
+    <div class="project-info project-info-bottom" id="project-info-bottom">
+      <div class="tag" id="lightbox-tag-bottom"></div>
+      <div class="title" id="lightbox-title-bottom"></div>
+      <div class="meta" id="lightbox-meta-bottom"></div>
     </div>
   </div>
 </div>
@@ -1188,7 +1169,7 @@
 </script>
 
 <script>
- // Lightbox with Right Thumbnails
+ // Lightbox with responsive thumbnails
 (function () {
   const triggers = document.querySelectorAll('.lightbox-trigger');
   const lightbox = document.getElementById('lightbox');
@@ -1196,10 +1177,18 @@
   const closeBtn = document.getElementById('lightbox-close');
   const content = document.getElementById('lightbox-content');
   const track = document.getElementById('carousel-track');
-  const thumbnailsContainer = document.getElementById('thumbnail-column');
-  const titleEl = document.getElementById('lightbox-title');
-  const metaEl = document.getElementById('lightbox-meta');
-  const tagEl = document.getElementById('lightbox-tag');
+  const thumbnailsContainer = document.getElementById('thumbnail-container');
+  
+  // Top info (desktop)
+  const titleTop = document.getElementById('lightbox-title-top');
+  const metaTop = document.getElementById('lightbox-meta-top');
+  const tagTop = document.getElementById('lightbox-tag-top');
+  
+  // Bottom info (mobile)
+  const titleBottom = document.getElementById('lightbox-title-bottom');
+  const metaBottom = document.getElementById('lightbox-meta-bottom');
+  const tagBottom = document.getElementById('lightbox-tag-bottom');
+  
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   
@@ -1297,9 +1286,18 @@
       images = mainImg ? [mainImg.src] : ['/assets/placeholder.jpg'];
     }
     
-    titleEl.textContent = card.dataset.title || 'Project';
-    metaEl.textContent = card.dataset.meta || '';
-    tagEl.textContent = card.dataset.tag || '';
+    const title = card.dataset.title || 'Project';
+    const meta = card.dataset.meta || '';
+    const tag = card.dataset.tag || '';
+    
+    // Update both top and bottom info
+    titleTop.textContent = title;
+    metaTop.textContent = meta;
+    tagTop.textContent = tag;
+    
+    titleBottom.textContent = title;
+    metaBottom.textContent = meta;
+    tagBottom.textContent = tag;
     
     buildCarousel(images);
     currentIndex = 0;
