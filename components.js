@@ -248,7 +248,7 @@
             <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
                     <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color: #E9E9E1;">
-                        <img src="./assets/logo-remove.png" alt="Interior Logo" class="h-12 md:h-16 w-auto object-contain" />
+                     <img src="./assets/logo-bg-removebg.png" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain" />
                     </a>
                     <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
                         <a href="index.html" class="nav-link" style="color: white; font-weight: 500;">Home</a>
@@ -291,7 +291,7 @@
                 <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-10">
                     <div>
                         <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
-                            <img src="/assets/interior_logo.jpeg" alt="logo" class="w-20 h-16">
+                            <img src="/assets/logo-bg.jpeg" alt="logo" class="w-20 h-20">
                         </a>
                         <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
                     </div>

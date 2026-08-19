@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services — Terra & Ochre</title>
+<title>Services — Dev Construction</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -138,7 +138,93 @@
   @media (max-width: 480px) {
     .mobile-nav-link { font-size: 1.4rem; }
   }
-</style>
+
+    /* ============================================================
+       GLOBAL MOTION + RESPONSIVE ENHANCEMENTS (CSS-only, added)
+       ============================================================ */
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Fluid type so headings never overflow small screens */
+    h1, .font-display { word-break: break-word; }
+
+    /* Prevent any accidental horizontal scroll on mobile */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    img, svg { max-width: 100%; height: auto; }
+
+    /* ---- Shine sweep for primary buttons ---- */
+    .btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+    .btn-shine::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -60%;
+        width: 40%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+        transform: skewX(-20deg);
+        transition: left .85s cubic-bezier(.22,1,.36,1);
+        pointer-events: none;
+        z-index: 1;
+    }
+    .btn-shine:hover::after { left: 130%; }
+    .btn-shine:active { transform: scale(.97); }
+
+    /* ---- Soft ambient float for decorative art/images ---- */
+    .float-soft { animation: floatSoft 6.5s ease-in-out infinite; }
+    @keyframes floatSoft {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* ---- Slow fade-in-up for supporting page-load moments ---- */
+    .fade-in-up-slow { animation: fadeInUpSlow 1s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes fadeInUpSlow {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Gentle border/underline grow used on inline text links ---- */
+    .underline-grow {
+        background-image: linear-gradient(currentColor, currentColor);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 0% 1px;
+        transition: background-size .45s cubic-bezier(.22,1,.36,1);
+    }
+    .underline-grow:hover { background-size: 100% 1px; }
+
+    /* ---- Icon/arrow nudge on hover (CSS only) ---- */
+    .nudge-x { transition: transform .35s cubic-bezier(.22,1,.36,1); display: inline-block; }
+    a:hover > .nudge-x, .group:hover .nudge-x { transform: translateX(5px); }
+
+    /* ---- Card tilt-shine used by project & portfolio cards ---- */
+    .shine-card { position: relative; }
+    .shine-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        pointer-events: none;
+        background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
+        background-size: 250% 250%;
+        background-position: -140% -140%;
+        transition: background-position 1s cubic-bezier(.22,1,.36,1);
+    }
+    .shine-card:hover::before { background-position: 140% 140%; }
+
+    /* ---- Responsive safety net for very small screens ---- */
+    @media (max-width: 380px) {
+        .font-display { letter-spacing: -0.01em; }
+    }
+
+    </style>
 </head>
 <body class="bg-cream text-espresso antialiased">
 
@@ -199,7 +285,7 @@
           <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
         </div>
         <div class="reveal group flex items-center justify-between py-6" style="--i:5">
-          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">06</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Map & WaterWing Services</h3></div>
+          <div class="flex items-center gap-5"><span class="text-umber/50 text-sm">06</span><h3 class="font-display text-xl md:text-2xl group-hover:text-umber transition-colors">Map & Waterproof Services</h3></div>
           <span class="w-10 h-10 rounded-full bg-gold/90 text-espresso flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
       </div>
     </div>
@@ -283,7 +369,7 @@
     <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-umber/20"></div>
     <span class="relative inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-gold/30 rounded-full px-4 py-2 text-gold mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Start Your Project</span>
     <h2 class="relative font-display text-4xl md:text-5xl leading-tight max-w-2xl mx-auto">Tell Us Which Service Fits Your Space</h2>
-    <a href="contact.html" class="relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
+    <a href="contact.html" class="btn-shine relative inline-flex items-center gap-3 mt-9 bg-gold text-espresso px-9 py-4 rounded-full font-medium hover:bg-cream transition-colors duration-300">Book a Consultation →</a>
   </div>
 </section>
 

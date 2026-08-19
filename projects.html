@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — Terra & Ochre</title>
+<title>Projects — Dev Construction</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,9 +37,105 @@
   .page-hero-img { transform: scale(1.1); transition: transform 1.6s cubic-bezier(.16,.86,.3,1); }
   .page-hero.in .page-hero-img { transform: scale(1); }
 
-  .proj-card { transition: opacity .5s ease, transform .5s ease; }
+  .proj-card { position: relative; transition: opacity .5s ease, transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s cubic-bezier(.22,1,.36,1), border-color .45s ease; will-change: transform; }
   .proj-card.hide { opacity: 0; transform: scale(.9); pointer-events:none; position:absolute; }
+  .proj-card:hover { transform: translateY(-10px) scale(1.015); box-shadow: 0 30px 60px -22px rgba(46,39,23,.38); border-color: rgba(137,87,37,.55); }
+  .proj-card .relative.overflow-hidden img { transition: transform .85s cubic-bezier(.22,1,.36,1), filter .6s ease; }
+  .proj-card:hover .relative.overflow-hidden img { transform: scale(1.09); filter: brightness(1.03) saturate(1.05); }
+  .proj-card h3 { transition: color .4s ease; }
+  .proj-card:hover h3 { color: #895725; }
+  
+  /* Bottom-to-top overlay effect */
+  .proj-card .overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(137,87,37,0.85) 0%, rgba(137,87,37,0.4) 40%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .proj-card:hover .overlay-gradient {
+    opacity: 1;
+  }
+  
+  /* Project name reveal from bottom */
+  .proj-card .project-name-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 1rem 1rem 1rem;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(46,39,23,0.8) 0%, transparent 100%);
+  }
+  .proj-card:hover .project-name-overlay {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Expand icon */
+  .proj-card .expand-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    opacity: 0;
+    transform: scale(0.75);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .proj-card:hover .expand-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .proj-card .expand-icon span {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(233,233,225,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2E2717;
+    font-size: 1.5rem;
+    transition: transform 0.4s ease;
+  }
+  .proj-card:hover .expand-icon span {
+    transform: rotate(45deg);
+  }
+  
+  /* Tag badge */
+  .proj-card .tag-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: rgba(233,233,225,0.9);
+    color: #2E2717;
+    font-size: 0.65rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    z-index: 5;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .proj-card:hover .tag-badge {
+    background: #895725;
+    color: #E9E9E1;
+    box-shadow: 0 4px 12px rgba(137,87,37,0.3);
+  }
+
   .filter-btn.active { background:#2E2717; color:#E9E9E1; }
+  .filter-btn { transition: background .35s ease, color .35s ease, transform .3s ease, border-color .35s ease; }
+  .filter-btn:hover { transform: translateY(-2px); border-color: rgba(137,87,37,.6); }
+  .filter-btn:active { transform: translateY(0) scale(.96); }
 
   #site-header.scrolled { background: #E9E9E1 !important; backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(46,39,23,.12); }
   #site-header.scrolled .nav-link { color: rgba(46,39,23,.75) !important; }
@@ -184,7 +280,6 @@
     position: relative;
   }
 
-  /* Main Carousel Container */
   .carousel-main {
     flex: 1;
     height: calc(100vh - 140px);
@@ -195,10 +290,6 @@
     min-width: 0;
   }
 
-  /* FIXED: track is now just a positioning context — no transform/width math.
-     Each slide is absolutely positioned and fades in/out via .active,
-     which removes the previous transform+width bug that kept slides
-     rendered off-screen. */
   .carousel-track {
     position: relative;
     width: 100%;
@@ -236,7 +327,6 @@
     padding: 1rem;
   }
   
-  /* Navigation Buttons */
   .carousel-btn {
     position: absolute;
     top: 50%;
@@ -266,7 +356,6 @@
   .carousel-btn.prev { left: 16px; }
   .carousel-btn.next { right: 16px; }
   
-  /* Thumbnails - Right Side Column */
   .thumbnail-column {
     display: flex;
     flex-direction: column;
@@ -310,7 +399,6 @@
     transform: scale(1.05);
   }
 
-  /* Project Info - Bottom Center */
   .project-info-bottom {
     position: absolute;
     bottom: 30px;
@@ -406,6 +494,77 @@
   @media (max-width: 1024px) {
     .page-hero h1 { font-size: 2.5rem; }
   }
+
+  /* Global motion + responsive enhancements */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  h1, .font-display { word-break: break-word; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  img, svg { max-width: 100%; height: auto; }
+
+  .btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%;
+    width: 40%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: skewX(-20deg);
+    transition: left .85s cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .btn-shine:hover::after { left: 130%; }
+  .btn-shine:active { transform: scale(.97); }
+
+  .float-soft { animation: floatSoft 6.5s ease-in-out infinite; }
+  @keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .fade-in-up-slow { animation: fadeInUpSlow 1s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes fadeInUpSlow {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .underline-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 1px;
+    transition: background-size .45s cubic-bezier(.22,1,.36,1);
+  }
+  .underline-grow:hover { background-size: 100% 1px; }
+
+  .nudge-x { transition: transform .35s cubic-bezier(.22,1,.36,1); display: inline-block; }
+  a:hover > .nudge-x, .group:hover .nudge-x { transform: translateX(5px); }
+
+  .shine-card { position: relative; }
+  .shine-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
+    background-size: 250% 250%;
+    background-position: -140% -140%;
+    transition: background-position 1s cubic-bezier(.22,1,.36,1);
+  }
+  .shine-card:hover::before { background-position: 140% 140%; }
+
+  @media (max-width: 380px) {
+    .font-display { letter-spacing: -0.01em; }
+  }
 </style>
 </head>
 <body class="bg-cream text-espresso antialiased">
@@ -440,541 +599,510 @@
     </div>
 
     <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 stagger" id="grid">
+      
       <!-- Project 1 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Altura baner 2 bhk" 
-           data-meta="interior Design · 2023" 
+           data-title="Baner · 2023" 
+           data-meta="Interior Design · 2023" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/p1.jpeg",
-             "/assets/projects/residential/p2.jpeg",
-             "/assets/projects/residential/p3.jpeg",
-             "/assets/projects/residential/p4.jpeg",
-             "/assets/projects/residential/p5.jpeg",
-             "/assets/projects/residential/p6.jpeg"
-           ]' 
+           data-images='["/assets/projects/residential/p1.jpeg","/assets/projects/residential/p2.jpeg","/assets/projects/residential/p3.jpeg","/assets/projects/residential/p4.jpeg","/assets/projects/residential/p5.jpeg","/assets/projects/residential/p6.jpeg"]' 
            style="--i:0">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/residential/p1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Altura baner 2 bhk">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          
+          <!-- Overlay gradient from bottom to top -->
+          <div class="overlay-gradient"></div>
+          
+          <!-- Tag badge -->
+          <span class="tag-badge">Residential</span>
+          
+          <!-- Project name overlay - desktop only -->
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-espresso">Baner · 2023</h3>
+            <!-- <p class="text-xs text-cream/70 mt-0.5">Interior Design · 2023</p> -->
+          </div>
+          
+          <!-- Expand icon -->
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Altura baner 2 bhk</h3>
-          <p class="text-xs text-espresso/50 mt-1">interior Design · 2023</p>
+        <!-- Project Name - Mobile only -->
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Baner · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Interior Design · 2023</p>
         </div>
       </div>
 
       <!-- Project 2 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Montvert finesse pashan 501 flat 3bhk" 
+           data-title="Pashan · 2024" 
            data-meta="Pashan Interior Design · 2024" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/B1.jpeg",
-             "/assets/projects/residential/b2.jpeg",
-             "/assets/projects/residential/b3.jpeg",
-             "/assets/projects/residential/b4.jpeg",
-             "/assets/projects/residential/b5.jpeg",
-             "/assets/projects/residential/p7.jpeg"
-           ]' 
+           data-images='["/assets/projects/residential/B1.jpeg","/assets/projects/residential/b2.jpeg","/assets/projects/residential/b3.jpeg","/assets/projects/residential/b4.jpeg","/assets/projects/residential/b5.jpeg","/assets/projects/residential/p7.jpeg"]' 
            style="--i:1">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/b2.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Montvert finesse pashan 501 flat 3bhk">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/b2.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Montvert finesse pashan">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Residential</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Pashan · 2024</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Pashan Interior Design · 2024</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Montvert finesse pashan 501 flat 3bhk</h3>
-          <p class="text-xs text-espresso/50 mt-1">Pashan Interior Design · 2024</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Pashan · 2024</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Pashan Interior Design · 2024</p>
         </div>
       </div>
 
       <!-- Project 3 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="Shruti bungalow" 
-           data-meta="Baner · 2020" 
+           data-title="Baner · 2020" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/renovation/r1.jpeg",
-             "/assets/projects/renovation/r2.jpeg",
-             "/assets/projects/renovation/r3.jpeg",
-             "/assets/projects/renovation/r4.jpeg",
-             "/assets/projects/renovation/r5.jpeg",
-             "/assets/projects/renovation/r6.jpeg"
-           ]' 
+           data-images='["/assets/projects/renovation/r1.jpeg","/assets/projects/renovation/r2.jpeg","/assets/projects/renovation/r3.jpeg","/assets/projects/renovation/r4.jpeg","/assets/projects/renovation/r5.jpeg","/assets/projects/renovation/r6.jpeg"]' 
            style="--i:2">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/renovation/r1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Vintage Glamour">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Baner · 2020</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Shruti bungalow</h3>
-          <p class="text-xs text-espresso/50 mt-1">Baner · 2020</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Baner · 2020</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
 
       <!-- Project 4 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Ambience hotel" 
-           data-meta="wakad  · 2022" 
+           data-title="Wakad · 2022" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/c1.jpeg",
-             "/assets/projects/commercial/c2.jpeg",
-             "/assets/projects/commercial/c3.jpeg",
-             "/assets/projects/commercial/c4.jpeg",
-             "/assets/projects/commercial/c5.jpeg",
-             "/assets/projects/commercial/c6.jpeg"
-           ]' 
+           data-images='["/assets/projects/commercial/c1.jpeg","/assets/projects/commercial/c2.jpeg","/assets/projects/commercial/c3.jpeg","/assets/projects/commercial/c4.jpeg","/assets/projects/commercial/c5.jpeg","/assets/projects/commercial/c6.jpeg"]' 
            style="--i:3">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/commercial/c1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Ambience hotel">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Wakad · 2022</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Ambience hotel</h3>
-          <p class="text-xs text-espresso/50 mt-1">wakad  · 2022</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Wakad · 2022</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
 
       <!-- Project 5 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="Polaris hospital Renovation" 
-           data-meta="Wakad · 2024" 
+           data-title="Wakad · 2024" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/renovation/k1.jpeg",
-             "/assets/projects/renovation/k2.jpeg",
-             "/assets/projects/renovation/k3.jpeg",
-             "/assets/projects/renovation/k4.jpeg",
-             "/assets/projects/renovation/k5.jpeg",
-             "/assets/projects/renovation/k6.jpeg",
-              "/assets/projects/renovation/k7.jpeg"
-           ]' 
+           data-images='["/assets/projects/renovation/k1.jpeg","/assets/projects/renovation/k2.jpeg","/assets/projects/renovation/k3.jpeg","/assets/projects/renovation/k4.jpeg","/assets/projects/renovation/k5.jpeg","/assets/projects/renovation/k6.jpeg","/assets/projects/renovation/k7.jpeg"]' 
            style="--i:4">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/renovation/k1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Polaris hospital Renovation">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Wakad · 2024</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Polaris hospital Renovation</h3>
-          <p class="text-xs text-espresso/50 mt-1">Wakad · 2024</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Wakad · 2024</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
 
       <!-- Project 6 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="ANNA IDLI Interior Design" 
-           data-meta="DP ROAD PUNE HOTEL · 2023" 
+           data-title="DP ROAD PUNE HOTEL · 2023" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/v1.jpeg",
-             "/assets/projects/commercial/v2.jpeg",
-             "/assets/projects/commercial/v3.jpeg",
-             "/assets/projects/commercial/v4.jpeg",
-             "/assets/projects/commercial/v5.jpeg",
-             "/assets/projects/commercial/v6.jpeg"
-           ]' 
+           data-images='["/assets/projects/commercial/v1.jpeg","/assets/projects/commercial/v2.jpeg","/assets/projects/commercial/v3.jpeg","/assets/projects/commercial/v4.jpeg","/assets/projects/commercial/v5.jpeg","/assets/projects/commercial/v6.jpeg"]' 
            style="--i:5">
         <div class="relative overflow-hidden">
           <img src="/assets/projects/commercial/v1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">DP ROAD PUNE HOTEL · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">ANNA IDLI Interior Design</h3>
-          <p class="text-xs text-espresso/50 mt-1">DP ROAD PUNE HOTEL · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">DP ROAD PUNE HOTEL · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
       <!-- Project 7 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Galaxy Tooling company" 
-           data-meta="Bhosri · 2021" 
+           data-title="Bhosri · 2021" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/i1.jpeg",
-             "/assets/projects/commercial/i2.jpeg",
-             "/assets/projects/commercial/i3.jpeg",
-             "/assets/projects/commercial/i4.jpeg",
-             "/assets/projects/commercial/i5.jpeg",
-             "/assets/projects/commercial/i6.jpeg",
-             "/assets/projects/commercial/i7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/commercial/i1.jpeg","/assets/projects/commercial/i2.jpeg","/assets/projects/commercial/i3.jpeg","/assets/projects/commercial/i4.jpeg","/assets/projects/commercial/i5.jpeg","/assets/projects/commercial/i6.jpeg","/assets/projects/commercial/i7.jpeg"]' 
+           style="--i:6">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/commercial/i3.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/commercial/i3.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Galaxy Tooling company">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Bhosri · 2021</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Galaxy Tooling company</h3>
-          <p class="text-xs text-espresso/50 mt-1">Bhosri · 2021</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Bhosri · 2021</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
       <!-- Project 8 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Hotel fusion Cafe" 
-           data-meta="vimannagar pune · 2023" 
+           data-title="Vimannagar Pune · 2023" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/d1.jpeg",
-             "/assets/projects/commercial/d2.jpeg",
-             "/assets/projects/commercial/d3.jpeg",
-             "/assets/projects/commercial/d4.jpeg",
-             "/assets/projects/commercial/d5.jpeg",
-             "/assets/projects/commercial/d6.jpeg",
-             "/assets/projects/commercial/d7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/commercial/d1.jpeg","/assets/projects/commercial/d2.jpeg","/assets/projects/commercial/d3.jpeg","/assets/projects/commercial/d4.jpeg","/assets/projects/commercial/d5.jpeg","/assets/projects/commercial/d6.jpeg","/assets/projects/commercial/d7.jpeg"]' 
+           style="--i:7">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/commercial/d1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/commercial/d1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Vimannagar">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Vimannagar Pune · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Hotel fusion Cafe</h3>
-          <p class="text-xs text-espresso/50 mt-1">vimannagar pune · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Vimannagar Pune · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
       <!-- Project 9 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Avalon city Gym" 
-           data-meta="Dapodi · 2020" 
+           data-title="Dapodi · 2020" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/e1.jpeg",
-             "/assets/projects/commercial/e2.jpeg",
-             "/assets/projects/commercial/e3.jpeg",
-             "/assets/projects/commercial/e4.jpeg",
-             "/assets/projects/commercial/e5.jpeg",
-             "/assets/projects/commercial/e6.jpeg",
-             "/assets/projects/commercial/e7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/commercial/e1.jpeg","/assets/projects/commercial/e2.jpeg","/assets/projects/commercial/e3.jpeg","/assets/projects/commercial/e4.jpeg","/assets/projects/commercial/e5.jpeg","/assets/projects/commercial/e6.jpeg","/assets/projects/commercial/e7.jpeg"]' 
+           style="--i:8">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/commercial/e1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/commercial/e1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Avalon city Gym">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Dapodi · 2020</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Avalon city Gym</h3>
-          <p class="text-xs text-espresso/50 mt-1">Dapodi · 2020</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Dapodi · 2020</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
       <!-- Project 10 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Avalon city sales office" 
-           data-meta="interior · 2022" 
+           data-title="Sales Office · 2022" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/f1.jpeg",
-             "/assets/projects/commercial/f2.jpeg",
-             "/assets/projects/commercial/f3.jpeg",
-             "/assets/projects/commercial/f4.jpeg",
-             "/assets/projects/commercial/f5.jpeg",
-             "/assets/projects/commercial/f6.jpeg",
-             "/assets/projects/commercial/f7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/commercial/f1.jpeg","/assets/projects/commercial/f2.jpeg","/assets/projects/commercial/f3.jpeg","/assets/projects/commercial/f4.jpeg","/assets/projects/commercial/f5.jpeg","/assets/projects/commercial/f6.jpeg","/assets/projects/commercial/f7.jpeg"]' 
+           style="--i:9">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/commercial/f1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/commercial/f1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Sales Office">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Sales Office · 2022</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Avalon city sales office</h3>
-          <p class="text-xs text-espresso/50 mt-1">interior  · 2022</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Sales Office · 2022</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
       <!-- Project 11 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Dream residency 3bhk interior" 
-           data-meta="Aundh · 2023" 
+           data-title="Aundh · 2023" 
+           data-meta="Residential" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/g7.jpeg",
-             "/assets/projects/residential/g1.jpeg",
-             "/assets/projects/residential/g2.jpeg",
-             "/assets/projects/residential/g3.jpeg",
-             "/assets/projects/residential/g4.jpeg",
-             "/assets/projects/residential/g5.jpeg",
-             "/assets/projects/residential/g6.jpeg",
-             "/assets/projects/residential/g8.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/g7.jpeg","/assets/projects/residential/g1.jpeg","/assets/projects/residential/g2.jpeg","/assets/projects/residential/g3.jpeg","/assets/projects/residential/g4.jpeg","/assets/projects/residential/g5.jpeg","/assets/projects/residential/g6.jpeg","/assets/projects/residential/g8.jpeg"]' 
+           style="--i:10">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/g7.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/g7.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Interior">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Residential</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Aundh · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Residential</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Dream residency 3bhk interior</h3>
-          <p class="text-xs text-espresso/50 mt-1">Aundh · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Aundh · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Residential</p>
         </div>
       </div>
+
       <!-- Project 12 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="Eden garden Bungalow renovation" 
-           data-meta="Wakad Pune · 2022" 
+           data-title="Wakad Pune · 2022" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/residential/h1.jpeg",
-             "/assets/projects/residential/h2.jpeg",
-             "/assets/projects/residential/h3.jpeg",
-             "/assets/projects/residential/h4.jpeg",
-             "/assets/projects/residential/h5.jpeg",
-             "/assets/projects/residential/h6.jpeg",
-             "/assets/projects/residential/h7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/h1.jpeg","/assets/projects/residential/h2.jpeg","/assets/projects/residential/h3.jpeg","/assets/projects/residential/h4.jpeg","/assets/projects/residential/h5.jpeg","/assets/projects/residential/h6.jpeg","/assets/projects/residential/h7.jpeg"]' 
+           style="--i:11">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/h1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/h1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Eden garden Bungalow renovation">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Wakad Pune · 2022</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Eden garden Bungalow renovation</h3>
-          <p class="text-xs text-espresso/50 mt-1">Wakad Pune · 2022</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Wakad Pune · 2022</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
+
       <!-- Project 13 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Chintamani society,Neelam society and Padmaja society" 
-           data-meta="Katraj Pune · 2023" 
+           data-title="Katraj Pune · 2023" 
+           data-meta="Residential" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/i1.jpeg",
-             "/assets/projects/residential/i2.jpeg",
-             "/assets/projects/residential/i3.jpeg",
-             "/assets/projects/residential/i4.jpeg",
-             "/assets/projects/residential/i5.jpeg",
-             "/assets/projects/residential/i6.jpeg",
-             "/assets/projects/residential/i7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/i1.jpeg","/assets/projects/residential/i2.jpeg","/assets/projects/residential/i3.jpeg","/assets/projects/residential/i4.jpeg","/assets/projects/residential/i5.jpeg","/assets/projects/residential/i6.jpeg","/assets/projects/residential/i7.jpeg"]' 
+           style="--i:12">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/i1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/i1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Interior Design">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Residential</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Katraj Pune · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Residential</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Chintamani society,Neelam society and Padmaja society</h3>
-          <p class="text-xs text-espresso/50 mt-1">Katraj Pune · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Katraj Pune · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Residential</p>
         </div>
       </div>
+
       <!-- Project 14 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="Oxford society 4 bhk flat renovation" 
-           data-meta="Pune · 2023" 
+           data-title="Pune · 2023" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/residential/j1.jpeg",
-             "/assets/projects/residential/j2.jpeg",
-             "/assets/projects/residential/j3.jpeg",
-             "/assets/projects/residential/j4.jpeg",
-             "/assets/projects/residential/j5.jpeg",
-             "/assets/projects/residential/j6.jpeg",
-             "/assets/projects/residential/j7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/j1.jpeg","/assets/projects/residential/j2.jpeg","/assets/projects/residential/j3.jpeg","/assets/projects/residential/j4.jpeg","/assets/projects/residential/j5.jpeg","/assets/projects/residential/j6.jpeg","/assets/projects/residential/j7.jpeg"]' 
+           style="--i:13">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/j1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/j1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Flat renovation">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Pune · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Oxford society 4 bhk flat renovation</h3>
-          <p class="text-xs text-espresso/50 mt-1">Pune · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Pune · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
+
       <!-- Project 15 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="River residency 3bhk flat renovation" 
-           data-meta="Moshi · 2024" 
+           data-title="Moshi · 2024" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/renovation/c1.jpeg",
-             "/assets/projects/renovation/c2.jpeg",
-             "/assets/projects/renovation/c3.jpeg",
-             "/assets/projects/renovation/c4.jpeg",
-             "/assets/projects/renovation/c5.jpeg",
-             "/assets/projects/renovation/c6.jpeg",
-             "/assets/projects/renovation/c7.jpeg",
-             "/assets/projects/renovation/c8.jpeg",
-             "/assets/projects/renovation/c9.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/renovation/c1.jpeg","/assets/projects/renovation/c2.jpeg","/assets/projects/renovation/c3.jpeg","/assets/projects/renovation/c4.jpeg","/assets/projects/renovation/c5.jpeg","/assets/projects/renovation/c6.jpeg","/assets/projects/renovation/c7.jpeg","/assets/projects/renovation/c8.jpeg","/assets/projects/renovation/c9.jpeg"]' 
+           style="--i:14">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/renovation/c1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/renovation/c1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Flat renovation">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Moshi · 2024</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">River residency 3bhk flat renovation</h3>
-          <p class="text-xs text-espresso/50 mt-1">Moshi · 2024</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Moshi · 2024</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
+
       <!-- Project 16 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Renovation" 
-           data-title="Solitaire business hub Renovation" 
-           data-meta="Viman Nagar, Pune · 2021" 
+           data-title="Viman Nagar, Pune · 2021" 
+           data-meta="Renovation" 
            data-tag="Renovation" 
-           data-images='[
-             "/assets/projects/renovation/d1.jpeg",
-             "/assets/projects/renovation/d2.jpeg",
-             "/assets/projects/renovation/d3.jpeg",
-             "/assets/projects/renovation/d4.jpeg",
-             "/assets/projects/renovation/d5.jpeg",
-             "/assets/projects/renovation/d6.jpeg",
-             "/assets/projects/renovation/d7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/renovation/d1.jpeg","/assets/projects/renovation/d2.jpeg","/assets/projects/renovation/d3.jpeg","/assets/projects/renovation/d4.jpeg","/assets/projects/renovation/d5.jpeg","/assets/projects/renovation/d6.jpeg","/assets/projects/renovation/d7.jpeg"]' 
+           style="--i:15">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/renovation/d1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Renovation</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/renovation/d1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Renovation">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Renovation</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Viman Nagar, Pune · 2021</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Renovation</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Solitaire business hub Renovation</h3>
-          <p class="text-xs text-espresso/50 mt-1">Viman Nagar, Pune · 2021</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Viman Nagar, Pune · 2021</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Renovation</p>
         </div>
       </div>
+
       <!-- Project 17 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Montvert Avion pashan sua road 3bhk flat interior" 
-           data-meta="Pune · 2021" 
+           data-title="Pune · 2021" 
+           data-meta="Residential" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/k1.jpeg",
-             "/assets/projects/residential/k2.jpeg",
-             "/assets/projects/residential/k3.jpeg",
-             "/assets/projects/residential/k4.jpeg",
-             "/assets/projects/residential/k5.jpeg",
-             "/assets/projects/residential/k6.jpeg",
-             "/assets/projects/residential/k7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/k1.jpeg","/assets/projects/residential/k2.jpeg","/assets/projects/residential/k3.jpeg","/assets/projects/residential/k4.jpeg","/assets/projects/residential/k5.jpeg","/assets/projects/residential/k6.jpeg","/assets/projects/residential/k7.jpeg"]' 
+           style="--i:16">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/k1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/k1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Flat interior">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Residential</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Pune · 2021</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Residential</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Montvert Avion pashan sua road 3bhk flat interior</h3>
-          <p class="text-xs text-espresso/50 mt-1">Pune · 2021</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Pune · 2021</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Residential</p>
         </div>
       </div>
+
       <!-- Project 18 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Residential" 
-           data-title="Montvert finesse pashan 3bhk flat fully furnished" 
-           data-meta="Pashan · 2023" 
+           data-title="Pashan · 2023" 
+           data-meta="Residential" 
            data-tag="Residential" 
-           data-images='[
-             "/assets/projects/residential/l1.jpeg",
-             "/assets/projects/residential/l2.jpeg",
-             "/assets/projects/residential/l3.jpeg",
-             "/assets/projects/residential/l4.jpeg",
-             "/assets/projects/residential/l5.jpeg",
-             "/assets/projects/residential/l6.jpeg",
-             "/assets/projects/residential/l7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/residential/l1.jpeg","/assets/projects/residential/l2.jpeg","/assets/projects/residential/l3.jpeg","/assets/projects/residential/l4.jpeg","/assets/projects/residential/l5.jpeg","/assets/projects/residential/l6.jpeg","/assets/projects/residential/l7.jpeg"]' 
+           style="--i:17">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/residential/l1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Residential</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/residential/l1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Furnished">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Residential</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Pashan · 2023</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Residential</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Montvert finesse pashan 3bhk flat fully furnished </h3>
-          <p class="text-xs text-espresso/50 mt-1">Pashan · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Pashan · 2023</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Residential</p>
         </div>
       </div>
-       <!-- Project 18 -->
-      <div class="proj-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
+
+      <!-- Project 19 -->
+      <div class="proj-card shine-card lightbox-trigger reveal lift rounded-2xl overflow-hidden bg-cream border border-umber/10 block cursor-pointer group" 
            data-cat="Commercial" 
-           data-title="Montvert finesse pashan 3bhk flat fully furnished" 
-           data-meta="Pashan · 2023" 
+           data-title="Pune · 2018" 
+           data-meta="Commercial" 
            data-tag="Commercial" 
-           data-images='[
-             "/assets/projects/commercial/s1.jpeg",
-             "/assets/projects/commercial/s2.jpeg",
-             "/assets/projects/commercial/s3.jpeg",
-             "/assets/projects/commercial/s4.jpeg",
-             "/assets/projects/commercial/s5.jpeg",
-             "/assets/projects/commercial/s6.jpeg",
-             "/assets/projects/commercial/s7.jpeg"
-           ]' 
-           style="--i:5">
+           data-images='["/assets/projects/commercial/s1.jpeg","/assets/projects/commercial/s2.jpeg","/assets/projects/commercial/s3.jpeg","/assets/projects/commercial/s4.jpeg","/assets/projects/commercial/s5.jpeg","/assets/projects/commercial/s6.jpeg","/assets/projects/commercial/s7.jpeg"]' 
+           style="--i:18">
         <div class="relative overflow-hidden">
-          <img src="/assets/projects/commercial/s1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Studio Atelier">
-          <span class="absolute top-3 left-3 bg-cream/90 text-espresso text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">Commercial</span>
-          <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/25 transition-colors duration-500 flex items-center justify-center">
-            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cream/90 flex items-center justify-center text-espresso opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-400 text-xl">⤢</span>
+          <img src="/assets/projects/commercial/s1.jpeg" class="w-full h-48 sm:h-56 md:h-60 object-cover" alt="Commercial">
+          <div class="overlay-gradient"></div>
+          <span class="tag-badge">Commercial</span>
+          <div class="project-name-overlay hidden md:block">
+            <h3 class="font-display text-lg text-cream">Pune · 2018</h3>
+            <p class="text-xs text-cream/70 mt-0.5">Commercial</p>
+          </div>
+          <div class="expand-icon">
+            <span>⤢</span>
           </div>
         </div>
-        <div class="p-4 sm:p-5">
-          <h3 class="font-display text-lg sm:text-xl">Montvert finesse pashan 3bhk flat fully furnished </h3>
-          <p class="text-xs text-espresso/50 mt-1">Pashan · 2023</p>
+        <div class="p-4 md:hidden">
+          <h3 class="font-display text-base text-espresso">Pune · 2018</h3>
+          <p class="text-xs text-espresso/50 mt-0.5">Commercial</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1180,7 +1308,6 @@
     open = true;
     lightbox.style.visibility = 'visible';
     lightbox.classList.add('visible');
-    // Fix: Ensure overlay doesn't block clicks when lightbox is visible
     overlay.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
     
@@ -1204,18 +1331,13 @@
     content.style.opacity = '0';
     content.style.transform = 'scale(0.95)';
     
-    // FIX: Allow clicks to pass through immediately
     overlay.style.pointerEvents = 'none';
-    
-    // Reset body overflow
     document.body.style.overflow = '';
     
-    // Remove visibility after transition
     lightbox.classList.remove('visible');
     setTimeout(() => { 
       if (!open) {
         lightbox.style.visibility = 'hidden';
-        // Ensure overlay doesn't block clicks
         overlay.style.pointerEvents = 'none';
       }
     }, 500);
@@ -1249,13 +1371,11 @@
     if (open && images.length > 1) startAutoPlay();
   });
   
-  // Ensure overlay doesn't block clicks by default
   overlay.style.pointerEvents = 'none';
 })();
 </script>
 
 <script>
-  // Header scroll + mobile menu
   // Header scroll + mobile menu
 (function () {
   const header = document.getElementById('site-header');
@@ -1266,7 +1386,6 @@
   const overlay = document.getElementById('mobile-menu-overlay');
   const mobileCloseBtn = document.getElementById('mobile-close-btn');
   
-  // Check if elements exist before proceeding
   if (!header || !menuBtn || !mobileMenu) return;
   
   const bars = menuBtn.querySelectorAll('.menu-bar');

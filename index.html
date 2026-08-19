@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home — Interior Design Studio</title>
+    <title>Home — Dev Construction</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
@@ -536,6 +536,134 @@
                 flex-shrink: 0 !important;
             }
         }
+/* Client Partners Marquee Animation - Right to Left */
+.animate-marquee {
+    animation: marquee-scroll-right-to-left 30s linear infinite;
+}
+
+@keyframes marquee-scroll-right-to-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause animation on hover */
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .animate-marquee {
+        animation-duration: 20s;
+    }
+}
+
+/* Partner chip — compact, professional treatment for each logo */
+.partner-chip {
+    background: #FFFFFF;
+    border: 1px solid rgba(46,39,23,0.08);
+    border-radius: 10px;
+    padding: 10px 18px;
+    transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.partner-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -14px rgba(46,39,23,.3);
+    border-color: rgba(137,87,37,.35);
+}
+@media (max-width: 640px) {
+    .partner-chip { padding: 8px 14px; }
+}
+    
+    /* ============================================================
+       GLOBAL MOTION + RESPONSIVE ENHANCEMENTS (CSS-only, added)
+       ============================================================ */
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Fluid type so headings never overflow small screens */
+    h1, .font-display { word-break: break-word; }
+
+    /* Prevent any accidental horizontal scroll on mobile */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    img, svg { max-width: 100%; height: auto; }
+
+    /* ---- Shine sweep for primary buttons ---- */
+    .btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+    .btn-shine::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -60%;
+        width: 40%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+        transform: skewX(-20deg);
+        transition: left .85s cubic-bezier(.22,1,.36,1);
+        pointer-events: none;
+        z-index: 1;
+    }
+    .btn-shine:hover::after { left: 130%; }
+    .btn-shine:active { transform: scale(.97); }
+
+    /* ---- Soft ambient float for decorative art/images ---- */
+    .float-soft { animation: floatSoft 6.5s ease-in-out infinite; }
+    @keyframes floatSoft {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* ---- Slow fade-in-up for supporting page-load moments ---- */
+    .fade-in-up-slow { animation: fadeInUpSlow 1s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes fadeInUpSlow {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Gentle border/underline grow used on inline text links ---- */
+    .underline-grow {
+        background-image: linear-gradient(currentColor, currentColor);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 0% 1px;
+        transition: background-size .45s cubic-bezier(.22,1,.36,1);
+    }
+    .underline-grow:hover { background-size: 100% 1px; }
+
+    /* ---- Icon/arrow nudge on hover (CSS only) ---- */
+    .nudge-x { transition: transform .35s cubic-bezier(.22,1,.36,1); display: inline-block; }
+    a:hover > .nudge-x, .group:hover .nudge-x { transform: translateX(5px); }
+
+    /* ---- Card tilt-shine used by project & portfolio cards ---- */
+    .shine-card { position: relative; }
+    .shine-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        pointer-events: none;
+        background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
+        background-size: 250% 250%;
+        background-position: -140% -140%;
+        transition: background-position 1s cubic-bezier(.22,1,.36,1);
+    }
+    .shine-card:hover::before { background-position: 140% 140%; }
+
+    /* ---- Responsive safety net for very small screens ---- */
+    @media (max-width: 380px) {
+        .font-display { letter-spacing: -0.01em; }
+    }
+
     </style>
 </head>
 
@@ -544,7 +672,7 @@
     <!-- ============ HEADER PLACEHOLDER ============ -->
     <div id="header-placeholder"></div>
 
-    <!-- ============ HERO CAROUSEL ============ -->
+   <!-- ============ HERO CAROUSEL ============ -->
     <section class="relative h-[100vh] min-h-[660px] w-full overflow-hidden" id="hero" style="background:#2E2717;">
         <!-- Slide 1 -->
         <div class="hero-slide active absolute inset-0">
@@ -554,23 +682,33 @@
            <div class="absolute inset-0"
                 style="background: linear-gradient(90deg, rgba(46,39,23,.8) 0%, rgba(46,39,23,.55) 45%, rgba(46,39,23,.25) 75%, rgba(46,39,23,.15) 100%), linear-gradient(180deg, rgba(46,39,23,.25) 0%, rgba(46,39,23,.1) 35%, rgba(46,39,23,.65) 100%);">
             </div>
-            <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
-                <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">Est. Studio · Since
-                    2017</p>
-                <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
-                    <span><em>9 Sens Interior Design</em></span><br>
-                </h1>
-                <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
-                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">Every
-                    room begins with restraint — texture, light and proportion, composed until the space speaks for
-                    itself.</p>
-                <div class="hero-cta mt-9 flex items-center gap-5">
-                    <a href="projects.html" class="px-8 py-2 rounded-full font-medium transition-colors duration-300"
-                        style="background:#E9E9E1; color:#2E2717;">View Our Work</a>
-                    <a href="contact.html" class="px-8 py-2 rounded-full transition-colors duration-300 border"
-                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book Consultation</a>
+            <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between">
+                <!-- Left Content -->
+                <div class="flex flex-col justify-center md:w-1/2">
+                    <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5"
+                        style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5); font-family: 'Georgia', serif; letter-spacing: 0.5em;">Est. Studio · Since
+                        2017</p>
+                    <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
+                        style="color:#E9E9E1; font-weight:700; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5); font-family: 'Playfair Display', Georgia, serif; font-style: italic;">
+                        <span>9 Sens Interior Design</span>
+                    </h1>
+                    <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
+                        style="color:rgba(233,233,225,0.92); font-weight:300; text-shadow: 0 2px 8px rgba(0,0,0,.5); font-family: 'Inter', 'Helvetica Neue', sans-serif; line-height: 1.8; letter-spacing: 0.02em;">
+                        Every room begins with restraint — texture, light and proportion, composed until the space speaks for itself.
+                    </p>
+                    <div class="hero-cta mt-9 flex items-center gap-5">
+                        <a href="projects.html" class="btn-shine px-8 py-3 rounded-full font-medium transition-colors duration-300"
+                            style="background:#E9E9E1; color:#2E2717; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">View Our Work</a>
+                        <a href="contact.html" class="px-8 py-3 rounded-full transition-colors duration-300 border"
+                            style="color:#E9E9E1; border-color:rgba(233,233,225,.4); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">Book Consultation</a>
+                    </div>
+                </div>
+                <!-- Right Image - Slide 1 Only -->
+                <div class="hidden md:block md:w-2/5 mt-8 md:mt-0 float-soft">
+                    <img src="/assets/9sens.jpeg" 
+                         alt="Interior Design" 
+                         class="w-[300px] h-auto rounded-lg shadow-2xl object-contain ml-32"
+                         style="max-height: 300px; border: 1px solid rgba(233,233,225,0.15);">
                 </div>
             </div>
         </div>
@@ -585,21 +723,21 @@
             </div>
             <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
                 <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">70+ Projects
+                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5); font-family: 'Georgia', serif; letter-spacing: 0.5em;">70+ Projects
                     Delivered</p>
                 <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
-                    <span><em>Dev Construction</em></span><br>
+                    style="color:#E9E9E1; font-weight:700; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5); font-family: 'Playfair Display', Georgia, serif; font-style: italic;">
+                    <span>Dev Construction</span>
                 </h1>
                 <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
-                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">From
-                    single rooms to full residences — we design around how you actually live, not how a catalogue says
-                    you should.</p>
+                    style="color:rgba(233,233,225,0.92); font-weight:300; text-shadow: 0 2px 8px rgba(0,0,0,.5); font-family: 'Inter', 'Helvetica Neue', sans-serif; line-height: 1.8; letter-spacing: 0.02em;">
+                    From single rooms to full residences — we design around how you actually live, not how a catalogue says you should.
+                </p>
                 <div class="hero-cta mt-9 flex items-center gap-5">
-                    <a href="projects.html" class="px-8 py-4 rounded-full font-medium transition-colors duration-300"
-                        style="background:#E9E9E1; color:#2E2717;">View Our Work</a>
-                    <a href="contact.html" class="px-8 py-4 rounded-full transition-colors duration-300 border"
-                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book Consultation</a>
+                    <a href="projects.html" class="btn-shine px-8 py-3 rounded-full font-medium transition-colors duration-300"
+                        style="background:#E9E9E1; color:#2E2717; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">View Our Work</a>
+                    <a href="contact.html" class="px-8 py-3 rounded-full transition-colors duration-300 border"
+                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">Book Consultation</a>
                 </div>
             </div>
         </div>
@@ -614,21 +752,21 @@
             </div>
             <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
                 <p class="hero-eyebrow uppercase tracking-[0.3em] text-xs mb-5"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5);">Material-First Design
+                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 6px rgba(0,0,0,.5); font-family: 'Georgia', serif; letter-spacing: 0.5em;">Material-First Design
                 </p>
                 <h1 class="hero-copy font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
-                    style="color:#E9E9E1; font-weight:600; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5);">
-                    <span><em>Rudra Engineers</em></span><br>
+                    style="color:#E9E9E1; font-weight:700; text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 8px 30px rgba(0,0,0,.5); font-family: 'Playfair Display', Georgia, serif; font-style: italic;">
+                    <span>Rudra Engineers</span>
                 </h1>
                 <p class="hero-sub max-w-md mt-6 text-base md:text-lg"
-                    style="color:rgba(233,233,225,0.92); font-weight:500; text-shadow: 0 2px 8px rgba(0,0,0,.5);">
+                    style="color:rgba(233,233,225,0.92); font-weight:300; text-shadow: 0 2px 8px rgba(0,0,0,.5); font-family: 'Inter', 'Helvetica Neue', sans-serif; line-height: 1.8; letter-spacing: 0.02em;">
                     Timber, stone, plaster and brass — chosen for how they age, not just how they photograph on day one.
                 </p>
                 <div class="hero-cta mt-9 flex items-center gap-5">
-                    <a href="projects.html" class="px-8 py-4 rounded-full font-medium transition-colors duration-300"
-                        style="background:#E9E9E1; color:#2E2717;">View Our Work</a>
-                    <a href="contact.html" class="px-8 py-4 rounded-full transition-colors duration-300 border"
-                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4);">Book Consultation</a>
+                    <a href="projects.html" class="btn-shine px-8 py-3 rounded-full font-medium transition-colors duration-300"
+                        style="background:#E9E9E1; color:#2E2717; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">View Our Work</a>
+                    <a href="contact.html" class="px-8 py-3 rounded-full transition-colors duration-300 border"
+                        style="color:#E9E9E1; border-color:rgba(233,233,225,.4); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">Book Consultation</a>
                 </div>
             </div>
         </div>
@@ -651,6 +789,125 @@
             </div>
         </div>
     </section>
+
+  <!-- ============ CLIENT PARTNERS ============ -->
+<section class="py-8 md:py-12 overflow-hidden" style="background: #F5F3EF; border-top: 1px solid rgba(46,39,23,0.08); border-bottom: 1px solid rgba(46,39,23,0.08);">
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <!-- Section Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5 md:mb-7 reveal">
+            <div class="flex items-center gap-3">
+                <span class="w-6 h-px" style="background:#895725;"></span>
+                <p class="text-[10px] md:text-[11px] uppercase tracking-[0.35em]" style="color:#2E2717; opacity:.55; font-weight:600;">Trusted Partners</p>
+            </div>
+            <h2 class="font-display text-lg md:text-xl" style="color:#2E2717; font-weight:600;">
+                Brands We've Collaborated With
+            </h2>
+        </div>
+    </div>
+
+    <!-- Marquee Container -->
+    <div class="relative overflow-hidden">
+        <!-- Gradient Overlays for fade effect -->
+        <div class="absolute left-0 top-0 bottom-0 w-14 md:w-24 z-10"
+             style="background: linear-gradient(to right, #F5F3EF, transparent);"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-14 md:w-24 z-10"
+             style="background: linear-gradient(to left, #F5F3EF, transparent);"></div>
+
+        <!-- Marquee Track - Single Row Moving Right to Left -->
+        <div class="flex items-center gap-8 md:gap-12 py-4 animate-marquee">
+            <!-- Brand 1 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand1.jpeg" alt="Studio & Co." class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 2 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand2.jpeg" alt="Design Haus" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 3 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand3.jpeg" alt="Architectural Group" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 4 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand4.jpeg" alt="Interiors Studio" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 5 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand5.jpeg" alt="Material Lab" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 6 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand6.jpeg" alt="Space Agency" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 7 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand7.jpeg" alt="Lighting Collective" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 8 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand8.jpeg" alt="Woodworks Studio" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 9 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand9.jpeg" alt="Design Collective" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 10 -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand10.jpeg" alt="Textile Haven" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Duplicate brands for seamless loop -->
+            <!-- Brand 1 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand1.jpeg" alt="Studio & Co." class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 2 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand2.jpeg" alt="Design Haus" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 3 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand3.jpeg" alt="Architectural Group" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 4 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand4.jpeg" alt="Interiors Studio" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 5 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand5.jpeg" alt="Material Lab" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 6 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand6.jpeg" alt="Space Agency" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 7 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand7.jpeg" alt="Lighting Collective" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+
+            <!-- Brand 8 Duplicate -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <img src="/assets/brand8.jpeg" alt="Woodworks Studio" class="h-14 md:h-20 w-auto object-contain" />
+            </div>
+        </div>
+    </div>
+</section>
 
     
    <!-- ============ WHO WE ARE — SECTION A (cards) ============ -->
@@ -853,6 +1110,20 @@
                         <span
                             class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
                     </div>
+                    <div class="reveal group relative flex items-center justify-between py-6 pl-5 -ml-5 cursor-pointer service-hover-trigger"
+                        style="--i:4" data-image="/assets/services5.png"
+                        data-label="Renovation & remodeling — reimagining existing spaces with sensitivity and precision.">
+                        <span
+                            class="service-bar absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-umber transition-all duration-500 ease-out"></span>
+                        <div class="flex items-center gap-5">
+                            <span class="text-umber/50 text-sm transition-colors duration-500">06</span>
+                            <h3
+                                class="font-display text-xl md:text-2xl transition-colors duration-500 group-hover:text-umber">
+                                Map & Waterproof Services</h3>
+                        </div>
+                        <span
+                            class="w-10 h-10 rounded-full bg-umber/90 text-cream flex items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:rotate-45">→</span>
+                    </div>
                 </div>
             </div>
 
@@ -966,147 +1237,220 @@
         </section>
     </section>
 
-    <!-- ============ PROJECTS MARQUEE ============ -->
-    <section class="relative py-12 overflow-hidden">
-        <div
-            class="max-w-7xl mx-auto px-6 md:px-10 mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-                <span
-                    class="reveal-left inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
-                    <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Our Projects
-                </span>
-                <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">Projects That <span
-                        class="text-umber">Define</span> Our Style</h2>
-            </div>
-            <p class="reveal-right text-espresso/70 max-w-sm">A selection of residential interiors, from full
-                renovations to considered single-room updates.</p>
+<!-- ============ PROJECTS MARQUEE ============ -->
+<section class="relative py-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+            <span class="reveal-left inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-umber/30 rounded-full px-4 py-2 text-umber mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-umber"></span> Our Projects
+            </span>
+            <h2 class="reveal-left font-display text-4xl md:text-5xl leading-tight">Projects That <span class="text-umber">Define</span> Our Style</h2>
         </div>
-        <div class="overflow-hidden">
-            <div class="proj-track flex gap-6 w-max px-6 md:px-10">
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p1.jpeg"
-                            class="w-full h-72 object-cover" alt="Ambience Hotel Wakad"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+        <p class="reveal-right text-espresso/70 max-w-sm">A selection of residential interiors, from full renovations to considered single-room updates.</p>
+    </div>
+    
+    <div class="overflow-hidden">
+        <div class="proj-track flex gap-6 w-max px-6 md:px-10">
+            <!-- Project 1 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p11.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="goa">
+                    
+                    <!-- Hover overlay with color effect -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <!-- Project Name - Hidden on desktop, visible on mobile -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">GOA · 2024 - 2025</h3>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Ambience Hotel</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Wakad, Pune · 2022</p>
+                </div>
+                <!-- Project Name - Visible only on mobile below card -->
+               
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p12.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Montvert 3bhk Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">GOA 2026</h3>
                     </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p2.jpeg"
-                            class="w-full h-72 object-cover" alt="Montvert 3bhk Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                </div>
+              
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p13.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Altura 2bhk Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Aundh 2023</h3>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Montvert 3bhk interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Pashan · 2024</p>
+                </div>
+                
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p14.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Shruti Bungalow Renovation and Interior Design">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Renovation</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">SBH Wakad</h3>
                     </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p3.jpeg"
-                            class="w-full h-72 object-cover" alt="Altura 2bhk Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                </div>
+               
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p15.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Living Quarter">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Baner 2023</h3>
+                        <!-- <p class="text-xs text-cream/70 mt-0.5">Sales office · 2022</p> -->
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Altura 2bhk Interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Baner · 2023</p>
+                </div>
+               
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p16.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Avalon City Sales office Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Wakad · 2022</h3>
                     </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p4.jpeg"
-                            class="w-full h-72 object-cover" alt="Shruti Bungalow Renovation and Interior Design"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Renovation</span>
+                </div>
+               
+            </div>
+
+            <!-- DUPLICATE ITEMS FOR SEAMLESS LOOP -->
+            <!-- Project 1 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p11.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="goa">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">GOA · 2024 - 2025</h3>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Shruti Bungalow Renovation and Interior Design</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Baner · 2020</p>
+                </div>
+               
+            </div>
+
+            <!-- Project 2 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p12.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Montvert 3bhk Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">GOA 2026</h3>
                     </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p5.jpeg"
-                            class="w-full h-72 object-cover" alt="Living Quarter"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                </div>
+              
+            </div>
+
+            <!-- Project 3 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p13.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Altura 2bhk Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Solitaire World Head Office Baner</h3>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Avalon City Sales office Interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Sales office · 2022</p>
+                </div>
+               
+            </div>
+
+            <!-- Project 4 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p14.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Shruti Bungalow Renovation and Interior Design">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Renovation</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">SBH Wakad</h3>
                     </div>
-                </a>
-                <!-- duplicate items for seamless loop -->
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p1.jpeg"
-                            class="w-full h-72 object-cover" alt="Montvert 3bhk Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
+                </div>
+              
+            </div>
+
+            <!-- Project 5 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p15.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Living Quarter">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Avalon City Sales office Interior</h3>
+                        <p class="text-xs text-cream/70 mt-0.5">Sales office · 2022</p>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Montvert 3bhk Interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Pashan · 2024</p>
+                </div>
+                
+            </div>
+
+            <!-- Project 6 Duplicate -->
+            <div class="project-card shine-card lift w-[280px] md:w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50 cursor-pointer group transition-all duration-500 hover:border-umber hover:shadow-2xl hover:shadow-umber/20 hover:-translate-y-2">
+                <div class="relative h-56 md:h-72 overflow-hidden">
+                    <img src="/assets/p16.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Avalon City Sales office Interior">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-umber/60 via-umber/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <span class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-umber group-hover:text-cream group-hover:shadow-lg">Residential</span>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/80 to-transparent md:opacity-0 md:translate-y-full md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+                        <h3 class="font-display text-lg text-cream">Wakad · 2022</h3>
                     </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p2.jpeg"
-                            class="w-full h-72 object-cover" alt="Montvert 3bhk Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Montvert 3bhk interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Pashan · 2024</p>
-                    </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p3.jpeg"
-                            class="w-full h-72 object-cover" alt="Altura 2bhk Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Altura 2bhk Interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Pashan · 2024</p>
-                    </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p4.jpeg"
-                            class="w-full h-72 object-cover" alt="Shruti Bungalow Renovation and Interior Design"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Commercial</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display text-lg">Shruti Bungalow Renovation and Interior Design</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Baner · 2020</p>
-                    </div>
-                </a>
-                <a href="projects.html"
-                    class="lift w-[300px] shrink-0 rounded-2xl overflow-hidden bg-cream border border-umber/50">
-                    <div class="relative"><img
-                            src="/assets/projects/p5.jpeg"
-                            class="w-full h-72 object-cover" alt="Avalon City Sales office Interior"><span
-                            class="absolute top-4 left-4 bg-cream/90 text-espresso text-xs px-3 py-1 rounded-full">Residential</span>
-                    </div>
-                     <div class="p-5">
-                        <h3 class="font-display text-lg">Avalon City Sales office Interior</h3>
-                        <p class="text-xs text-espresso/50 mt-1">Sales office · 2022</p>
-                    </div>
-                </a>
+                </div>
+                
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ============ CTA ============ -->
     <section class="relative py-14 px-6 md:px-10">
@@ -1121,7 +1465,7 @@
                         Never Want to Leave</h2>
                 </div>
                 <a href="contact.html"
-                    class="inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-medium whitespace-nowrap transition-all duration-300 hover:gap-4"
+                    class="btn-shine inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-medium whitespace-nowrap transition-all duration-300 hover:gap-4"
                     style="background:#E9E9E1; color:#2E2717;">Book a Consultation <span
                         class="transition-transform duration-300">→</span></a>
             </div>
