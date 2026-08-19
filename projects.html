@@ -195,7 +195,7 @@
     transform: rotate(90deg);
   }
 
-  /* Lightbox Styles */
+  /* Lightbox Styles - UPDATED */
   #lightbox { z-index: 1000; pointer-events: none; }
   #lightbox-overlay { 
     background: rgba(3, 3, 2, 0.94);
@@ -242,7 +242,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 70px 20px 20px 20px;
+    padding: 80px 20px 20px 20px;
     gap: 12px;
     position: relative;
   }
@@ -324,17 +324,18 @@
   .carousel-btn.prev { left: 16px; }
   .carousel-btn.next { right: 16px; }
   
-  /* Thumbnails - Horizontal on both desktop and mobile */
+  /* Thumbnails - Horizontal at bottom */
   .thumbnail-container {
     display: flex;
     gap: 8px;
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 4px 0;
+    padding: 8px 4px;
     justify-content: center;
     flex-shrink: 0;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
   .thumbnail-container::-webkit-scrollbar {
     height: 3px;
@@ -349,8 +350,8 @@
   }
   
   .thumbnail-item {
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 6px;
@@ -369,20 +370,14 @@
     transform: scale(1.05);
   }
 
-  /* Project Info - Top on both desktop and mobile */
-  .project-info-top {
+  /* Project Info - Left Top on Desktop, Top Center on Mobile */
+  .project-info {
     position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
     z-index: 5;
     pointer-events: none;
     padding: 0 20px;
-    width: 100%;
-    max-width: 90%;
   }
-  .project-info-top .tag {
+  .project-info .tag {
     display: inline-block;
     font-size: 10px;
     letter-spacing: 0.25em;
@@ -390,24 +385,30 @@
     color: #D9A025;
     margin-bottom: 4px;
   }
-  .project-info-top .title {
+  .project-info .title {
     font-family: 'Space Grotesk', serif;
     font-size: 1.5rem;
     color: #E9E9E1;
     line-height: 1.3;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
-  .project-info-top .meta {
+  .project-info .meta {
     font-size: 0.8rem;
     color: rgba(233, 233, 225, 0.6);
     margin-top: 2px;
   }
 
-  /* Desktop specific adjustments */
+  /* Desktop: Info at Left Top */
   @media (min-width: 769px) {
     #lightbox-content {
-      padding: 70px 20px 20px 20px;
+      padding: 80px 80px 20px 80px;
       gap: 16px;
+    }
+    .project-info {
+      top: 30px;
+      left: 30px;
+      text-align: left;
+      max-width: 60%;
     }
     .carousel-main {
       height: calc(100vh - 160px);
@@ -421,49 +422,62 @@
       width: 70px;
       height: 70px;
     }
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+    }
+    .carousel-btn.prev { left: 20px; }
+    .carousel-btn.next { right: 20px; }
+    #lightbox-close {
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+    }
   }
 
-  /* Mobile specific adjustments */
+  /* Mobile: Info at Top Center, Thumbnails at Bottom */
   @media (max-width: 768px) {
     #lightbox-content {
-      padding: 60px 12px 12px 12px;
+      padding: 70px 12px 12px 12px;
       gap: 10px;
     }
+    .project-info {
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      max-width: 90%;
+      padding: 0 10px;
+    }
+    .project-info .title {
+      font-size: 1.2rem;
+    }
+    .project-info .meta {
+      font-size: 0.7rem;
+    }
+    .project-info .tag {
+      font-size: 9px;
+    }
     .carousel-main {
-      height: calc(100vh - 160px);
-      max-height: calc(100vh - 160px);
+      height: calc(100vh - 180px);
+      max-height: calc(100vh - 180px);
+      margin-top: 30px;
+    }
+    .thumbnail-container {
+      gap: 6px;
+      padding: 6px 0;
+      justify-content: flex-start;
+      overflow-x: auto;
     }
     .thumbnail-item {
       width: 50px;
       height: 50px;
-    }
-    .project-info-top .title {
-      font-size: 1.2rem;
-    }
-    .project-info-top .meta {
-      font-size: 0.7rem;
-    }
-    .project-info-top .tag {
-      font-size: 9px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    #lightbox-content {
-      padding: 50px 6px 6px 6px;
-      gap: 6px;
-    }
-    .carousel-main {
-      height: calc(100vh - 140px);
-      max-height: calc(100vh - 140px);
-    }
-    .thumbnail-item {
-      width: 38px;
-      height: 38px;
+      flex-shrink: 0;
     }
     .carousel-btn {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
     }
     .carousel-btn svg {
       width: 14px;
@@ -471,20 +485,78 @@
     }
     .carousel-btn.prev { left: 6px; }
     .carousel-btn.next { right: 6px; }
-    .project-info-top .title {
-      font-size: 1rem;
-    }
-    .project-info-top .meta {
-      font-size: 0.6rem;
-    }
-    .project-info-top .tag {
-      font-size: 8px;
-    }
     #lightbox-close {
       top: 10px;
       right: 10px;
       width: 36px;
       height: 36px;
+    }
+    #lightbox-close svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #lightbox-content {
+      padding: 60px 6px 6px 6px;
+      gap: 6px;
+    }
+    .carousel-main {
+      height: calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
+      margin-top: 35px;
+    }
+    .project-info .title {
+      font-size: 1rem;
+    }
+    .project-info .meta {
+      font-size: 0.6rem;
+    }
+    .project-info .tag {
+      font-size: 8px;
+    }
+    .thumbnail-item {
+      width: 40px;
+      height: 40px;
+    }
+    .thumbnail-container {
+      gap: 5px;
+      padding: 4px 0;
+    }
+    .carousel-btn {
+      width: 26px;
+      height: 26px;
+    }
+    .carousel-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+    .carousel-btn.prev { left: 4px; }
+    .carousel-btn.next { right: 4px; }
+    #lightbox-close {
+      top: 6px;
+      right: 6px;
+      width: 32px;
+      height: 32px;
+    }
+    #lightbox-close svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .thumbnail-item {
+      width: 34px;
+      height: 34px;
+    }
+    .carousel-main {
+      height: calc(100vh - 150px);
+      max-height: calc(100vh - 150px);
+    }
+    .project-info .title {
+      font-size: 0.9rem;
     }
   }
 
@@ -1079,11 +1151,11 @@
       </button>
     </div>
 
-    <!-- Thumbnails - Horizontal on both desktop and mobile -->
+    <!-- Thumbnails - Horizontal at bottom -->
     <div class="thumbnail-container" id="thumbnail-container"></div>
 
-    <!-- Project Info - Top on both desktop and mobile -->
-    <div class="project-info-top" id="project-info-top">
+    <!-- Project Info - Left Top on Desktop, Top Center on Mobile -->
+    <div class="project-info" id="project-info">
       <div class="tag" id="lightbox-tag"></div>
       <div class="title" id="lightbox-title"></div>
       <div class="meta" id="lightbox-meta"></div>
@@ -1118,7 +1190,7 @@
 </script>
 
 <script>
- // Lightbox with horizontal thumbnails and top info
+ // Lightbox with horizontal thumbnails - Left Top on Desktop, Top Center on Mobile
 (function () {
   const triggers = document.querySelectorAll('.lightbox-trigger');
   const lightbox = document.getElementById('lightbox');
@@ -1127,12 +1199,10 @@
   const content = document.getElementById('lightbox-content');
   const track = document.getElementById('carousel-track');
   const thumbnailsContainer = document.getElementById('thumbnail-container');
-  
-  // Top info (both desktop and mobile)
+  const infoEl = document.getElementById('project-info');
   const titleEl = document.getElementById('lightbox-title');
   const metaEl = document.getElementById('lightbox-meta');
   const tagEl = document.getElementById('lightbox-tag');
-  
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   
@@ -1170,7 +1240,10 @@
       thumb.src = url;
       thumb.alt = `Thumbnail ${index + 1}`;
       thumb.dataset.index = index;
-      thumb.addEventListener('click', () => goToSlide(index));
+      thumb.addEventListener('click', function(e) {
+        e.stopPropagation();
+        goToSlide(parseInt(this.dataset.index));
+      });
       thumb.onerror = function() { this.style.display = 'none'; };
       thumbnailsContainer.appendChild(thumb);
     });
@@ -1179,7 +1252,6 @@
   function goToSlide(index) {
     if (index < 0) index = images.length - 1;
     if (index >= images.length) index = 0;
-    
     currentIndex = index;
 
     document.querySelectorAll('.carousel-slide').forEach((slide, i) => {
@@ -1234,7 +1306,6 @@
     const meta = card.dataset.meta || '';
     const tag = card.dataset.tag || '';
     
-    // Update info
     titleEl.textContent = title;
     metaEl.textContent = meta;
     tagEl.textContent = tag;
@@ -1282,30 +1353,35 @@
   }
   
   triggers.forEach(card => {
-    card.addEventListener('click', () => openLightbox(card));
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      openLightbox(this);
+    });
   });
   
   overlay.addEventListener('click', closeLightbox);
   closeBtn.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', (e) => {
+  
+  prevBtn.addEventListener('click', function(e) {
     e.stopPropagation();
     prevSlide();
     startAutoPlay();
   });
-  nextBtn.addEventListener('click', (e) => {
+  
+  nextBtn.addEventListener('click', function(e) {
     e.stopPropagation();
     nextSlide();
     startAutoPlay();
   });
   
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && open) closeLightbox();
     if (e.key === 'ArrowLeft' && open) { prevSlide(); startAutoPlay(); }
     if (e.key === 'ArrowRight' && open) { nextSlide(); startAutoPlay(); }
   });
   
   lightbox.addEventListener('mouseenter', stopAutoPlay);
-  lightbox.addEventListener('mouseleave', () => {
+  lightbox.addEventListener('mouseleave', function() {
     if (open && images.length > 1) startAutoPlay();
   });
   
