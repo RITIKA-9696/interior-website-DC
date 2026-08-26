@@ -42,7 +42,7 @@
 
             .nav-link.active {
                 color: #f8f8f5 !important;
-                background: rgba(233, 233, 225, 0.18);
+                background: rgba(130, 122, 35, 0.3);
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
@@ -52,7 +52,7 @@
             }
 
             #site-header.scrolled .nav-link.active {
-                background: rgba(137, 87, 37, 0.12) !important;
+                background: rgba(137, 87, 37, 0.39) !important;
                 color: #554520 !important;
                 box-shadow: 0 2px 12px rgba(137, 87, 37, 0.15);
             }
@@ -86,7 +86,7 @@
 
             /* Header scrolled state */
             #site-header.scrolled {
-                background: #E9E9E1 !important;
+                background: white !important;
                 backdrop-filter: blur(8px);
                 box-shadow: 0 4px 20px rgba(46, 39, 23, 0.15);
             }
@@ -146,7 +146,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: #E9E9E1;
+                background: white;
                 transform: translateY(-100%);
                 transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
                 display: flex;
@@ -247,9 +247,10 @@
             <!-- ============ HEADER (FIXED) ============ -->
             <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
-                    <a href="index.html" class="font-display text-2xl tracking-wide flex items-center gap-2" id="logo" style="color: #E9E9E1;">
-                     <img src="./assets/logo-bg-removebg.png" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain" />
-                    </a>
+               <a href="index.html" class="font-display text-2xl tracking-wide flex flex-col items-center gap-1" id="logo" style="color: #E9E9E1;">
+    <img src="./assets/logo-bg.jpeg" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain rounded-full" />
+    <span style="font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; color: #e0c31c;">We Make It Possible</span>
+</a>
                     <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
                         <a href="index.html" class="nav-link" style="color: white; font-weight: 500;">Home</a>
                         <a href="about.html" class="nav-link" style="color: white;">About</a>
@@ -290,9 +291,9 @@
             <footer class="bg-espresso text-cream/70 pt-14 pb-6 px-6 md:px-10">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-10">
                     <div>
-                        <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
-                            <img src="/assets/logo-bg.jpeg" alt="logo" class="w-20 h-20">
-                        </a>
+                       <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+    <img src="/assets/logo-bg.jpeg" alt="logo" class="w-20 h-20 rounded-full">
+</a>
                         <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
                     </div>
                     <div>
@@ -324,8 +325,8 @@
                     </div>
                 </div>
                 <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-                    <p>© 2026 Dev Construction Interior Design. All rights reserved.</p>
-                    <p>Crafted with care in India.</p>
+                    <p>© 2026 <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="hover:text-umber transition-colors">Kunash Media</a>. All rights reserved.</p>
+                    <p>Developed by <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="hover:text-umber transition-colors">Kunash Media</a></p>
                 </div>
             </footer>
         `;
@@ -355,10 +356,10 @@
 
             if (href === currentPage) {
                 link.classList.add('active');
-                link.style.color = '#E9E9E1';
+                link.style.color = '#fffdfd';
             } else {
                 link.classList.remove('active');
-                link.style.color = 'rgba(233, 233, 225, 0.7)';
+                link.style.color = 'rgb(250, 250, 250)';
             }
         });
 
