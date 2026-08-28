@@ -248,7 +248,7 @@
             <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
                <a href="index.html" class="font-display text-2xl tracking-wide flex flex-col items-center gap-1" id="logo" style="color: #E9E9E1;">
-    <img src="./assets/logo-bg.jpeg" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain rounded-full" />
+    <img src="./assets/logo-black.jpeg" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain rounded-lg" />
     <span style="font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; color: #e0c31c;">We Make It Possible</span>
 </a>
                     <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
