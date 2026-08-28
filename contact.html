@@ -326,6 +326,27 @@
       transform: scale(1.02);
     }
 
+    /* ✅ Contact link styles */
+    .contact-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: #895725;
+    }
+
+    .contact-link-email {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link-email:hover {
+      color: #895725;
+    }
+
     @media (max-width: 768px) {
       .page-hero {
         min-height: 300px;
@@ -542,20 +563,28 @@
           studio will get back to you within two working days to arrange a consultation.</p>
 
         <div class="space-y-4 md:space-y-6 stagger">
+          <!-- ✅ Phone - Clickable -->
           <div class="reveal flex items-start gap-3 md:gap-4" style="--i:0">
             <span
               class="w-9 h-9 md:w-11 md:h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0 text-sm md:text-base">✆</span>
             <div>
               <p class="text-[10px] md:text-xs text-espresso/50 uppercase tracking-wide mb-0.5 md:mb-1">Phone</p>
-              <p class="text-sm md:text-base font-medium">9552523655 / 9922065069</p>
+              <p class="text-sm md:text-base font-medium">
+                <a href="tel:+919552523655" class="contact-link">9552523655</a> / 
+                <a href="tel:+919922065069" class="contact-link">9922065069</a>
+              </p>
             </div>
           </div>
+          <!-- ✅ Email - Clickable -->
           <div class="reveal flex items-start gap-3 md:gap-4" style="--i:1">
             <span
               class="w-9 h-9 md:w-11 md:h-11 rounded-full bg-espresso text-gold flex items-center justify-center shrink-0 text-sm md:text-base">✉</span>
             <div>
               <p class="text-[10px] md:text-xs text-espresso/50 uppercase tracking-wide mb-0.5 md:mb-1">Email</p>
-              <p class="text-sm md:text-base font-medium">devcons333@gmail.com 9sensinterior27@gmail.com</p>
+              <p class="text-sm md:text-base font-medium">
+                <a href="mailto:devcons333@gmail.com" class="contact-link-email">devcons333@gmail.com</a> / 
+                <a href="mailto:9sensinterior27@gmail.com" class="contact-link-email">9sensinterior27@gmail.com</a>
+              </p>
             </div>
           </div>
           <div class="reveal flex items-start gap-3 md:gap-4" style="--i:2">

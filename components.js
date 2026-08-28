@@ -213,6 +213,15 @@
                 background: rgba(137, 87, 37, 0.12);
             }
 
+            /* Footer link styles */
+            .footer-link {
+                transition: all 0.3s ease;
+            }
+
+            .footer-link:hover {
+                color: #8f7933 !important;
+            }
+
             /* Responsive mobile menu */
             @media (max-width: 480px) {
                 .mobile-nav-link {
@@ -247,16 +256,15 @@
             <!-- ============ HEADER (FIXED) ============ -->
             <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between py-4 md:py-5">
-               <a href="index.html" class="font-display text-2xl tracking-wide flex flex-col items-center gap-1" id="logo" style="color: #E9E9E1;">
-    <img src="./assets/logo-black.jpeg" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain rounded-lg" />
-    <span style="font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; color: #e0c31c;">We Make It Possible</span>
-</a>
+                    <a href="index.html" class="font-display text-2xl tracking-wide flex flex-col items-center gap-1" id="logo" style="color: #E9E9E1;">
+                        <img src="./assets/logo-black.jpeg" alt="Interior Logo" class="h-20 md:h-24 w-auto object-contain rounded-lg" />
+                        <span style="font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; color: #e0c31c;">We Make It Possible</span>
+                    </a>
                     <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-sm tracking-wide" style="color: rgba(233, 233, 225, 0.85);">
                         <a href="index.html" class="nav-link" style="color: white; font-weight: 500;">Home</a>
                         <a href="about.html" class="nav-link" style="color: white;">About</a>
                         <a href="services.html" class="nav-link" style="color: white;">Services</a>
                         <a href="projects.html" class="nav-link" style="color: white;">Projects</a>
-                       
                     </nav>
                     <div class="flex items-center gap-3 md:gap-4">
                         <a href="/contact.html" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full transition-colors duration-300" style="background: #8f7933; color: #f6f4ef;">Contact Us</a>
@@ -284,25 +292,25 @@
         `;
     }
 
-    // Footer HTML template
+    // Footer HTML template - ✅ UPDATED with clickable email and phone
     function getFooterHTML() {
         return `
             <!-- ============ FOOTER ============ -->
             <footer class="bg-espresso text-cream/70 pt-14 pb-6 px-6 md:px-10">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-10">
                     <div>
-                       <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
-    <img src="/assets/logo-bg.jpeg" alt="logo" class="w-20 h-20 rounded-full">
-</a>
+                        <a href="index.html" class="font-display text-2xl text-cream flex items-center gap-2 mb-4">
+                            <img src="/assets/logo-black.jpeg" alt="logo" class="h-20 md:h-24 w-auto object-contain rounded-lg">
+                        </a>
                         <p class="text-sm max-w-xs">A boutique interior design studio composing rooms around light, material and how people actually live.</p>
                     </div>
                     <div>
                         <h4 class="text-cream font-display text-lg mb-4">Navigate</h4>
                         <ul class="space-y-3 text-sm">
-                            <li><a href="index.html" class="hover:text-umber transition-colors">Home</a></li>
-                            <li><a href="about.html" class="hover:text-umber transition-colors">About</a></li>
-                            <li><a href="services.html" class="hover:text-umber transition-colors">Services</a></li>
-                            <li><a href="projects.html" class="hover:text-umber transition-colors">Projects</a></li>
+                            <li><a href="index.html" class="footer-link hover:text-umber transition-colors" style="color: inherit;">Home</a></li>
+                            <li><a href="about.html" class="footer-link hover:text-umber transition-colors" style="color: inherit;">About</a></li>
+                            <li><a href="services.html" class="footer-link hover:text-umber transition-colors" style="color: inherit;">Services</a></li>
+                            <li><a href="projects.html" class="footer-link hover:text-umber transition-colors" style="color: inherit;">Projects</a></li>
                         </ul>
                     </div>
                     <div>
@@ -311,8 +319,18 @@
                             <li>Gate No.1491, Hanuman Hsg Soc No.1,
                                 Tamhanevasti, Chikhali, Haveli,
                                 Pune - 411062</li>
-                            <li>devcons333@gmail.com</li>
-                            <li>9922065069</li>
+                            <!-- ✅ Email - Clickable -->
+                            <li>
+                                <a href="mailto:devcons333@gmail.com" class="footer-link hover:text-umber transition-colors" style="color: inherit;">
+                                    <i class="fas fa-envelope" style="margin-right: 6px;"></i> devcons333@gmail.com
+                                </a>
+                            </li>
+                            <!-- ✅ Phone - Clickable -->
+                            <li>
+                                <a href="tel:+919922065069" class="footer-link hover:text-umber transition-colors" style="color: inherit;">
+                                    <i class="fas fa-phone" style="margin-right: 6px;"></i> 9922065069
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div>
@@ -325,8 +343,8 @@
                     </div>
                 </div>
                 <div class="max-w-7xl mx-auto border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-                    <p>© 2026 <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="hover:text-umber transition-colors">Kunash Media</a>. All rights reserved.</p>
-                    <p>Developed by <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="hover:text-umber transition-colors">Kunash Media</a></p>
+                    <p>© 2026 <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="footer-link hover:text-umber transition-colors" style="color: inherit;">Kunash Media</a>. All rights reserved.</p>
+                    <p>Developed by <a href="https://kunashmedia.com/" target="_blank" rel="noopener noreferrer" class="footer-link hover:text-umber transition-colors" style="color: inherit;">Kunash Media</a></p>
                 </div>
             </footer>
         `;
